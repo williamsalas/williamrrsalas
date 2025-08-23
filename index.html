@@ -15,5 +15,19 @@
     </small>
 
     <img src="pikaconstruction.gif" class="pikachu" alt="Under Construction" />
+    <div id="pikachu-counter" class="pikachu-counter"></div>
+    <script>
+      // Pikachu construction start date: August 22, 2025
+      const startDate = new Date("2025-08-22T00:00:00Z");
+      const today = new Date();
+      // Calculate difference in days
+      const diffTime = today - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      document.getElementById(
+        "pikachu-counter"
+      ).textContent = `pikachu has been working on this website for ${diffDays} day${
+        diffDays === 1 ? "" : "s"
+      }!`;
+    </script>
   </body>
 </html>

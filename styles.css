@@ -27,3 +27,10 @@ small {
 img.pikachu {
   margin-top: 16px;
 }
+
+.pikachu-counter {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  color: #00adb5;
+  font-weight: bold;
+}
