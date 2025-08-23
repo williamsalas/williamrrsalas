@@ -1,45 +1,29 @@
-:root {
-  --color-wallpaper: #000;
-  --color-font: #eeeeee;
-  --color-secondary: #393e46;
-  --color-accent: #00adb5;
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background: #000;
+  font-family: sf mono, menlo, monospace;
+  color: #eee;
 }
 
 h1 {
-  color: var(--color-font);
+  color: #eee;
 }
 
-body {
-  background-color: var(--color-wallpaper);
-  color: var(--color-font);
-  font-family: sf mono, menlo, monospace;
-}
-
-a {
-  color: var(--color-accent);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.section {
-  background-color: var(--color-secondary);
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-}
-
-.button {
-  background-color: var(--color-accent);
-  color: var(--color-font);
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 6px;
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 20px;
   cursor: pointer;
 }
 
-.button:hover {
-  opacity: 0.9;
+small {
+  margin-bottom: 4px;
+}
+
+img.pikachu {
+  margin-top: 16px;
 }
