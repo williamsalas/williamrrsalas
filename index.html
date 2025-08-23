@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello World</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="flex-container" style="justify-content: flex-start">
+    <h2>hi, i'm william salas 👋</h2>
+    <small>software developer from southern california</small>
+    <small>
+      part of Redfin’s search team building the site’s most visited pages,
+      search and home details
+    </small>
+
+    <img src="pikaconstruction.gif" class="pikachu" alt="Under Construction" />
+    <div id="pikachu-counter" class="pikachu-counter"></div>
+    <div class="bottom-flex-container">
+      <div class="bottom-left">
+        <h3>Lorem Ipsum Left</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+          euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi,
+          euismod euismod nisi nisi euismod.
+        </p>
+      </div>
+      <div class="bottom-right">
+        <h3>Lorem Ipsum Right</h3>
+        <p>
+          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+          posuere cubilia curae; Integer nec odio. Praesent libero. Sed cursus
+          ante dapibus diam.
+        </p>
+      </div>
+    </div>
+    <script>
+      // Pikachu construction start date: August 22, 2025
+      const startDate = new Date("2025-08-22T00:00:00Z");
+      const today = new Date();
+      // Calculate difference in days
+      const diffTime = today - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      document.getElementById(
+        "pikachu-counter"
+      ).textContent = `pikachu has been working on this website for ${diffDays} day${
+        diffDays === 1 ? "" : "s"
+      }!`;
+    </script>
+  </body>
+</html>
