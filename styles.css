@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: stretch;
   padding: 2rem 0 0 0;
-  gap: 2rem;
+  gap: 8px;
 }
 
 .bottom-left,
@@ -19,15 +19,10 @@
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
   display: flex;
   flex-direction: column;
+  height: fit-content;
+  margin-bottom: 8px;
 }
 
-.bottom-left {
-  margin-right: 1rem;
-}
-
-.bottom-right {
-  margin-left: 1rem;
-}
 body {
   display: flex;
   flex-direction: column;
