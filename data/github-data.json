@@ -1,5 +1,27 @@
 [
   {
+    "id": "53766970554",
+    "type": "PullRequestEvent",
+    "created_at": "2025-08-24T22:00:14Z",
+    "repo": "williamsalas/williamrrsalas",
+    "pr_number": 31,
+    "url": "https://github.com/williamsalas/williamrrsalas/pull/31",
+    "title": "opening this to get an open PR in gh api",
+    "merged": false,
+    "action": "opened"
+  },
+  {
+    "id": "53766541621",
+    "type": "PullRequestEvent",
+    "created_at": "2025-08-24T21:24:20Z",
+    "repo": "williamsalas/williamrrsalas",
+    "pr_number": 30,
+    "url": "https://github.com/williamsalas/williamrrsalas/pull/30",
+    "title": "chore(data): refresh cached GitHub data",
+    "merged": true,
+    "action": "closed"
+  },
+  {
     "id": "53766224415",
     "type": "PullRequestEvent",
     "created_at": "2025-08-24T21:00:15Z",
@@ -282,28 +304,6 @@
     "pr_number": 6,
     "url": "https://github.com/williamsalas/williamrrsalas/pull/6",
     "title": "organize directory and update paths",
-    "merged": false,
-    "action": "opened"
-  },
-  {
-    "id": "53751000495",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T02:16:17Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 5,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/5",
-    "title": "Wrrs/display GitHub data",
-    "merged": true,
-    "action": "closed"
-  },
-  {
-    "id": "53750276270",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T01:10:53Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 5,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/5",
-    "title": "Wrrs/display GitHub data",
     "merged": false,
     "action": "opened"
   }
