@@ -2,7 +2,7 @@ name: Cache GitHub data
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # every 30 minutes, UTC
+     - cron: "7,37 * * * *"   # every 30 minutes, UTC
   workflow_dispatch:          # allow manual runs
 
 # Default to read-only
