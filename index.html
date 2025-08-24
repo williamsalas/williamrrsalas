@@ -27,7 +27,7 @@
     <div id="pikachu-counter" class="pikachu-counter"></div>
     <div class="bottom-flex-container">
       <div class="bottom-left">
-        <h3>recent activity</h3>
+        <h3 class="github-activity">recent activity</h3>
         <p id="github-events" class="github-events">
           Loading recent GitHub activity...
         </p>
@@ -100,31 +100,33 @@
           const fragment = document.createDocumentFragment();
           for (const [repoName, events] of repoMap.entries()) {
             const repoHeader = document.createElement("div");
-            repoHeader.style.fontWeight = "bold";
-            repoHeader.style.marginTop = "1em";
-            repoHeader.style.marginBottom = "0.2em";
-            repoHeader.textContent = repoName;
+            repoHeader.className = "repo-header";
+            // Prepend repo icon
+            const repoIcon = document.createElement("img");
+            repoIcon.src = "assets/img/repo-16.svg";
+            repoIcon.alt = "Repo icon";
+            repoIcon.width = 16;
+            repoIcon.height = 16;
+            repoIcon.className = "repo-icon";
+            repoHeader.appendChild(repoIcon);
+            repoHeader.appendChild(document.createTextNode(repoName));
             fragment.appendChild(repoHeader);
 
             const ul = document.createElement("ul");
-            ul.style.paddingLeft = "0";
-            ul.style.margin = "0 0 0.5em 0";
-            ul.style.listStyle = "none";
+            ul.className = "github-activity-list pr-list";
 
             events.forEach((event) => {
               const createdAt = event?.created_at
                 ? new Date(event.created_at)
                 : null;
               const li = document.createElement("li");
-              li.style.marginBottom = "8px";
+              li.className = "pr-event";
 
               // status image
               const statusIcon = document.createElement("img");
               statusIcon.width = 16;
               statusIcon.height = 16;
-              statusIcon.style.verticalAlign = "middle";
-              statusIcon.style.marginLeft = "2px";
-              statusIcon.style.marginRight = "6px";
+              statusIcon.className = "status-icon";
               if (event.action === "opened" || event.merged === false) {
                 statusIcon.src = "assets/img/git-pull-request-16.svg";
                 statusIcon.alt = "PR open";
@@ -142,29 +144,20 @@
               titleLink.target = "_blank";
               titleLink.rel = "noopener noreferrer";
               titleLink.textContent = event.title || "(no title)";
-              titleLink.style.fontWeight = "bold";
-              titleLink.style.maxWidth = "60vw";
-              titleLink.style.display = "inline-block";
-              titleLink.style.overflow = "hidden";
-              titleLink.style.textOverflow = "ellipsis";
-              titleLink.style.verticalAlign = "middle";
-              titleLink.style.whiteSpace = "nowrap";
+              titleLink.className = "pr-title-link";
 
-              const small = document.createElement("small");
+              const githubDate = document.createElement("small");
+              githubDate.className = "github-date";
               if (createdAt) {
                 const month = createdAt.toLocaleString("en-US", {
                   month: "short",
                 });
                 const day = createdAt.getDate();
-                small.textContent = `${month} ${day}`;
+                githubDate.textContent = `${month} ${day}`;
               } else {
-                small.textContent = "";
+                githubDate.textContent = "";
               }
-              small.style.marginLeft = "0.5em";
-              small.style.float = "right";
-              small.style.textAlign = "right";
-              small.style.display = "block";
-              li.append(statusIcon, titleLink, small);
+              li.append(statusIcon, titleLink, githubDate);
               ul.appendChild(li);
             });
             fragment.appendChild(ul);
@@ -172,9 +165,7 @@
 
           // Show non-PR events as before
           const ulOther = document.createElement("ul");
-          ulOther.style.paddingLeft = "0";
-          ulOther.style.margin = "0";
-          ulOther.style.listStyle = "none";
+          ulOther.className = "github-activity-list other-list";
           data
             .filter((event) => event.type !== "PullRequestEvent")
             .forEach((event) => {
@@ -187,26 +178,30 @@
                 ? new Date(event.created_at)
                 : null;
               const li = document.createElement("li");
-              li.style.marginBottom = "8px";
+              li.className = "other-event";
               const b = document.createElement("b");
               b.textContent = type;
               const code = document.createElement("code");
               code.textContent = repoName;
               const br = document.createElement("br");
-              const small = document.createElement("small");
+              const githubDate = document.createElement("small");
+              githubDate.className = "github-date";
               if (createdAt) {
                 const month = createdAt.toLocaleString("en-US", {
                   month: "short",
                 });
                 const day = createdAt.getDate();
-                small.textContent = `${month} ${day}`;
+                githubDate.textContent = `${month} ${day}`;
               } else {
-                small.textContent = "";
+                githubDate.textContent = "";
               }
-              small.style.float = "right";
-              small.style.textAlign = "right";
-              small.style.display = "block";
-              li.append(b, document.createTextNode(" on "), code, br, small);
+              li.append(
+                b,
+                document.createTextNode(" on "),
+                code,
+                br,
+                githubDate
+              );
               ulOther.appendChild(li);
             });
           fragment.appendChild(ulOther);
