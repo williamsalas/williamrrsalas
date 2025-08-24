@@ -24,11 +24,7 @@
     <div class="bottom-flex-container">
       <div class="bottom-left">
         <h3>Lorem Ipsum Left</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi,
-          euismod euismod nisi nisi euismod.
-        </p>
+        <p id="github-events">Loading recent GitHub activity...</p>
       </div>
       <div class="bottom-right">
         <h3>Lorem Ipsum Right</h3>
@@ -51,6 +47,35 @@
       ).textContent = `pikachu has been working on this website for ${diffDays} day${
         diffDays === 1 ? "" : "s"
       }!`;
+
+      // Fetch and display GitHub activity from data.json
+      fetch("public/data.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const container = document.getElementById("github-events");
+          if (!Array.isArray(data) || data.length === 0) {
+            container.textContent = "No recent GitHub activity.";
+            return;
+          }
+          container.innerHTML =
+            '<ul style="padding-left: 1.2em; margin: 0;">' +
+            data
+              .slice(0, 5)
+              .map(
+                (event) =>
+                  `<li><b>${event.type.replace("Event", "")}</b> on <code>${
+                    event.repo
+                  }</code><br><small>${new Date(
+                    event.created_at
+                  ).toLocaleString()}</small></li>`
+              )
+              .join("") +
+            "</ul>";
+        })
+        .catch(() => {
+          document.getElementById("github-events").textContent =
+            "Could not load GitHub activity.";
+        });
     </script>
   </body>
 </html>
