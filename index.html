@@ -109,7 +109,14 @@
             repoIcon.height = 16;
             repoIcon.className = "repo-icon";
             repoHeader.appendChild(repoIcon);
-            repoHeader.appendChild(document.createTextNode(repoName));
+            // Create link to repo
+            const repoLink = document.createElement("a");
+            repoLink.href = `https://github.com/${repoName}`;
+            repoLink.target = "_blank";
+            repoLink.rel = "noopener noreferrer";
+            repoLink.textContent = repoName;
+            repoLink.className = "repo-link";
+            repoHeader.appendChild(repoLink);
             fragment.appendChild(repoHeader);
 
             const ul = document.createElement("ul");
