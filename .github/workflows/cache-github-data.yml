@@ -40,7 +40,7 @@ jobs:
             > data/events.raw.json
 
           sudo apt-get update -y && sudo apt-get install -y jq
-          jq 'map({id, type, created_at, repo: .repo.name})' \
+          jq 'map(select(.type == "CreateEvent" or .type == "PushEvent" or .type == "IssuesEvent" or .type == "ReleaseEvent" or .type == "PullRequestEvent" or .type == "PullRequestReviewEvent" or .type == "WatchEvent") | {id, type, created_at, repo: .repo.name})' \
             data/events.raw.json > data/github-data.json
 
       - name: Create pull request
