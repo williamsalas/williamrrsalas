@@ -19,7 +19,6 @@
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
 }
 
 .bottom-left {
@@ -38,6 +37,7 @@ body {
   background: #000;
   font-family: sf mono, menlo, monospace;
   color: #eee;
+  margin: 16px;
 }
 
 h1 {
