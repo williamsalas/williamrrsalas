@@ -27,7 +27,7 @@
     <div id="pikachu-counter" class="pikachu-counter"></div>
     <div class="bottom-flex-container">
       <div class="bottom-left">
-        <h3>Lorem Ipsum Left</h3>
+        <h3>recent activity</h3>
         <p id="github-events">Loading recent GitHub activity...</p>
       </div>
       <div class="bottom-right">
@@ -56,12 +56,14 @@
           }!`;
         }
 
-        // Fetch and display GitHub activity from data.json
+        // Fetch and display GitHub activity from github-data.json
         const container = document.getElementById("github-events");
         if (!container) return;
 
         try {
-          const res = await fetch("data/data.json", { cache: "no-store" });
+          const res = await fetch("data/github-data.json", {
+            cache: "no-store",
+          });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
           const data = await res.json();
