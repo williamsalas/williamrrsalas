@@ -73,8 +73,9 @@
           }
 
           const ul = document.createElement("ul");
-          ul.style.paddingLeft = "1.2em";
+          ul.style.paddingLeft = "0";
           ul.style.margin = "0";
+          ul.style.listStyle = "none";
 
           // Only show the most recent update for each PR
           const seenPRs = new Set();
@@ -105,6 +106,7 @@
                 : null;
 
               const li = document.createElement("li");
+              li.style.marginBottom = "8px";
               if (event.type === "PullRequestEvent" && event.url) {
                 // repo name
                 const repoCode = document.createElement("code");
@@ -142,7 +144,7 @@
                 small.textContent = createdAt ? createdAt.toLocaleString() : "";
 
                 // final order: repo name → image → linked title
-                li.append(repoCode, statusIcon, titleLink, br, small);
+                li.append(statusIcon, titleLink, br, small);
               } else {
                 // Other event types
                 const b = document.createElement("b");
