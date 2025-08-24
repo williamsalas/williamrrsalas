@@ -2,8 +2,8 @@ name: Cache GitHub data
 
 on:
   schedule:
-     - cron: "7,37 * * * *"   # every 30 minutes, UTC
-  workflow_dispatch:          # allow manual runs
+    - cron: "7,37 * * * *" # every 30 minutes, UTC
+  workflow_dispatch: # allow manual runs
 
 # Default to read-only
 permissions:
@@ -29,21 +29,21 @@ jobs:
 
       - name: Fetch GitHub data
         run: |
-          mkdir -p public
+          mkdir -p data
           # Example endpoint: recent public events
           curl -sS \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             "https://api.github.com/users/$GH_USER/events?per_page=30" \
-            > public/events.raw.json
+            > data/events.raw.json
 
           # Slim the payload to the fields you actually need
           sudo apt-get update -y && sudo apt-get install -y jq
           jq 'map({id, type, created_at, repo: .repo.name})' \
-            public/events.raw.json > public/data.json
+            data/events.raw.json > data/github-data.json
 
       - name: Commit and push if changed
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore(data): refresh cached GitHub data"
-          file_pattern: public/data.json
+          file_pattern: data/github-data.json
