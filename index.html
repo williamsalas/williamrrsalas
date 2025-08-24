@@ -76,32 +76,83 @@
           ul.style.paddingLeft = "1.2em";
           ul.style.margin = "0";
 
-          data.forEach((event) => {
-            const type = (event?.type || "").replace("Event", "");
-            const repoName =
-              event?.repo && event.repo.name
-                ? event.repo.name
-                : event?.repo || "unknown";
-            const createdAt = event?.created_at
-              ? new Date(event.created_at)
-              : null;
+          // Only show the most recent update for each PR
+          const seenPRs = new Set();
+          data
+            .filter(
+              (event) =>
+                !(
+                  event.type === "PullRequestEvent" &&
+                  event.title &&
+                  event.title.startsWith("chore(data")
+                )
+            )
+            .filter((event) => {
+              if (event.type !== "PullRequestEvent" || !event.pr_number)
+                return true;
+              if (seenPRs.has(event.pr_number)) return false;
+              seenPRs.add(event.pr_number);
+              return true;
+            })
+            .forEach((event) => {
+              const type = (event?.type || "").replace("Event", "");
+              const repoName =
+                event?.repo && event.repo.name
+                  ? event.repo.name
+                  : event?.repo || "unknown";
+              const createdAt = event?.created_at
+                ? new Date(event.created_at)
+                : null;
 
-            const li = document.createElement("li");
+              const li = document.createElement("li");
 
-            const b = document.createElement("b");
-            b.textContent = type;
+              if (event.type === "PullRequestEvent" && event.url) {
+                // PR event: show title, link, and merged/open/closed status only
+                const titleSpan = document.createElement("span");
+                titleSpan.textContent = event.title || "(no title)";
+                titleSpan.style.fontWeight = "bold";
+                titleSpan.style.marginRight = "0.5em";
 
-            const code = document.createElement("code");
-            code.textContent = repoName;
+                const prLink = document.createElement("a");
+                prLink.href = event.url;
+                prLink.target = "_blank";
+                prLink.rel = "noopener noreferrer";
+                prLink.textContent = `#${event.pr_number}`;
+                prLink.style.marginRight = "0.5em";
 
-            const br = document.createElement("br");
+                const status = document.createElement("span");
+                if (event.action === "opened" || event.merged === false) {
+                  status.textContent = "(open)";
+                  status.style.color = "#00adb5";
+                } else if (event.merged) {
+                  status.textContent = "(merged)";
+                  status.style.color = "#4caf50";
+                } else {
+                  status.textContent = "(closed)";
+                  status.style.color = "#aaa";
+                }
 
-            const small = document.createElement("small");
-            small.textContent = createdAt ? createdAt.toLocaleString() : "";
+                const br = document.createElement("br");
+                const small = document.createElement("small");
+                small.textContent = createdAt ? createdAt.toLocaleString() : "";
 
-            li.append(b, document.createTextNode(" on "), code, br, small);
-            ul.appendChild(li);
-          });
+                li.append(titleSpan, prLink, status, br, small);
+              } else {
+                // Other event types
+                const b = document.createElement("b");
+                b.textContent = type;
+
+                const code = document.createElement("code");
+                code.textContent = repoName;
+
+                const br = document.createElement("br");
+                const small = document.createElement("small");
+                small.textContent = createdAt ? createdAt.toLocaleString() : "";
+
+                li.append(b, document.createTextNode(" on "), code, br, small);
+              }
+              ul.appendChild(li);
+            });
 
           container.replaceChildren(ul);
         } catch (err) {
