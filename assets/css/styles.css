@@ -106,6 +106,19 @@
   text-overflow: ellipsis;
   vertical-align: middle;
   white-space: nowrap;
+  color: #00adb5;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.pr-title-link:visited {
+  color: #00adb5;
+}
+
+.pr-title-link:hover,
+.pr-title-link:focus {
+  color: #fff;
+  text-decoration: underline;
 }
 
 .other-event {
