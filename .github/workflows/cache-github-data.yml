@@ -5,20 +5,20 @@ on:
     - cron: "7,37 * * * *" # every 30 minutes, UTC
   workflow_dispatch: # allow manual runs
 
-# Default to read-only
 permissions:
   contents: read
+  pull-requests: write
 
 concurrency:
   group: cache-github-data
   cancel-in-progress: true
 
 jobs:
-  fetch-and-commit:
+  fetch-and-pr:
     runs-on: ubuntu-latest
-    # Elevate only this job to allow pushing changes
     permissions:
       contents: write
+      pull-requests: write
 
     env:
       GH_USER: williamsalas
@@ -30,7 +30,6 @@ jobs:
       - name: Fetch GitHub data
         run: |
           mkdir -p data
-          # Example endpoint: recent public events
           curl -sS \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
@@ -42,8 +41,33 @@ jobs:
           jq 'map({id, type, created_at, repo: .repo.name})' \
             data/events.raw.json > data/github-data.json
 
-      - name: Commit and push if changed
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Create pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit_message: "chore(data): refresh cached GitHub data"
-          file_pattern: data/github-data.json
+          # Use the default GITHUB_TOKEN so the PR author is github-actions[bot]
+          token: ${{ github.token }}
+          commit-message: "chore(data): refresh cached GitHub data"
+          title: "chore(data): refresh cached GitHub data"
+          body: "Automated PR to update cached GitHub data."
+          branch: "bot/cache-github-data"
+          add-paths: |
+            data/github-data.json
+          delete-branch: true
+          labels: |
+            automated
+            data
+
+      - name: Approve PR as William
+        if: steps.cpr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh pr review ${{ steps.cpr.outputs.pull-request-number }} --approve --repo ${{ github.repository }}
+
+      - name: Enable auto-merge (squash)
+        if: steps.cpr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --squash --delete-branch --repo ${{ github.repository }}
