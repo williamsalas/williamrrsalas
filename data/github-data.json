@@ -1,5 +1,16 @@
 [
   {
+    "id": "53767324059",
+    "type": "PullRequestEvent",
+    "created_at": "2025-08-24T22:27:39Z",
+    "repo": "williamsalas/williamrrsalas",
+    "pr_number": 32,
+    "url": "https://github.com/williamsalas/williamrrsalas/pull/32",
+    "title": "chore(data): refresh cached GitHub data",
+    "merged": true,
+    "action": "closed"
+  },
+  {
     "id": "53766970554",
     "type": "PullRequestEvent",
     "created_at": "2025-08-24T22:00:14Z",
