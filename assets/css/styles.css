@@ -47,6 +47,10 @@ h1 {
   color: #eee;
 }
 
+p.github-events {
+  margin-top: unset;
+}
+
 button {
   padding: 10px 20px;
   font-size: 16px;

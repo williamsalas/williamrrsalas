@@ -28,14 +28,8 @@
     <div class="bottom-flex-container">
       <div class="bottom-left">
         <h3>recent activity</h3>
-        <p id="github-events">Loading recent GitHub activity...</p>
-      </div>
-      <div class="bottom-right">
-        <h3>Lorem Ipsum Right</h3>
-        <p>
-          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-          posuere cubilia curae; Integer nec odio. Praesent libero. Sed cursus
-          ante dapibus diam.
+        <p id="github-events" class="github-events">
+          Loading recent GitHub activity...
         </p>
       </div>
     </div>
@@ -72,13 +66,9 @@
             return;
           }
 
-          const ul = document.createElement("ul");
-          ul.style.paddingLeft = "0";
-          ul.style.margin = "0";
-          ul.style.listStyle = "none";
-
-          // Only show the most recent update for each PR
+          // Group PR events by repo
           const seenPRs = new Set();
+          const repoMap = new Map();
           data
             .filter(
               (event) =>
@@ -96,6 +86,98 @@
               return true;
             })
             .forEach((event) => {
+              const repoName =
+                event?.repo && event.repo.name
+                  ? event.repo.name
+                  : event?.repo || "unknown";
+              if (event.type === "PullRequestEvent") {
+                if (!repoMap.has(repoName)) repoMap.set(repoName, []);
+                repoMap.get(repoName).push(event);
+              }
+            });
+
+          // Create the display
+          const fragment = document.createDocumentFragment();
+          for (const [repoName, events] of repoMap.entries()) {
+            const repoHeader = document.createElement("div");
+            repoHeader.style.fontWeight = "bold";
+            repoHeader.style.marginTop = "1em";
+            repoHeader.style.marginBottom = "0.2em";
+            repoHeader.textContent = repoName;
+            fragment.appendChild(repoHeader);
+
+            const ul = document.createElement("ul");
+            ul.style.paddingLeft = "0";
+            ul.style.margin = "0 0 0.5em 0";
+            ul.style.listStyle = "none";
+
+            events.forEach((event) => {
+              const createdAt = event?.created_at
+                ? new Date(event.created_at)
+                : null;
+              const li = document.createElement("li");
+              li.style.marginBottom = "8px";
+
+              // status image
+              const statusIcon = document.createElement("img");
+              statusIcon.width = 16;
+              statusIcon.height = 16;
+              statusIcon.style.verticalAlign = "middle";
+              statusIcon.style.marginLeft = "2px";
+              statusIcon.style.marginRight = "6px";
+              if (event.action === "opened" || event.merged === false) {
+                statusIcon.src = "assets/img/git-pull-request-16.svg";
+                statusIcon.alt = "PR open";
+              } else if (event.merged) {
+                statusIcon.src = "assets/img/git-merge-16.svg";
+                statusIcon.alt = "PR merged";
+              } else {
+                statusIcon.src = "assets/img/git-pull-request-closed-16.svg";
+                statusIcon.alt = "PR closed";
+              }
+
+              // PR title hyperlinked to the PR
+              const titleLink = document.createElement("a");
+              titleLink.href = event.url;
+              titleLink.target = "_blank";
+              titleLink.rel = "noopener noreferrer";
+              titleLink.textContent = event.title || "(no title)";
+              titleLink.style.fontWeight = "bold";
+              titleLink.style.maxWidth = "60vw";
+              titleLink.style.display = "inline-block";
+              titleLink.style.overflow = "hidden";
+              titleLink.style.textOverflow = "ellipsis";
+              titleLink.style.verticalAlign = "middle";
+              titleLink.style.whiteSpace = "nowrap";
+
+              const small = document.createElement("small");
+              if (createdAt) {
+                const month = createdAt.toLocaleString("en-US", {
+                  month: "short",
+                });
+                const day = createdAt.getDate();
+                small.textContent = `${month} ${day}`;
+              } else {
+                small.textContent = "";
+              }
+              small.style.marginLeft = "0.5em";
+              small.style.float = "right";
+              small.style.textAlign = "right";
+              small.style.display = "block";
+              li.append(statusIcon, titleLink, small);
+              ul.appendChild(li);
+            });
+            fragment.appendChild(ul);
+          }
+
+          // Show non-PR events as before
+          const ulOther = document.createElement("ul");
+          ulOther.style.paddingLeft = "0";
+          ulOther.style.margin = "0";
+          ulOther.style.listStyle = "none";
+          data
+            .filter((event) => event.type !== "PullRequestEvent")
+            .forEach((event) => {
               const type = (event?.type || "").replace("Event", "");
               const repoName =
                 event?.repo && event.repo.name
@@ -104,65 +186,32 @@
               const createdAt = event?.created_at
                 ? new Date(event.created_at)
                 : null;
-
               const li = document.createElement("li");
               li.style.marginBottom = "8px";
-              if (event.type === "PullRequestEvent" && event.url) {
-                // repo name
-                const repoCode = document.createElement("code");
-                repoCode.textContent = repoName;
-                repoCode.style.marginRight = "0.5em";
-
-                // status image
-                const statusIcon = document.createElement("img");
-                statusIcon.width = 16;
-                statusIcon.height = 16;
-                statusIcon.style.verticalAlign = "middle";
-                statusIcon.style.marginLeft = "2px";
-                statusIcon.style.marginRight = "6px";
-                if (event.action === "opened" || event.merged === false) {
-                  statusIcon.src = "assets/img/git-pull-request-16.svg";
-                  statusIcon.alt = "PR open";
-                } else if (event.merged) {
-                  statusIcon.src = "assets/img/git-merge-16.svg";
-                  statusIcon.alt = "PR merged";
-                } else {
-                  statusIcon.src = "assets/img/git-pull-request-closed-16.svg";
-                  statusIcon.alt = "PR closed";
-                }
-
-                // PR title hyperlinked to the PR
-                const titleLink = document.createElement("a");
-                titleLink.href = event.url;
-                titleLink.target = "_blank";
-                titleLink.rel = "noopener noreferrer";
-                titleLink.textContent = event.title || "(no title)";
-                titleLink.style.fontWeight = "bold";
-
-                const br = document.createElement("br");
-                const small = document.createElement("small");
-                small.textContent = createdAt ? createdAt.toLocaleString() : "";
-
-                // final order: repo name → image → linked title
-                li.append(statusIcon, titleLink, br, small);
+              const b = document.createElement("b");
+              b.textContent = type;
+              const code = document.createElement("code");
+              code.textContent = repoName;
+              const br = document.createElement("br");
+              const small = document.createElement("small");
+              if (createdAt) {
+                const month = createdAt.toLocaleString("en-US", {
+                  month: "short",
+                });
+                const day = createdAt.getDate();
+                small.textContent = `${month} ${day}`;
               } else {
-                // Other event types
-                const b = document.createElement("b");
-                b.textContent = type;
-
-                const code = document.createElement("code");
-                code.textContent = repoName;
-
-                const br = document.createElement("br");
-                const small = document.createElement("small");
-                small.textContent = createdAt ? createdAt.toLocaleString() : "";
-
-                li.append(b, document.createTextNode(" on "), code, br, small);
+                small.textContent = "";
               }
-              ul.appendChild(li);
+              small.style.float = "right";
+              small.style.textAlign = "right";
+              small.style.display = "block";
+              li.append(b, document.createTextNode(" on "), code, br, small);
+              ulOther.appendChild(li);
             });
+          fragment.appendChild(ulOther);
 
-          container.replaceChildren(ul);
+          container.replaceChildren(fragment);
         } catch (err) {
           container.textContent = `Could not load GitHub activity. ${err.message}`;
           console.error(err);
