@@ -120,23 +120,29 @@
                 prLink.textContent = `#${event.pr_number}`;
                 prLink.style.marginRight = "0.5em";
 
-                const status = document.createElement("span");
+                // Insert <img> for PR status
+                let statusIcon = document.createElement("img");
+                statusIcon.width = 16;
+                statusIcon.height = 16;
+                statusIcon.style.verticalAlign = "middle";
+                statusIcon.style.marginLeft = "2px";
+                statusIcon.style.marginRight = "2px";
                 if (event.action === "opened" || event.merged === false) {
-                  status.textContent = "(open)";
-                  status.style.color = "#00adb5";
+                  statusIcon.src = "assets/img/git-pull-request-16.svg";
+                  statusIcon.alt = "PR open";
                 } else if (event.merged) {
-                  status.textContent = "(merged)";
-                  status.style.color = "#4caf50";
+                  statusIcon.src = "assets/img/git-merge-16.svg";
+                  statusIcon.alt = "PR merged";
                 } else {
-                  status.textContent = "(closed)";
-                  status.style.color = "#aaa";
+                  statusIcon.src = "assets/img/git-pull-request-closed-16.svg";
+                  statusIcon.alt = "PR closed";
                 }
 
                 const br = document.createElement("br");
                 const small = document.createElement("small");
                 small.textContent = createdAt ? createdAt.toLocaleString() : "";
 
-                li.append(titleSpan, prLink, status, br, small);
+                li.append(titleSpan, prLink, statusIcon, br, small);
               } else {
                 // Other event types
                 const b = document.createElement("b");
