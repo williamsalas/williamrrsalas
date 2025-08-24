@@ -24,11 +24,7 @@
     <div class="bottom-flex-container">
       <div class="bottom-left">
         <h3>Lorem Ipsum Left</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi,
-          euismod euismod nisi nisi euismod.
-        </p>
+        <p id="github-events">Loading recent GitHub activity...</p>
       </div>
       <div class="bottom-right">
         <h3>Lorem Ipsum Right</h3>
@@ -40,17 +36,73 @@
       </div>
     </div>
     <script>
-      // Pikachu construction start date: August 22, 2025
-      const startDate = new Date("2025-08-22T00:00:00Z");
-      const today = new Date();
-      // Calculate difference in days
-      const diffTime = today - startDate;
-      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-      document.getElementById(
-        "pikachu-counter"
-      ).textContent = `pikachu has been working on this website for ${diffDays} day${
-        diffDays === 1 ? "" : "s"
-      }!`;
+      (async function () {
+        // Pikachu construction start date: August 22, 2025
+        const startDate = new Date("2025-08-22T00:00:00Z");
+        const today = new Date();
+        const diffTime = today - startDate;
+        const diffDays = Math.max(
+          0,
+          Math.floor(diffTime / (1000 * 60 * 60 * 24))
+        );
+        const counterElement = document.getElementById("pikachu-counter");
+        if (counterElement) {
+          counterElement.textContent = `pikachu has been working on this website for ${diffDays} day${
+            diffDays === 1 ? "" : "s"
+          }!`;
+        }
+
+        // Fetch and display GitHub activity from data.json
+        const container = document.getElementById("github-events");
+        if (!container) return;
+
+        try {
+          const res = await fetch("public/data.json", { cache: "no-store" });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+          const data = await res.json();
+          if (!Array.isArray(data) || data.length === 0) {
+            container.textContent = "No recent GitHub activity.";
+            return;
+          }
+
+          const ul = document.createElement("ul");
+          ul.style.paddingLeft = "1.2em";
+          ul.style.margin = "0";
+
+          data.forEach((event) => {
+            const type = (event?.type || "").replace("Event", "");
+            const repoName =
+              event?.repo && event.repo.name
+                ? event.repo.name
+                : event?.repo || "unknown";
+            const createdAt = event?.created_at
+              ? new Date(event.created_at)
+              : null;
+
+            const li = document.createElement("li");
+
+            const b = document.createElement("b");
+            b.textContent = type;
+
+            const code = document.createElement("code");
+            code.textContent = repoName;
+
+            const br = document.createElement("br");
+
+            const small = document.createElement("small");
+            small.textContent = createdAt ? createdAt.toLocaleString() : "";
+
+            li.append(b, document.createTextNode(" on "), code, br, small);
+            ul.appendChild(li);
+          });
+
+          container.replaceChildren(ul);
+        } catch (err) {
+          container.textContent = `Could not load GitHub activity. ${err.message}`;
+          console.error(err);
+        }
+      })();
     </script>
   </body>
 </html>

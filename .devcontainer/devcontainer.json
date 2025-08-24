@@ -1,0 +1,11 @@
+{
+  "name": "PR VM",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": { "label": "site", "onAutoForward": "openBrowser" }
+  },
+  "postCreateCommand": "nohup python3 -m http.server 8080 >/tmp/server.log 2>&1 &"
+}

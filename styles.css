@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: stretch;
   padding: 2rem 0 0 0;
-  gap: 2rem;
+  gap: 8px;
 }
 
 .bottom-left,
@@ -19,16 +19,18 @@
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  height: fit-content;
+  margin-bottom: 8px;
+  overflow-x: auto;
+  word-break: break-word;
 }
 
-.bottom-left {
-  margin-right: 1rem;
+.bottom-left code,
+.bottom-right code {
+  word-break: break-all;
+  white-space: pre-wrap;
 }
 
-.bottom-right {
-  margin-left: 1rem;
-}
 body {
   display: flex;
   flex-direction: column;
@@ -38,6 +40,7 @@ body {
   background: #000;
   font-family: sf mono, menlo, monospace;
   color: #eee;
+  margin: 16px;
 }
 
 h1 {
