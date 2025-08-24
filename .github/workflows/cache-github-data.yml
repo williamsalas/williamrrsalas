@@ -2,12 +2,13 @@ name: Cache GitHub data
 
 on:
   schedule:
-    - cron: "7,37 * * * *" # every 30 minutes, UTC
-  workflow_dispatch: # allow manual runs
+    - cron: "7 * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: read
   pull-requests: write
+  issues: write
 
 concurrency:
   group: cache-github-data
@@ -16,9 +17,11 @@ concurrency:
 jobs:
   fetch-and-pr:
     runs-on: ubuntu-latest
+    # Job-level override (explicit is better)
     permissions:
       contents: write
       pull-requests: write
+      issues: write
 
     env:
       GH_USER: williamsalas
@@ -36,7 +39,6 @@ jobs:
             "https://api.github.com/users/$GH_USER/events?per_page=30" \
             > data/events.raw.json
 
-          # Slim the payload to the fields you actually need
           sudo apt-get update -y && sudo apt-get install -y jq
           jq 'map({id, type, created_at, repo: .repo.name})' \
             data/events.raw.json > data/github-data.json
