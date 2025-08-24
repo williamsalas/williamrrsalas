@@ -36,11 +36,11 @@ jobs:
           curl -sS \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/users/$GH_USER/events?per_page=30" \
+            "https://api.github.com/users/$GH_USER/events?per_page=100" \
             > data/events.raw.json
 
           sudo apt-get update -y && sudo apt-get install -y jq
-          jq 'map(select(.type == "CreateEvent" or .type == "PushEvent" or .type == "IssuesEvent" or .type == "ReleaseEvent" or .type == "PullRequestEvent" or .type == "PullRequestReviewEvent" or .type == "WatchEvent") | {id, type, created_at, repo: .repo.name})' \
+          jq 'map(select(.type == "PullRequestEvent") | {id, type, created_at, repo: .repo.name, url: .payload.html_url, title: .payload.title, merged: .payload.merged })' \
             data/events.raw.json > data/github-data.json
 
       - name: Create pull request
