@@ -27,15 +27,9 @@
     <div id="pikachu-counter" class="pikachu-counter"></div>
     <div class="bottom-flex-container">
       <div class="bottom-left">
-        <h3>recent activity</h3>
-        <p id="github-events">Loading recent GitHub activity...</p>
-      </div>
-      <div class="bottom-right">
-        <h3>Lorem Ipsum Right</h3>
-        <p>
-          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-          posuere cubilia curae; Integer nec odio. Praesent libero. Sed cursus
-          ante dapibus diam.
+        <h3 class="github-activity">recent activity</h3>
+        <p id="github-events" class="github-events">
+          Loading recent GitHub activity...
         </p>
       </div>
     </div>
@@ -72,38 +66,154 @@
             return;
           }
 
-          const ul = document.createElement("ul");
-          ul.style.paddingLeft = "1.2em";
-          ul.style.margin = "0";
+          // Group PR events by repo
+          const seenPRs = new Set();
+          const repoMap = new Map();
+          data
+            .filter(
+              (event) =>
+                !(
+                  event.type === "PullRequestEvent" &&
+                  event.title &&
+                  event.title.startsWith("chore(data")
+                )
+            )
+            .filter((event) => {
+              if (event.type !== "PullRequestEvent" || !event.pr_number)
+                return true;
+              if (seenPRs.has(event.pr_number)) return false;
+              seenPRs.add(event.pr_number);
+              return true;
+            })
+            .forEach((event) => {
+              const repoName =
+                event?.repo && event.repo.name
+                  ? event.repo.name
+                  : event?.repo || "unknown";
+              if (event.type === "PullRequestEvent") {
+                if (!repoMap.has(repoName)) repoMap.set(repoName, []);
+                repoMap.get(repoName).push(event);
+              }
+            });
 
-          data.forEach((event) => {
-            const type = (event?.type || "").replace("Event", "");
-            const repoName =
-              event?.repo && event.repo.name
-                ? event.repo.name
-                : event?.repo || "unknown";
-            const createdAt = event?.created_at
-              ? new Date(event.created_at)
-              : null;
+          // Create the display
+          const fragment = document.createDocumentFragment();
+          for (const [repoName, events] of repoMap.entries()) {
+            const repoHeader = document.createElement("div");
+            repoHeader.className = "repo-header";
+            // Prepend repo icon
+            const repoIcon = document.createElement("img");
+            repoIcon.src = "assets/img/repo-16.svg";
+            repoIcon.alt = "Repo icon";
+            repoIcon.width = 16;
+            repoIcon.height = 16;
+            repoIcon.className = "repo-icon";
+            repoHeader.appendChild(repoIcon);
+            // Create link to repo
+            const repoLink = document.createElement("a");
+            repoLink.href = `https://github.com/${repoName}`;
+            repoLink.target = "_blank";
+            repoLink.rel = "noopener noreferrer";
+            repoLink.textContent = repoName;
+            repoLink.className = "repo-link";
+            repoHeader.appendChild(repoLink);
+            fragment.appendChild(repoHeader);
 
-            const li = document.createElement("li");
+            const ul = document.createElement("ul");
+            ul.className = "github-activity-list pr-list";
 
-            const b = document.createElement("b");
-            b.textContent = type;
+            events.forEach((event) => {
+              const createdAt = event?.created_at
+                ? new Date(event.created_at)
+                : null;
+              const li = document.createElement("li");
+              li.className = "pr-event";
 
-            const code = document.createElement("code");
-            code.textContent = repoName;
+              // status image
+              const statusIcon = document.createElement("img");
+              statusIcon.width = 16;
+              statusIcon.height = 16;
+              statusIcon.className = "status-icon";
+              if (event.action === "opened" || event.merged === false) {
+                statusIcon.src = "assets/img/git-pull-request-16.svg";
+                statusIcon.alt = "PR open";
+              } else if (event.merged) {
+                statusIcon.src = "assets/img/git-merge-16.svg";
+                statusIcon.alt = "PR merged";
+              } else {
+                statusIcon.src = "assets/img/git-pull-request-closed-16.svg";
+                statusIcon.alt = "PR closed";
+              }
 
-            const br = document.createElement("br");
+              // PR title hyperlinked to the PR
+              const titleLink = document.createElement("a");
+              titleLink.href = event.url;
+              titleLink.target = "_blank";
+              titleLink.rel = "noopener noreferrer";
+              titleLink.textContent = event.title || "(no title)";
+              titleLink.className = "pr-title-link";
 
-            const small = document.createElement("small");
-            small.textContent = createdAt ? createdAt.toLocaleString() : "";
+              const githubDate = document.createElement("small");
+              githubDate.className = "github-date";
+              if (createdAt) {
+                const month = createdAt.toLocaleString("en-US", {
+                  month: "short",
+                });
+                const day = createdAt.getDate();
+                githubDate.textContent = `${month} ${day}`;
+              } else {
+                githubDate.textContent = "";
+              }
+              li.append(statusIcon, titleLink, githubDate);
+              ul.appendChild(li);
+            });
+            fragment.appendChild(ul);
+          }
 
-            li.append(b, document.createTextNode(" on "), code, br, small);
-            ul.appendChild(li);
-          });
+          // Show non-PR events as before
+          const ulOther = document.createElement("ul");
+          ulOther.className = "github-activity-list other-list";
+          data
+            .filter((event) => event.type !== "PullRequestEvent")
+            .forEach((event) => {
+              const type = (event?.type || "").replace("Event", "");
+              const repoName =
+                event?.repo && event.repo.name
+                  ? event.repo.name
+                  : event?.repo || "unknown";
+              const createdAt = event?.created_at
+                ? new Date(event.created_at)
+                : null;
+              const li = document.createElement("li");
+              li.className = "other-event";
+              const b = document.createElement("b");
+              b.textContent = type;
+              const code = document.createElement("code");
+              code.textContent = repoName;
+              const br = document.createElement("br");
+              const githubDate = document.createElement("small");
+              githubDate.className = "github-date";
+              if (createdAt) {
+                const month = createdAt.toLocaleString("en-US", {
+                  month: "short",
+                });
+                const day = createdAt.getDate();
+                githubDate.textContent = `${month} ${day}`;
+              } else {
+                githubDate.textContent = "";
+              }
+              li.append(
+                b,
+                document.createTextNode(" on "),
+                code,
+                br,
+                githubDate
+              );
+              ulOther.appendChild(li);
+            });
+          fragment.appendChild(ulOther);
 
-          container.replaceChildren(ul);
+          container.replaceChildren(fragment);
         } catch (err) {
           container.textContent = `Could not load GitHub activity. ${err.message}`;
           console.error(err);

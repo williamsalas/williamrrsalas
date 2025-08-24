@@ -1,7 +1,39 @@
+.repo-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+  cursor: pointer;
+}
+
+.repo-link:visited {
+  color: inherit;
+}
+
+.repo-link:hover,
+.repo-link:focus {
+  text-decoration: underline dotted;
+}
+.github-activity-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.pr-list {
+  margin: 0 0 0.5em 0;
+}
+
+.other-list {
+  margin: 0;
+}
 .bottom-flex-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  .github-date {
+    margin-left: auto;
+    margin-bottom: unset;
+    right: 0;
+  }
   align-items: stretch;
   padding: 2rem 0 0 0;
   gap: 8px;
@@ -12,7 +44,8 @@
   background: rgba(34, 34, 34, 0.92);
   color: #eee;
   border-radius: 10px;
-  padding: 1.2rem 1.5rem;
+  padding-left: 16px;
+  padding-right: 16px;
   flex: 1 1 0;
   min-width: 0;
   pointer-events: auto;
@@ -31,6 +64,67 @@
   white-space: pre-wrap;
 }
 
+.github-activity {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.repo-header {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.pr-event {
+  padding-bottom: 4px;
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.github-date {
+  margin-bottom: unset;
+  right: 0;
+}
+
+.repo-icon {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.status-icon {
+  vertical-align: middle;
+  margin-left: 2px;
+  margin-right: 6px;
+}
+
+.pr-title-link {
+  font-weight: bold;
+  max-width: 60vw;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: #00adb5;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.pr-title-link:visited {
+  color: #00adb5;
+}
+
+.pr-title-link:hover,
+.pr-title-link:focus {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.other-event {
+  margin-bottom: 8px;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -45,6 +139,10 @@ body {
 
 h1 {
   color: #eee;
+}
+
+p.github-events {
+  margin-top: unset;
 }
 
 button {
