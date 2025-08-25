@@ -2,7 +2,7 @@ name: Cache GitHub data
 
 on:
   schedule:
-    - cron: "7 * * * *"
+    - cron: "0 0,12 * * *" # At minute 0 past hour 0 and 12 (UTC) every day
   workflow_dispatch:
 
 permissions:
