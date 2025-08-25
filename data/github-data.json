@@ -1,5 +1,60 @@
 [
   {
+    "id": "53769046088",
+    "type": "PullRequestEvent",
+    "created_at": "2025-08-25T00:37:14Z",
+    "repo": "williamsalas/williamrrsalas",
+    "pr_number": 35,
+    "url": "https://github.com/williamsalas/williamrrsalas/pull/35",
+    "title": "modularize js utils used in index.html",
+    "merged": true,
+    "action": "closed"
+  },
+  {
+    "id": "53769043960",
+    "type": "PullRequestEvent",
+    "created_at": "2025-08-25T00:37:06Z",
+    "repo": "williamsalas/williamrrsalas",
+    "pr_number": 35,
+    "url": "https://github.com/williamsalas/williamrrsalas/pull/35",
+    "title": "modularize js utils used in index.html",
+    "merged": false,
+    "action": "opened"
+  },
+  {
+    "id": "53768327745",
+    "type": "PullRequestEvent",
+    "created_at": "2025-08-24T23:50:33Z",
+    "repo": "williamsalas/williamrrsalas",
+    "pr_number": 34,
+    "url": "https://github.com/williamsalas/williamrrsalas/pull/34",
+    "title": "Update github display section",
+    "merged": true,
+    "action": "closed"
+  },
+  {
+    "id": "53768324069",
+    "type": "PullRequestEvent",
+    "created_at": "2025-08-24T23:50:15Z",
+    "repo": "williamsalas/williamrrsalas",
+    "pr_number": 34,
+    "url": "https://github.com/williamsalas/williamrrsalas/pull/34",
+    "title": "Update github display section",
+    "merged": false,
+    "action": "opened"
+  },
+  {
+    "id": "53768027795",
+    "type": "PullRequestEvent",
+    "created_at": "2025-08-24T23:25:18Z",
+    "repo": "williamsalas/williamrrsalas",
+    "pr_number": 33,
+    "url": "https://github.com/williamsalas/williamrrsalas/pull/33",
+    "title": "chore(data): refresh cached GitHub data",
+    "merged": true,
+    "action": "closed"
+  },
+  {
     "id": "53767324059",
     "type": "PullRequestEvent",
     "created_at": "2025-08-24T22:27:39Z",
@@ -229,93 +284,5 @@
     "title": "chore(data): refresh cached GitHub data",
     "merged": true,
     "action": "closed"
-  },
-  {
-    "id": "53755607366",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T08:51:45Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 10,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/10",
-    "title": "chore(data): refresh cached GitHub data",
-    "merged": false,
-    "action": "closed"
-  },
-  {
-    "id": "53755490499",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T08:43:15Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 8,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/8",
-    "title": "chore(data): refresh cached GitHub data",
-    "merged": false,
-    "action": "closed"
-  },
-  {
-    "id": "53755487128",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T08:43:00Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 9,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/9",
-    "title": "fix(workflow): update cron schedule and permissions in cache GitHub d…",
-    "merged": true,
-    "action": "closed"
-  },
-  {
-    "id": "53755478790",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T08:42:22Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 9,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/9",
-    "title": "fix(workflow): update cron schedule and permissions in cache GitHub d…",
-    "merged": false,
-    "action": "opened"
-  },
-  {
-    "id": "53755305231",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T08:29:33Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 7,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/7",
-    "title": "attempt fix workflow",
-    "merged": true,
-    "action": "closed"
-  },
-  {
-    "id": "53755303628",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T08:29:24Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 7,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/7",
-    "title": "attempt fix workflow",
-    "merged": false,
-    "action": "opened"
-  },
-  {
-    "id": "53754854845",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T07:56:17Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 6,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/6",
-    "title": "organize directory and update paths",
-    "merged": true,
-    "action": "closed"
-  },
-  {
-    "id": "53754845858",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T07:55:32Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 6,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/6",
-    "title": "organize directory and update paths",
-    "merged": false,
-    "action": "opened"
   }
 ]
