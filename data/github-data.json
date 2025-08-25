@@ -1,5 +1,16 @@
 [
   {
+    "id": "53770788340",
+    "type": "PullRequestEvent",
+    "created_at": "2025-08-25T02:09:48Z",
+    "repo": "williamsalas/williamrrsalas",
+    "pr_number": 36,
+    "url": "https://github.com/williamsalas/williamrrsalas/pull/36",
+    "title": "chore(data): refresh cached GitHub data",
+    "merged": true,
+    "action": "closed"
+  },
+  {
     "id": "53769046088",
     "type": "PullRequestEvent",
     "created_at": "2025-08-25T00:37:14Z",
@@ -273,16 +284,5 @@
     "title": "fix(index): update section title and change data source for GitHub ac…",
     "merged": false,
     "action": "opened"
-  },
-  {
-    "id": "53755615491",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T08:52:22Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 11,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/11",
-    "title": "chore(data): refresh cached GitHub data",
-    "merged": true,
-    "action": "closed"
   }
 ]
