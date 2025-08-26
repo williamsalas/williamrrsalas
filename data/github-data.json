@@ -1,5 +1,16 @@
 [
   {
+    "id": "53792306587",
+    "type": "PullRequestEvent",
+    "created_at": "2025-08-25T12:27:32Z",
+    "repo": "williamsalas/williamrrsalas",
+    "pr_number": 39,
+    "url": "https://github.com/williamsalas/williamrrsalas/pull/39",
+    "title": "chore(data): refresh cached GitHub data",
+    "merged": true,
+    "action": "closed"
+  },
+  {
     "id": "53773449937",
     "type": "PullRequestEvent",
     "created_at": "2025-08-25T04:15:52Z",
@@ -270,17 +281,6 @@
     "repo": "williamsalas/williamrrsalas",
     "pr_number": 15,
     "url": "https://github.com/williamsalas/williamrrsalas/pull/15",
-    "title": "chore(data): refresh cached GitHub data",
-    "merged": true,
-    "action": "closed"
-  },
-  {
-    "id": "53757005787",
-    "type": "PullRequestEvent",
-    "created_at": "2025-08-24T10:29:13Z",
-    "repo": "williamsalas/williamrrsalas",
-    "pr_number": 14,
-    "url": "https://github.com/williamsalas/williamrrsalas/pull/14",
     "title": "chore(data): refresh cached GitHub data",
     "merged": true,
     "action": "closed"
