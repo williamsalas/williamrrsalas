@@ -1,9 +1,14 @@
 import { loadJson } from "./utils/http.js";
-import { isChoreDataPR, uniquePRs, groupPRsByRepo } from "./github/events.js";
+import {
+  isChoreDataPR,
+  uniquePRs,
+  groupPRsByRepo,
+  transformPullRequestEvents,
+} from "./github/events.js";
 import { renderPRSections, renderOtherEvents } from "./github/render.js";
 import { renderPikachuCounter } from "./features/pikachuCounter.js";
-
-const GITHUB_DATA_URL = "data/github-data.json";
+// cloudflare worker URL
+const GITHUB_DATA_URL = "https://wrrs.williamsalas24.workers.dev/githubEvents";
 const PIKA_START_ISO = "2025-08-22T00:00:00Z";
 
 async function init() {
@@ -13,11 +18,12 @@ async function init() {
   if (!container) return;
 
   try {
-    const data = await loadJson(GITHUB_DATA_URL);
-    if (!Array.isArray(data) || data.length === 0) {
+    const raw = await loadJson(GITHUB_DATA_URL);
+    if (!Array.isArray(raw) || raw.length === 0) {
       container.textContent = "No recent GitHub activity.";
       return;
     }
+    const data = transformPullRequestEvents(raw);
 
     const cleaned = uniquePRs(data.filter((e) => !isChoreDataPR(e)));
     const prGrouped = groupPRsByRepo(cleaned);
