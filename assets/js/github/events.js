@@ -24,3 +24,30 @@ export function groupPRsByRepo(events) {
   });
   return map;
 }
+
+/** @typedef {{
+ *   id: string,
+ *   type: string,
+ *   created_at: string,
+ *   repo: { name?: string } | undefined,
+ *   payload?: { action?: string, pull_request?: {
+ *     number: number, html_url: string, title: string, merged?: boolean
+ *   }}
+ * }} GitHubEvent */
+
+/** Return only PullRequestEvent items in the jq-shaped form. */
+export function transformPullRequestEvents(events /** @type GitHubEvent[] */) {
+  return events
+    .filter((e) => e?.type === "PullRequestEvent" && e?.payload?.pull_request)
+    .map((e) => ({
+      id: e.id,
+      type: e.type,
+      created_at: e.created_at,
+      repo: e.repo?.name ?? null,
+      pr_number: e.payload.pull_request.number,
+      url: e.payload.pull_request.html_url,
+      title: e.payload.pull_request.title,
+      merged: !!e.payload.pull_request.merged,
+      action: e.payload.action ?? null,
+    }));
+}
