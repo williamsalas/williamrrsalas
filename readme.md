@@ -2,6 +2,12 @@
 
 [williamrrsalas.com](https://williamrrsalas.com)
 
+## tech used
+
+- github pages
+- github api
+- cloudflare workers
+
 ## running locally
 
 - In VS Code, use the Live Server (Five Server) extension
