@@ -6,14 +6,10 @@ import {
   transformPullRequestEvents,
 } from "./github/events.js";
 import { renderPRSections, renderOtherEvents } from "./github/render.js";
-import { renderPikachuCounter } from "./features/pikachuCounter.js";
 // cloudflare worker URL
 const GITHUB_DATA_URL = "https://wrrs.williamsalas24.workers.dev/githubEvents";
-const PIKA_START_ISO = "2025-08-22T00:00:00Z";
 
 async function init() {
-  renderPikachuCounter(PIKA_START_ISO);
-
   const container = document.getElementById("github-events");
   if (!container) return;
 
