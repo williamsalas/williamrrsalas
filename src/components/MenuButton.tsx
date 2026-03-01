@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 
-export function MenuButton() {
+interface MenuButtonProps {
+  navigate: (to: string) => void;
+}
+
+export function MenuButton({ navigate }: MenuButtonProps) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -16,6 +20,12 @@ export function MenuButton() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
+  function handleNav(e: React.MouseEvent, to: string) {
+    e.preventDefault();
+    navigate(to);
+    setOpen(false);
+  }
+
   return (
     <div className="menu-container" ref={menuRef}>
       <button
@@ -29,12 +39,14 @@ export function MenuButton() {
       {open && (
         <ul className="menu-dropdown">
           <li>
-            <a href="/" onClick={() => setOpen(false)}>
+            <a href="/" onClick={(e) => handleNav(e, "/")}>
               Home
             </a>
           </li>
           <li>
-            <span className="menu-disabled">Coming soon</span>
+            <a href="/btc" onClick={(e) => handleNav(e, "/btc")}>
+              BTC Visualizer
+            </a>
           </li>
         </ul>
       )}

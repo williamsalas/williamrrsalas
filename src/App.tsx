@@ -3,11 +3,12 @@ import { Header } from "./components/Header.tsx";
 import { GitHubActivity } from "./components/GitHubActivity.tsx";
 import { Footer } from "./components/Footer.tsx";
 import { MenuButton } from "./components/MenuButton.tsx";
+import { BtcPage } from "./components/btc/BtcPage.tsx";
+import { useRoute } from "./hooks/useRoute.ts";
 
-export default function App() {
+function HomePage() {
   return (
     <>
-      <MenuButton />
       <Header />
       <div className="bottom-flex-container">
         <div className="bottom-left">
@@ -16,6 +17,17 @@ export default function App() {
         </div>
       </div>
       <Footer />
+    </>
+  );
+}
+
+export default function App() {
+  const { path, navigate } = useRoute();
+
+  return (
+    <>
+      <MenuButton navigate={navigate} />
+      {path === "/btc" ? <BtcPage /> : <HomePage />}
     </>
   );
 }
