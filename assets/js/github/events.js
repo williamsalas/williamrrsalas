@@ -25,9 +25,8 @@ export function groupPRsByRepo(events) {
 
   // Sort repos by most recent event, cap each at 10 PRs
   const sorted = [...map.entries()]
-    .sort(
-      ([, a], [, b]) =>
-        (b[0]?.created_at ?? "").localeCompare(a[0]?.created_at ?? ""),
+    .sort(([, a], [, b]) =>
+      (b[0]?.created_at ?? "").localeCompare(a[0]?.created_at ?? ""),
     )
     .map(([repo, prs]) => [repo, prs.slice(0, 10)]);
 
