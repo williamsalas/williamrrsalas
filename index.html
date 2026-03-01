@@ -4,67 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>william salas | software dev</title>
-    <link rel="stylesheet" href="./assets/css/styles.css" />
-    <link rel="icon" href="./favicon.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-    <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#00ADB5" />
-    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#00ADB5" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#222831" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-0D3VJGGB54"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-0D3VJGGB54");
+    </script>
   </head>
-  <!-- Google tag (gtag.js) -->
-  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=G-0D3VJGGB54"
-  ></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-    gtag("config", "G-0D3VJGGB54");
-  </script>
-  <body class="flex-container" style="justify-content: flex-start">
-    <h2>hi, i'm william salas 👋</h2>
-    <small>software developer from southern california</small>
-    <small>
-      part of Redfin’s search team building the site’s most visited pages,
-      search and home details
-    </small>
-
-    <img
-      src="assets/img/pikaconstruction.gif"
-      class="pikachu"
-      alt="Under Construction"
-    />
-    <div class="bottom-flex-container">
-      <div class="bottom-left">
-        <h3 class="github-activity">recent activity</h3>
-        <p id="github-events" class="github-events">
-          Loading recent GitHub activity...
-        </p>
-      </div>
-    </div>
-    <footer class="footer">
-      <a
-        href="https://github.com/williamsalas"
-        target="_blank"
-        aria-label="GitHub"
-      >
-        <i class="fab fa-github"></i>
-      </a>
-      <a
-        href="https://linkedin.com/in/williamsalas"
-        target="_blank"
-        aria-label="LinkedIn"
-      >
-        <i class="fab fa-linkedin"></i>
-      </a>
-    </footer>
-    <script type="module" src="./assets/js/main.js"></script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

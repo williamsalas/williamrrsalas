@@ -26,13 +26,13 @@ jobs:
             > /tmp/new-events.json
 
       - name: Merge and deduplicate events
-        run: python3 tools/merge_events.py /tmp/new-events.json data/github-events.json
+        run: python3 tools/merge_events.py /tmp/new-events.json public/data/github-events.json
 
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/github-events.json
+          git add public/data/github-events.json
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
