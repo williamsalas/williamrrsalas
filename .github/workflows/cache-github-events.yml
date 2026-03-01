@@ -1,0 +1,41 @@
+name: Cache GitHub events
+
+on:
+  schedule:
+    - cron: "0 0,12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cache-github-events
+  cancel-in-progress: true
+
+jobs:
+  fetch-and-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch current events from GitHub API
+        run: |
+          curl -sS \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/users/williamsalas/events?per_page=100" \
+            > /tmp/new-events.json
+
+      - name: Merge and deduplicate events
+        run: python3 tools/merge_events.py /tmp/new-events.json data/github-events.json
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/github-events.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: refresh cached GitHub events"
+            git push
+          fi
