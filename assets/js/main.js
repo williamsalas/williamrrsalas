@@ -1,13 +1,11 @@
 import { loadJson } from "./utils/http.js";
 import {
-  isChoreDataPR,
   uniquePRs,
   groupPRsByRepo,
   transformPullRequestEvents,
 } from "./github/events.js";
 import { renderPRSections, renderOtherEvents } from "./github/render.js";
-// cloudflare worker URL
-const GITHUB_DATA_URL = "https://wrrs.williamsalas24.workers.dev/githubEvents";
+const GITHUB_DATA_URL = "data/github-events.json";
 
 async function init() {
   const container = document.getElementById("github-events");
@@ -21,9 +19,14 @@ async function init() {
     }
     const data = transformPullRequestEvents(raw);
 
-    const cleaned = uniquePRs(data.filter((e) => !isChoreDataPR(e)));
+    const cleaned = uniquePRs(data);
     const prGrouped = groupPRsByRepo(cleaned);
     const other = data.filter((e) => e.type !== "PullRequestEvent");
+
+    if (cleaned.length === 0 && other.length === 0) {
+      container.textContent = "No recent GitHub activity.";
+      return;
+    }
 
     const frag = document.createDocumentFragment();
     renderPRSections(frag, prGrouped);
