@@ -111,9 +111,13 @@ describe("BtcPage", () => {
     expect(screen.getByTestId("total-btc")).toHaveTextContent("3.50000000");
   });
 
-  it("does not show remove button with only one entry", () => {
+  it("clears value instead of removing when only one entry", () => {
+    localStorage.setItem("btc-holdings-btc", '["2.5"]');
     render(<BtcPage />);
-    expect(screen.queryByLabelText("Remove BTC entry 1")).toBeNull();
+    const removeButton = screen.getByLabelText("Remove BTC entry 1");
+    fireEvent.click(removeButton);
+    const input = screen.getByLabelText("BTC amount 1") as HTMLInputElement;
+    expect(input.value).toBe("");
   });
 
   it("does not persist empty or zero entries to localStorage", () => {

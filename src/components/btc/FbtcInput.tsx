@@ -40,15 +40,15 @@ export function FbtcInput({
                 : `USD amount for FBTC ${i + 1}`
             }
           />
-          {entries.length > 1 && (
-            <button
-              className="btc-entry-remove"
-              onClick={() => onRemoveEntry(i)}
-              aria-label={`Remove FBTC entry ${i + 1}`}
-            >
-              x
-            </button>
-          )}
+          <button
+            className="btc-entry-remove"
+            onClick={() =>
+              entries.length > 1 ? onRemoveEntry(i) : onEntryChange(i, "")
+            }
+            aria-label={`Remove FBTC entry ${i + 1}`}
+          >
+            x
+          </button>
         </div>
       ))}
       <button className="btc-entry-add" onClick={onAddEntry}>
