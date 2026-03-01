@@ -6,6 +6,8 @@
 
 - react + typescript
 - vite
+- less
+- prettier
 - github pages
 - github actions
 - vitest + react testing library
@@ -25,6 +27,8 @@ then open http://localhost:5173
 npm run build     # type-check + production build
 npm run preview   # preview production build
 npm test          # run tests
+npm run lint      # check formatting
+npm run format    # fix formatting
 ```
 
 ## using github codespaces for PR VMs
