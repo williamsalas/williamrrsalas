@@ -4,22 +4,35 @@
 
 ## tech used
 
+- react + typescript
+- vite
 - github pages
-- github api
-- cloudflare workers
+- github actions
+- vitest + react testing library
 
 ## running locally
 
-- In VS Code, use the Live Server (Five Server) extension
-- Alternatively:
-  - from root directory, `python3 -m http.server 8000`
+```bash
+npm install
+npm run dev
+```
+
+then open http://localhost:5173
+
+## other commands
+
+```bash
+npm run build     # type-check + production build
+npm run preview   # preview production build
+npm test          # run tests
+```
 
 ## using github codespaces for PR VMs
 
 - spin up a PR
 - in the top right of the page, click on code -> codespaces -> create it
 - the codespace will take some time to build
-- after build is done, run `python3 -m http.server 8080 >/tmp/server.log 2>&1 &` from the project root
+- after build is done, the dev server starts automatically on port 5173
 - if VM didnt open in browser:
   - `shift + command + p in vs code`
   - -> View: Toggle Ports

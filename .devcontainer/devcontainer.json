@@ -1,11 +1,12 @@
 {
   "name": "PR VM",
   "features": {
-    "ghcr.io/devcontainers/features/common-utils:2": {}
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" }
   },
-  "forwardPorts": [8080],
+  "forwardPorts": [5173],
   "portsAttributes": {
-    "8080": { "label": "site", "onAutoForward": "openBrowser" }
+    "5173": { "label": "site", "onAutoForward": "openBrowser" }
   },
-  "postCreateCommand": "nohup python3 -m http.server 8080 >/tmp/server.log 2>&1 &"
+  "postCreateCommand": "npm install && nohup npx vite --host >/tmp/server.log 2>&1 &"
 }

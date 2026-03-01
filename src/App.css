@@ -161,11 +161,18 @@ body {
   margin: 16px;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 h1 {
   color: #eee;
 }
 
-p.github-events {
+.github-events {
   margin-top: unset;
 }
 
