@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.less";
 import { Header } from "./components/Header.tsx";
 import { GitHubActivity } from "./components/GitHubActivity.tsx";
 import { Footer } from "./components/Footer.tsx";
