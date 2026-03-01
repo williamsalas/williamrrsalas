@@ -1,0 +1,138 @@
+[
+  {
+    "id": "54046002696",
+    "type": "PullRequestEvent",
+    "repo": {
+      "name": "williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "closed",
+      "pull_request": {
+        "number": 44,
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/44",
+        "title": "setup google analytics 4",
+        "merged": true
+      }
+    },
+    "created_at": "2025-08-31T00:19:09Z"
+  },
+  {
+    "id": "54045995525",
+    "type": "PullRequestEvent",
+    "repo": {
+      "name": "williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "pull_request": {
+        "number": 44,
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/44",
+        "title": "setup google analytics 4",
+        "merged": false
+      }
+    },
+    "created_at": "2025-08-31T00:18:26Z"
+  },
+  {
+    "id": "53773449937",
+    "type": "PullRequestEvent",
+    "repo": {
+      "name": "williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "closed",
+      "pull_request": {
+        "number": 38,
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/38",
+        "title": "Add social media footer and tweak job",
+        "merged": true
+      }
+    },
+    "created_at": "2025-08-25T04:15:52Z"
+  },
+  {
+    "id": "53773443018",
+    "type": "PullRequestEvent",
+    "repo": {
+      "name": "williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "pull_request": {
+        "number": 38,
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/38",
+        "title": "Add social media footer and tweak job",
+        "merged": false
+      }
+    },
+    "created_at": "2025-08-25T04:15:33Z"
+  },
+  {
+    "id": "53769046088",
+    "type": "PullRequestEvent",
+    "repo": {
+      "name": "williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "closed",
+      "pull_request": {
+        "number": 35,
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/35",
+        "title": "modularize js utils used in index.html",
+        "merged": true
+      }
+    },
+    "created_at": "2025-08-25T00:37:14Z"
+  },
+  {
+    "id": "53769043960",
+    "type": "PullRequestEvent",
+    "repo": {
+      "name": "williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "pull_request": {
+        "number": 35,
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/35",
+        "title": "modularize js utils used in index.html",
+        "merged": false
+      }
+    },
+    "created_at": "2025-08-25T00:37:06Z"
+  },
+  {
+    "id": "53768327745",
+    "type": "PullRequestEvent",
+    "repo": {
+      "name": "williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "closed",
+      "pull_request": {
+        "number": 34,
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/34",
+        "title": "Update github display section",
+        "merged": true
+      }
+    },
+    "created_at": "2025-08-24T23:50:33Z"
+  },
+  {
+    "id": "53768324069",
+    "type": "PullRequestEvent",
+    "repo": {
+      "name": "williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "pull_request": {
+        "number": 34,
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/34",
+        "title": "Update github display section",
+        "merged": false
+      }
+    },
+    "created_at": "2025-08-24T23:50:15Z"
+  }
+]
