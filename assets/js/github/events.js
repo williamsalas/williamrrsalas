@@ -47,15 +47,20 @@ export function groupPRsByRepo(events) {
 export function transformPullRequestEvents(events /** @type GitHubEvent[] */) {
   return events
     .filter((e) => e?.type === "PullRequestEvent" && e?.payload?.pull_request)
-    .map((e) => ({
-      id: e.id,
-      type: e.type,
-      created_at: e.created_at,
-      repo: e.repo?.name ?? null,
-      pr_number: e.payload.pull_request.number,
-      url: e.payload.pull_request.html_url,
-      title: e.payload.pull_request.title,
-      merged: !!e.payload.pull_request.merged,
-      action: e.payload.action ?? null,
-    }));
+    .map((e) => {
+      const pr = e.payload.pull_request;
+      const repo = e.repo?.name ?? null;
+      const number = pr.number;
+      return {
+        id: e.id,
+        type: e.type,
+        created_at: e.created_at,
+        repo,
+        pr_number: number,
+        url: pr.html_url ?? `https://github.com/${repo}/pull/${number}`,
+        title: pr.title ?? `PR #${number}`,
+        merged: pr.merged ?? e.payload.action === "merged",
+        action: e.payload.action ?? null,
+      };
+    });
 }
