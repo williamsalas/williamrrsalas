@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: cache-github-events
@@ -38,4 +39,12 @@ jobs:
           else
             git commit -m "chore: refresh cached GitHub events"
             git push
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
           fi
+        id: commit
+
+      - name: Trigger deploy
+        if: steps.commit.outputs.has_changes == 'true'
+        run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
