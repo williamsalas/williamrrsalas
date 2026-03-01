@@ -3,6 +3,8 @@
 import json
 import os
 import sys
+import urllib.request
+import urllib.error
 
 MAX_EVENTS = 500
 
@@ -10,6 +12,40 @@ MAX_EVENTS = 500
 def filter_pr_events(events):
     """Keep only PullRequestEvent items."""
     return [e for e in events if e.get("type") == "PullRequestEvent"]
+
+
+def enrich_pr_events(events):
+    """Fetch title, html_url, and merged from the PR API for events missing them."""
+    enriched = []
+    for event in events:
+        pr = event.get("payload", {}).get("pull_request", {})
+        if pr.get("title") and pr.get("html_url"):
+            enriched.append(event)
+            continue
+
+        repo_name = event.get("repo", {}).get("name")
+        number = pr.get("number")
+        if not repo_name or not number:
+            enriched.append(event)
+            continue
+
+        api_url = f"https://api.github.com/repos/{repo_name}/pulls/{number}"
+        try:
+            req = urllib.request.Request(
+                api_url,
+                headers={"Accept": "application/vnd.github+json"},
+            )
+            with urllib.request.urlopen(req) as resp:
+                pr_data = json.loads(resp.read())
+            pr["title"] = pr_data.get("title")
+            pr["html_url"] = pr_data.get("html_url")
+            pr["merged"] = pr_data.get("merged")
+            print(f"  Enriched PR #{number}: {pr['title']}")
+        except Exception as e:
+            print(f"  Warning: could not enrich PR #{number}: {e}")
+
+        enriched.append(event)
+    return enriched
 
 
 def merge_events(new_events, existing_events, max_events=MAX_EVENTS):
@@ -54,7 +90,7 @@ def main():
         with open(cache_file) as f:
             existing = json.load(f)
 
-    merged = merge_events(pr_events, existing)
+    merged = enrich_pr_events(merge_events(pr_events, existing))
 
     os.makedirs(os.path.dirname(cache_file) or ".", exist_ok=True)
     with open(cache_file, "w") as f:
