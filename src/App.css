@@ -253,3 +253,279 @@ img.pikachu {
   color: #888;
   cursor: default;
 }
+
+/* BTC Visualizer */
+
+.btc-page {
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.btc-heading {
+  color: #eee;
+  margin: 0 0 8px 0;
+}
+
+.btc-inputs {
+  display: flex;
+  gap: 16px;
+}
+
+.btc-input-group {
+  --accent: #f7931a;
+  flex: 1 1 0;
+  min-width: 0;
+  background: rgba(34, 34, 34, 0.92);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
+}
+
+.btc-input-group--fbtc {
+  --accent: #76a923;
+}
+
+.btc-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.btc-input-row {
+  display: flex;
+  align-items: center;
+  background: #393e46;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.btc-input-prefix {
+  color: #888;
+  margin-right: 6px;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.btc-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #eee;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  padding: 6px 0;
+  min-width: 0;
+}
+
+.btc-input::placeholder {
+  color: #666;
+}
+
+.btc-toggle-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.btc-toggle {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  margin-top: 0;
+  background: #393e46;
+  border: 1px solid #555;
+  border-radius: 4px;
+  color: #aaa;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.btc-toggle-active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+  font-weight: bold;
+}
+
+.btc-summary {
+  background: rgba(34, 34, 34, 0.92);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
+}
+
+.btc-summary-heading {
+  margin: 0 0 12px 0;
+  color: #eee;
+}
+
+.btc-summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.btc-summary-label {
+  color: #888;
+}
+
+.btc-summary-value {
+  color: #f7931a;
+  font-weight: bold;
+}
+
+.btc-summary-note {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.btc-whatif {
+  background: rgba(34, 34, 34, 0.92);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
+}
+
+.btc-whatif-heading {
+  margin: 0 0 12px 0;
+  color: #eee;
+}
+
+.btc-whatif-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.btc-whatif-table th {
+  text-align: left;
+  color: #888;
+  font-weight: normal;
+  padding: 6px 0;
+  border-bottom: 1px solid #393e46;
+}
+
+.btc-whatif-table th:last-child {
+  text-align: right;
+}
+
+.btc-whatif-table td {
+  padding: 8px 0;
+  border-bottom: 1px solid #393e46;
+}
+
+.btc-whatif-table td:last-child {
+  text-align: right;
+  color: #f7931a;
+  font-weight: bold;
+}
+
+.btc-custom-prefix {
+  display: inline;
+  margin-right: 2px;
+}
+
+.btc-custom-input {
+  padding: 4px 6px;
+  background: #393e46;
+  border-radius: 4px;
+}
+
+.btc-input-row + .btc-input-row {
+  margin-top: 6px;
+}
+
+.btc-entry-remove {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  margin: 0;
+  margin-top: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.btc-entry-remove:hover {
+  color: #e74c3c;
+}
+
+.btc-entry-add {
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px;
+  font-size: 0.85rem;
+  background: transparent;
+  border: 1px dashed #555;
+  border-radius: 6px;
+  color: #888;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.btc-entry-add:hover {
+  border-color: #888;
+  color: #ccc;
+}
+
+.btc-fbtc-per-btc {
+  background: rgba(34, 34, 34, 0.92);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
+}
+
+.btc-fbtc-per-btc-heading {
+  margin: 0 0 12px 0;
+  color: #eee;
+}
+
+.btc-fbtc-per-btc-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.btc-fbtc-per-btc-label {
+  color: #888;
+}
+
+.btc-fbtc-per-btc-value {
+  color: #f7931a;
+  font-weight: bold;
+}
+
+.btc-fbtc-per-btc-note {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.btc-disclaimer {
+  color: #888;
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 24px 0 0;
+}
+
+.btc-disclaimer a {
+  color: #aaa;
+  text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  .btc-inputs {
+    flex-direction: column;
+  }
+}
