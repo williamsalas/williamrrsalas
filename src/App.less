@@ -381,16 +381,35 @@ img.pikachu {
 .btc-summary-row {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   padding: 4px 0;
 }
 
 .btc-summary-label {
   color: @muted;
+  min-width: 70px;
+}
+
+.btc-summary-amounts {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  text-align: right;
+}
+
+.btc-summary-sep {
+  color: @muted-dark;
+  font-size: 0.85rem;
 }
 
 .btc-summary-value {
   color: @btc-orange;
   font-weight: bold;
+}
+
+.btc-summary-divider {
+  border-top: 1px solid @muted-dark;
+  margin: 6px 0;
 }
 
 .btc-summary-note {
