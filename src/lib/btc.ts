@@ -1,6 +1,5 @@
-// TODO: Replace hardcoded prices with TwelveData API (free tier) - see https://twelvedata.com
-export const BTC_PRICE_USD = 65_296.67;
-export const FBTC_PRICE_USD = 57.15;
+export const DEFAULT_BTC_PRICE = 65_296.67;
+export const DEFAULT_FBTC_PRICE = 57.15;
 
 export const WHAT_IF_PRICES = [100_000, 200_000, 500_000, 1_000_000];
 
@@ -27,21 +26,27 @@ export function formatWithCommas(value: string): string {
   return dec !== undefined ? `${withCommas}.${dec}` : withCommas;
 }
 
-export function parseBtcHoldings(amount: string, mode: "btc" | "usd"): number {
+export function parseBtcHoldings(
+  amount: string,
+  mode: "btc" | "usd",
+  btcPrice: number,
+): number {
   const n = parseFloat(amount);
   if (isNaN(n) || n < 0) return 0;
   if (mode === "btc") return n;
-  return n / BTC_PRICE_USD;
+  return n / btcPrice;
 }
 
 export function parseFbtcHoldings(
   amount: string,
   mode: "shares" | "usd",
+  btcPrice: number,
+  fbtcPrice: number,
 ): number {
   const n = parseFloat(amount);
   if (isNaN(n) || n < 0) return 0;
-  if (mode === "shares") return n * (FBTC_PRICE_USD / BTC_PRICE_USD);
-  return n / BTC_PRICE_USD;
+  if (mode === "shares") return n * (fbtcPrice / btcPrice);
+  return n / btcPrice;
 }
 
 export function formatUsd(value: number): string {
@@ -60,21 +65,26 @@ export function formatBtc(value: number): string {
   });
 }
 
-export function btcToCanonical(amount: string, mode: "btc" | "usd"): string {
+export function btcToCanonical(
+  amount: string,
+  mode: "btc" | "usd",
+  btcPrice: number,
+): string {
   if (mode === "btc") return amount;
   const n = parseFloat(amount);
   if (isNaN(n) || n < 0) return "";
-  return (n / BTC_PRICE_USD).toString();
+  return (n / btcPrice).toString();
 }
 
 export function fbtcToCanonicalShares(
   amount: string,
   mode: "shares" | "usd",
+  fbtcPrice: number,
 ): string {
   if (mode === "shares") return amount;
   const n = parseFloat(amount);
   if (isNaN(n) || n < 0) return "";
-  return (n / FBTC_PRICE_USD).toString();
+  return (n / fbtcPrice).toString();
 }
 
 export function parseStoredEntries(raw: string | null): string[] {

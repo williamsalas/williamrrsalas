@@ -27,3 +27,10 @@ export interface TransformedEvent {
   merged: boolean;
   action: string | null;
 }
+
+export interface BtcPrices {
+  btc: number;
+  fbtc: number;
+  ts: string;
+  source: "live" | "cached" | "default";
+}

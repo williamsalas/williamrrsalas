@@ -9,8 +9,8 @@ import {
   fbtcToCanonicalShares,
   parseStoredEntries,
   formatWithCommas,
-  BTC_PRICE_USD,
-  FBTC_PRICE_USD,
+  DEFAULT_BTC_PRICE,
+  DEFAULT_FBTC_PRICE,
 } from "../btc.ts";
 
 describe("sanitizeNumericInput", () => {
@@ -37,45 +37,63 @@ describe("sanitizeNumericInput", () => {
 
 describe("parseBtcHoldings", () => {
   it("returns BTC amount directly in btc mode", () => {
-    expect(parseBtcHoldings("1.5", "btc")).toBe(1.5);
+    expect(parseBtcHoldings("1.5", "btc", DEFAULT_BTC_PRICE)).toBe(1.5);
   });
 
   it("converts USD to BTC in usd mode", () => {
-    const result = parseBtcHoldings(String(BTC_PRICE_USD), "usd");
+    const result = parseBtcHoldings(
+      String(DEFAULT_BTC_PRICE),
+      "usd",
+      DEFAULT_BTC_PRICE,
+    );
     expect(result).toBeCloseTo(1, 8);
   });
 
   it("returns 0 for empty string", () => {
-    expect(parseBtcHoldings("", "btc")).toBe(0);
+    expect(parseBtcHoldings("", "btc", DEFAULT_BTC_PRICE)).toBe(0);
   });
 
   it("returns 0 for negative values", () => {
-    expect(parseBtcHoldings("-1", "btc")).toBe(0);
+    expect(parseBtcHoldings("-1", "btc", DEFAULT_BTC_PRICE)).toBe(0);
   });
 
   it("returns 0 for non-numeric input", () => {
-    expect(parseBtcHoldings("abc", "btc")).toBe(0);
+    expect(parseBtcHoldings("abc", "btc", DEFAULT_BTC_PRICE)).toBe(0);
   });
 });
 
 describe("parseFbtcHoldings", () => {
   it("converts shares to BTC using FBTC/BTC ratio", () => {
-    const result = parseFbtcHoldings("100", "shares");
-    const expected = 100 * (FBTC_PRICE_USD / BTC_PRICE_USD);
+    const result = parseFbtcHoldings(
+      "100",
+      "shares",
+      DEFAULT_BTC_PRICE,
+      DEFAULT_FBTC_PRICE,
+    );
+    const expected = 100 * (DEFAULT_FBTC_PRICE / DEFAULT_BTC_PRICE);
     expect(result).toBeCloseTo(expected, 8);
   });
 
   it("converts USD to BTC in usd mode", () => {
-    const result = parseFbtcHoldings(String(BTC_PRICE_USD), "usd");
+    const result = parseFbtcHoldings(
+      String(DEFAULT_BTC_PRICE),
+      "usd",
+      DEFAULT_BTC_PRICE,
+      DEFAULT_FBTC_PRICE,
+    );
     expect(result).toBeCloseTo(1, 8);
   });
 
   it("returns 0 for empty string", () => {
-    expect(parseFbtcHoldings("", "shares")).toBe(0);
+    expect(
+      parseFbtcHoldings("", "shares", DEFAULT_BTC_PRICE, DEFAULT_FBTC_PRICE),
+    ).toBe(0);
   });
 
   it("returns 0 for negative values", () => {
-    expect(parseFbtcHoldings("-5", "shares")).toBe(0);
+    expect(
+      parseFbtcHoldings("-5", "shares", DEFAULT_BTC_PRICE, DEFAULT_FBTC_PRICE),
+    ).toBe(0);
   });
 });
 
@@ -105,33 +123,41 @@ describe("formatBtc", () => {
 
 describe("btcToCanonical", () => {
   it("returns amount as-is in btc mode", () => {
-    expect(btcToCanonical("1.5", "btc")).toBe("1.5");
+    expect(btcToCanonical("1.5", "btc", DEFAULT_BTC_PRICE)).toBe("1.5");
   });
 
   it("converts USD to BTC string in usd mode", () => {
-    const result = parseFloat(btcToCanonical(String(BTC_PRICE_USD), "usd"));
-    expect(result).toBeCloseTo(1, 8);
-  });
-
-  it("returns empty string for invalid input", () => {
-    expect(btcToCanonical("abc", "usd")).toBe("");
-  });
-});
-
-describe("fbtcToCanonicalShares", () => {
-  it("returns amount as-is in shares mode", () => {
-    expect(fbtcToCanonicalShares("100", "shares")).toBe("100");
-  });
-
-  it("converts USD to shares in usd mode", () => {
     const result = parseFloat(
-      fbtcToCanonicalShares(String(FBTC_PRICE_USD), "usd"),
+      btcToCanonical(String(DEFAULT_BTC_PRICE), "usd", DEFAULT_BTC_PRICE),
     );
     expect(result).toBeCloseTo(1, 8);
   });
 
   it("returns empty string for invalid input", () => {
-    expect(fbtcToCanonicalShares("abc", "usd")).toBe("");
+    expect(btcToCanonical("abc", "usd", DEFAULT_BTC_PRICE)).toBe("");
+  });
+});
+
+describe("fbtcToCanonicalShares", () => {
+  it("returns amount as-is in shares mode", () => {
+    expect(fbtcToCanonicalShares("100", "shares", DEFAULT_FBTC_PRICE)).toBe(
+      "100",
+    );
+  });
+
+  it("converts USD to shares in usd mode", () => {
+    const result = parseFloat(
+      fbtcToCanonicalShares(
+        String(DEFAULT_FBTC_PRICE),
+        "usd",
+        DEFAULT_FBTC_PRICE,
+      ),
+    );
+    expect(result).toBeCloseTo(1, 8);
+  });
+
+  it("returns empty string for invalid input", () => {
+    expect(fbtcToCanonicalShares("abc", "usd", DEFAULT_FBTC_PRICE)).toBe("");
   });
 });
 
