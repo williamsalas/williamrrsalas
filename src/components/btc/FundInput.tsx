@@ -1,7 +1,8 @@
+import { memo } from "react";
 import { sanitizeNumericInput } from "../../lib/btc.ts";
 import type { FundConfig } from "../../lib/types.ts";
 
-interface FundInputProps {
+export interface FundInputProps {
   fund: FundConfig;
   entries: string[];
   mode: string;
@@ -11,7 +12,7 @@ interface FundInputProps {
   onModeChange: (mode: string) => void;
 }
 
-export function FundInput({
+export const FundInput = memo(function FundInput({
   fund,
   entries,
   mode,
@@ -74,4 +75,4 @@ export function FundInput({
       </div>
     </div>
   );
-}
+});

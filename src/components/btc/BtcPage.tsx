@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { FundInput } from "./FundInput.tsx";
 import { HoldingsSummary } from "./HoldingsSummary.tsx";
 import { WhatIfTable } from "./WhatIfTable.tsx";
@@ -6,6 +6,12 @@ import { FbtcPerBtc } from "./FbtcPerBtc.tsx";
 import { PriceSource } from "./PriceSource.tsx";
 import { ACTIVE_FUNDS, parseStoredEntries } from "../../lib/btc.ts";
 import { useBtcPrices } from "../../hooks/useBtcPrices.ts";
+import type { FundInputProps } from "./FundInput.tsx";
+
+type FundHandlers = Pick<
+  FundInputProps,
+  "onEntryChange" | "onAddEntry" | "onRemoveEntry" | "onModeChange"
+>;
 
 export function BtcPage() {
   const { prices, loading } = useBtcPrices();
@@ -41,30 +47,72 @@ export function BtcPage() {
     });
   }, [entries, modes, prices]);
 
-  const handleEntryChange = (ticker: string, index: number, value: string) => {
-    setEntries((prev) => ({
-      ...prev,
-      [ticker]: prev[ticker].map((e, i) => (i === index ? value : e)),
-    }));
-  };
+  const handleEntryChange = useCallback(
+    (ticker: string, index: number, value: string) => {
+      setEntries((prev) => ({
+        ...prev,
+        [ticker]: prev[ticker].map((e, i) => (i === index ? value : e)),
+      }));
+    },
+    [],
+  );
 
-  const handleAddEntry = (ticker: string) => {
+  const handleAddEntry = useCallback((ticker: string) => {
     setEntries((prev) => ({
       ...prev,
       [ticker]: [...prev[ticker], ""],
     }));
-  };
+  }, []);
 
-  const handleRemoveEntry = (ticker: string, index: number) => {
+  const handleRemoveEntry = useCallback((ticker: string, index: number) => {
     setEntries((prev) => ({
       ...prev,
       [ticker]: prev[ticker].filter((_, i) => i !== index),
     }));
-  };
+  }, []);
 
-  const handleModeChange = (ticker: string, mode: string) => {
+  const handleModeChange = useCallback((ticker: string, mode: string) => {
     setModes((prev) => ({ ...prev, [ticker]: mode }));
-  };
+  }, []);
+
+  // Stable per-fund handler objects so React.memo on FundInput can bail out
+  // when a sibling fund's entries change.
+  const fundHandlers = useMemo<Record<string, FundHandlers>>(
+    () =>
+      Object.fromEntries(
+        ACTIVE_FUNDS.map((fund) => [
+          fund.ticker,
+          {
+            onEntryChange: (index: number, value: string) =>
+              handleEntryChange(fund.ticker, index, value),
+            onAddEntry: () => handleAddEntry(fund.ticker),
+            onRemoveEntry: (index: number) =>
+              handleRemoveEntry(fund.ticker, index),
+            onModeChange: (mode: string) => handleModeChange(fund.ticker, mode),
+          },
+        ]),
+      ),
+    [handleEntryChange, handleAddEntry, handleRemoveEntry, handleModeChange],
+  );
+
+  const fundHoldings = useMemo(
+    () =>
+      ACTIVE_FUNDS.map((fund) => ({
+        label: fund.ticker,
+        btc: (entries[fund.ticker] ?? []).reduce(
+          (sum, e) => sum + fund.parseHoldings(e, modes[fund.ticker], prices),
+          0,
+        ),
+        testIdBtc: `${fund.ticker.toLowerCase()}-holdings-btc`,
+        testIdUsd: `${fund.ticker.toLowerCase()}-holdings-usd`,
+      })),
+    [entries, modes, prices],
+  );
+
+  const totalBtc = useMemo(
+    () => fundHoldings.reduce((sum, f) => sum + f.btc, 0),
+    [fundHoldings],
+  );
 
   if (loading) {
     return (
@@ -74,18 +122,6 @@ export function BtcPage() {
       </div>
     );
   }
-
-  const fundHoldings = ACTIVE_FUNDS.map((fund) => ({
-    label: fund.ticker,
-    btc: (entries[fund.ticker] ?? []).reduce(
-      (sum, e) => sum + fund.parseHoldings(e, modes[fund.ticker], prices),
-      0,
-    ),
-    testIdBtc: `${fund.ticker.toLowerCase()}-holdings-btc`,
-    testIdUsd: `${fund.ticker.toLowerCase()}-holdings-usd`,
-  }));
-
-  const totalBtc = fundHoldings.reduce((sum, f) => sum + f.btc, 0);
 
   return (
     <div className="btc-page">
@@ -97,12 +133,7 @@ export function BtcPage() {
             fund={fund}
             entries={entries[fund.ticker] ?? [""]}
             mode={modes[fund.ticker]}
-            onEntryChange={(index, value) =>
-              handleEntryChange(fund.ticker, index, value)
-            }
-            onAddEntry={() => handleAddEntry(fund.ticker)}
-            onRemoveEntry={(index) => handleRemoveEntry(fund.ticker, index)}
-            onModeChange={(mode) => handleModeChange(fund.ticker, mode)}
+            {...fundHandlers[fund.ticker]}
           />
         ))}
       </div>

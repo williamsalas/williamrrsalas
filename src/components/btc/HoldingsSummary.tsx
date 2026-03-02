@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { formatBtc, formatUsd } from "../../lib/btc.ts";
 
 interface FundHolding {
@@ -41,7 +42,10 @@ function SummaryRow({
   );
 }
 
-export function HoldingsSummary({ holdings, btcPrice }: HoldingsSummaryProps) {
+export const HoldingsSummary = memo(function HoldingsSummary({
+  holdings,
+  btcPrice,
+}: HoldingsSummaryProps) {
   const totalBtc = holdings.reduce((sum, h) => sum + h.btc, 0);
 
   return (
@@ -68,4 +72,4 @@ export function HoldingsSummary({ holdings, btcPrice }: HoldingsSummaryProps) {
       <div className="btc-summary-note">@ {formatUsd(btcPrice)} per BTC</div>
     </div>
   );
-}
+});
