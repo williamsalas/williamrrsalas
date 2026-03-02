@@ -1,0 +1,68 @@
+name: Cache BTC prices
+
+on:
+  schedule:
+    - cron: "0 0,6,12,18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: cache-btc-prices
+  cancel-in-progress: true
+
+jobs:
+  fetch-and-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch prices from worker
+        run: |
+          curl -sS --fail \
+            "https://wrrs.williamsalas24.workers.dev/prices" \
+            -o /tmp/btc-prices.json
+
+      - name: Validate response shape
+        run: |
+          python3 -c "
+          import json, sys
+          d = json.load(open('/tmp/btc-prices.json'))
+          assert isinstance(d.get('btc'), (int, float)) and d['btc'] > 0
+          assert isinstance(d.get('fbtc'), (int, float)) and d['fbtc'] > 0
+          assert isinstance(d.get('ts'), str)
+          print('Valid:', d)
+          "
+
+      - name: Update fallback JSON
+        run: |
+          python3 -c "
+          import json
+          with open('/tmp/btc-prices.json') as f:
+              d = json.load(f)
+          with open('public/data/btc-prices.json', 'w') as f:
+              json.dump({'btc': d['btc'], 'fbtc': d['fbtc'], 'ts': d['ts']}, f, indent=2)
+              f.write('\n')
+          "
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/btc-prices.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore(data): refresh cached BTC prices"
+            git push
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+        id: commit
+
+      - name: Trigger deploy
+        if: steps.commit.outputs.has_changes == 'true'
+        run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
