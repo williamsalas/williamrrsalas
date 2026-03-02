@@ -1,6 +1,18 @@
-import { describe, it, expect, afterEach, beforeEach } from "vitest";
+import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import { BtcPage } from "../BtcPage.tsx";
+
+vi.mock("../../../hooks/useBtcPrices.ts", () => ({
+  useBtcPrices: () => ({
+    prices: {
+      btc: 65_296.67,
+      fbtc: 57.15,
+      ts: "2025-01-01T00:00:00Z",
+      source: "default" as const,
+    },
+    loading: false,
+  }),
+}));
 
 beforeEach(() => {
   localStorage.clear();
@@ -135,5 +147,12 @@ describe("BtcPage", () => {
     const inputs = screen.getAllByLabelText(/^BTC amount \d+$/);
     fireEvent.change(inputs[0], { target: { value: "0" } });
     expect(localStorage.getItem("btc-holdings-btc")).toBe('["2"]');
+  });
+
+  it("shows price source attribution", () => {
+    render(<BtcPage />);
+    expect(
+      screen.getByText(/Pricing information accurate as of/),
+    ).toBeInTheDocument();
   });
 });

@@ -1,18 +1,21 @@
-import { formatBtc, formatUsd, BTC_PRICE_USD } from "../../lib/btc.ts";
+import { formatBtc, formatUsd } from "../../lib/btc.ts";
 
 interface HoldingsSummaryProps {
   btcBtc: number;
   fbtcBtc: number;
+  btcPrice: number;
 }
 
 function SummaryRow({
   label,
   btc,
+  btcPrice,
   testIdBtc,
   testIdUsd,
 }: {
   label: string;
   btc: number;
+  btcPrice: number;
   testIdBtc?: string;
   testIdUsd?: string;
 }) {
@@ -25,14 +28,18 @@ function SummaryRow({
         </span>
         <span className="btc-summary-sep">/</span>
         <span className="btc-summary-value" data-testid={testIdUsd}>
-          {formatUsd(btc * BTC_PRICE_USD)}
+          {formatUsd(btc * btcPrice)}
         </span>
       </span>
     </div>
   );
 }
 
-export function HoldingsSummary({ btcBtc, fbtcBtc }: HoldingsSummaryProps) {
+export function HoldingsSummary({
+  btcBtc,
+  fbtcBtc,
+  btcPrice,
+}: HoldingsSummaryProps) {
   const totalBtc = btcBtc + fbtcBtc;
 
   return (
@@ -41,12 +48,14 @@ export function HoldingsSummary({ btcBtc, fbtcBtc }: HoldingsSummaryProps) {
       <SummaryRow
         label="BTC"
         btc={btcBtc}
+        btcPrice={btcPrice}
         testIdBtc="btc-holdings-btc"
         testIdUsd="btc-holdings-usd"
       />
       <SummaryRow
         label="FBTC"
         btc={fbtcBtc}
+        btcPrice={btcPrice}
         testIdBtc="fbtc-holdings-btc"
         testIdUsd="fbtc-holdings-usd"
       />
@@ -54,10 +63,11 @@ export function HoldingsSummary({ btcBtc, fbtcBtc }: HoldingsSummaryProps) {
       <SummaryRow
         label="Combined"
         btc={totalBtc}
+        btcPrice={btcPrice}
         testIdBtc="total-btc"
         testIdUsd="current-value"
       />
-      <div className="btc-summary-note">@ {formatUsd(BTC_PRICE_USD)} per BTC</div>
+      <div className="btc-summary-note">@ {formatUsd(btcPrice)} per BTC</div>
     </div>
   );
 }
