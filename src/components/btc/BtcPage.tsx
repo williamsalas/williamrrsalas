@@ -74,9 +74,15 @@ export function BtcPage() {
     setFbtcEntries((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const totalBtc =
-    btcEntries.reduce((sum, e) => sum + parseBtcHoldings(e, btcMode), 0) +
-    fbtcEntries.reduce((sum, e) => sum + parseFbtcHoldings(e, fbtcMode), 0);
+  const btcBtc = btcEntries.reduce(
+    (sum, e) => sum + parseBtcHoldings(e, btcMode),
+    0,
+  );
+  const fbtcBtc = fbtcEntries.reduce(
+    (sum, e) => sum + parseFbtcHoldings(e, fbtcMode),
+    0,
+  );
+  const totalBtc = btcBtc + fbtcBtc;
 
   return (
     <div className="btc-page">
@@ -99,7 +105,7 @@ export function BtcPage() {
           onModeChange={setFbtcMode}
         />
       </div>
-      <HoldingsSummary totalBtc={totalBtc} />
+      <HoldingsSummary btcBtc={btcBtc} fbtcBtc={fbtcBtc} />
       <WhatIfTable
         totalBtc={totalBtc}
         customPrice={customPrice}
