@@ -1,81 +1,69 @@
 import { useState, useEffect } from "react";
-import { BtcInput } from "./BtcInput.tsx";
-import { FbtcInput } from "./FbtcInput.tsx";
+import { FundInput } from "./FundInput.tsx";
 import { HoldingsSummary } from "./HoldingsSummary.tsx";
 import { WhatIfTable } from "./WhatIfTable.tsx";
 import { FbtcPerBtc } from "./FbtcPerBtc.tsx";
 import { PriceSource } from "./PriceSource.tsx";
-import {
-  parseBtcHoldings,
-  parseFbtcHoldings,
-  btcToCanonical,
-  fbtcToCanonicalShares,
-  parseStoredEntries,
-} from "../../lib/btc.ts";
+import { ACTIVE_FUNDS, parseStoredEntries } from "../../lib/btc.ts";
 import { useBtcPrices } from "../../hooks/useBtcPrices.ts";
-
-const LS_BTC_KEY = "btc-holdings-btc";
-const LS_FBTC_KEY = "btc-holdings-fbtc-shares";
 
 export function BtcPage() {
   const { prices, loading } = useBtcPrices();
 
-  const [btcEntries, setBtcEntries] = useState(() =>
-    parseStoredEntries(localStorage.getItem(LS_BTC_KEY)),
+  const [entries, setEntries] = useState<Record<string, string[]>>(() =>
+    Object.fromEntries(
+      ACTIVE_FUNDS.map((fund) => [
+        fund.ticker,
+        parseStoredEntries(localStorage.getItem(fund.lsKey)),
+      ]),
+    ),
   );
-  const [btcMode, setBtcMode] = useState<"btc" | "usd">("btc");
 
-  const [fbtcEntries, setFbtcEntries] = useState(() =>
-    parseStoredEntries(localStorage.getItem(LS_FBTC_KEY)),
+  const [modes, setModes] = useState<Record<string, string>>(() =>
+    Object.fromEntries(
+      ACTIVE_FUNDS.map((fund) => [fund.ticker, fund.nativeMode]),
+    ),
   );
-  const [fbtcMode, setFbtcMode] = useState<"shares" | "usd">("shares");
 
   const [customPrice, setCustomPrice] = useState("");
 
   useEffect(() => {
-    const canonicals = btcEntries
-      .map((e) => btcToCanonical(e, btcMode, prices.btc))
-      .filter((c) => c !== "" && parseFloat(c) !== 0);
-    if (canonicals.length > 0) {
-      localStorage.setItem(LS_BTC_KEY, JSON.stringify(canonicals));
-    } else {
-      localStorage.removeItem(LS_BTC_KEY);
-    }
-  }, [btcEntries, btcMode, prices.btc]);
+    ACTIVE_FUNDS.forEach((fund) => {
+      const fundEntries = entries[fund.ticker] ?? [""];
+      const canonicals = fundEntries
+        .map((e) => fund.toCanonical(e, modes[fund.ticker], prices))
+        .filter((c) => c !== "" && parseFloat(c) !== 0);
+      if (canonicals.length > 0) {
+        localStorage.setItem(fund.lsKey, JSON.stringify(canonicals));
+      } else {
+        localStorage.removeItem(fund.lsKey);
+      }
+    });
+  }, [entries, modes, prices]);
 
-  useEffect(() => {
-    const canonicals = fbtcEntries
-      .map((e) => fbtcToCanonicalShares(e, fbtcMode, prices.fbtc))
-      .filter((c) => c !== "" && parseFloat(c) !== 0);
-    if (canonicals.length > 0) {
-      localStorage.setItem(LS_FBTC_KEY, JSON.stringify(canonicals));
-    } else {
-      localStorage.removeItem(LS_FBTC_KEY);
-    }
-  }, [fbtcEntries, fbtcMode, prices.fbtc]);
-
-  const handleBtcEntryChange = (index: number, value: string) => {
-    setBtcEntries((prev) => prev.map((e, i) => (i === index ? value : e)));
+  const handleEntryChange = (ticker: string, index: number, value: string) => {
+    setEntries((prev) => ({
+      ...prev,
+      [ticker]: prev[ticker].map((e, i) => (i === index ? value : e)),
+    }));
   };
 
-  const handleAddBtcEntry = () => {
-    setBtcEntries((prev) => [...prev, ""]);
+  const handleAddEntry = (ticker: string) => {
+    setEntries((prev) => ({
+      ...prev,
+      [ticker]: [...prev[ticker], ""],
+    }));
   };
 
-  const handleRemoveBtcEntry = (index: number) => {
-    setBtcEntries((prev) => prev.filter((_, i) => i !== index));
+  const handleRemoveEntry = (ticker: string, index: number) => {
+    setEntries((prev) => ({
+      ...prev,
+      [ticker]: prev[ticker].filter((_, i) => i !== index),
+    }));
   };
 
-  const handleFbtcEntryChange = (index: number, value: string) => {
-    setFbtcEntries((prev) => prev.map((e, i) => (i === index ? value : e)));
-  };
-
-  const handleAddFbtcEntry = () => {
-    setFbtcEntries((prev) => [...prev, ""]);
-  };
-
-  const handleRemoveFbtcEntry = (index: number) => {
-    setFbtcEntries((prev) => prev.filter((_, i) => i !== index));
+  const handleModeChange = (ticker: string, mode: string) => {
+    setModes((prev) => ({ ...prev, [ticker]: mode }));
   };
 
   if (loading) {
@@ -87,42 +75,38 @@ export function BtcPage() {
     );
   }
 
-  const btcBtc = btcEntries.reduce(
-    (sum, e) => sum + parseBtcHoldings(e, btcMode, prices.btc),
-    0,
-  );
-  const fbtcBtc = fbtcEntries.reduce(
-    (sum, e) => sum + parseFbtcHoldings(e, fbtcMode, prices.btc, prices.fbtc),
-    0,
-  );
-  const totalBtc = btcBtc + fbtcBtc;
+  const fundHoldings = ACTIVE_FUNDS.map((fund) => ({
+    label: fund.ticker,
+    btc: (entries[fund.ticker] ?? []).reduce(
+      (sum, e) => sum + fund.parseHoldings(e, modes[fund.ticker], prices),
+      0,
+    ),
+    testIdBtc: `${fund.ticker.toLowerCase()}-holdings-btc`,
+    testIdUsd: `${fund.ticker.toLowerCase()}-holdings-usd`,
+  }));
+
+  const totalBtc = fundHoldings.reduce((sum, f) => sum + f.btc, 0);
 
   return (
     <div className="btc-page">
       <h2 className="btc-heading">BTC Holdings Visualizer</h2>
       <div className="btc-inputs">
-        <BtcInput
-          entries={btcEntries}
-          mode={btcMode}
-          onEntryChange={handleBtcEntryChange}
-          onAddEntry={handleAddBtcEntry}
-          onRemoveEntry={handleRemoveBtcEntry}
-          onModeChange={setBtcMode}
-        />
-        <FbtcInput
-          entries={fbtcEntries}
-          mode={fbtcMode}
-          onEntryChange={handleFbtcEntryChange}
-          onAddEntry={handleAddFbtcEntry}
-          onRemoveEntry={handleRemoveFbtcEntry}
-          onModeChange={setFbtcMode}
-        />
+        {ACTIVE_FUNDS.map((fund) => (
+          <FundInput
+            key={fund.ticker}
+            fund={fund}
+            entries={entries[fund.ticker] ?? [""]}
+            mode={modes[fund.ticker]}
+            onEntryChange={(index, value) =>
+              handleEntryChange(fund.ticker, index, value)
+            }
+            onAddEntry={() => handleAddEntry(fund.ticker)}
+            onRemoveEntry={(index) => handleRemoveEntry(fund.ticker, index)}
+            onModeChange={(mode) => handleModeChange(fund.ticker, mode)}
+          />
+        ))}
       </div>
-      <HoldingsSummary
-        btcBtc={btcBtc}
-        fbtcBtc={fbtcBtc}
-        btcPrice={prices.btc}
-      />
+      <HoldingsSummary holdings={fundHoldings} btcPrice={prices.btc} />
       <WhatIfTable
         totalBtc={totalBtc}
         customPrice={customPrice}

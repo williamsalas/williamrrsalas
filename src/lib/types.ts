@@ -34,3 +34,16 @@ export interface BtcPrices {
   ts: string;
   source: "live" | "cached" | "default";
 }
+
+export interface FundConfig {
+  ticker: string;
+  label: string;
+  lsKey: string;
+  cssModifier: string;
+  nativeMode: string;
+  nativePrefix: string;
+  nativePlaceholder: string;
+  nativeAriaLabel: string;
+  parseHoldings: (amount: string, mode: string, prices: BtcPrices) => number;
+  toCanonical: (amount: string, mode: string, prices: BtcPrices) => string;
+}

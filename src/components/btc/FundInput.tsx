@@ -1,29 +1,33 @@
 import { sanitizeNumericInput } from "../../lib/btc.ts";
+import type { FundConfig } from "../../lib/types.ts";
 
-interface FbtcInputProps {
+interface FundInputProps {
+  fund: FundConfig;
   entries: string[];
-  mode: "shares" | "usd";
+  mode: string;
   onEntryChange: (index: number, value: string) => void;
   onAddEntry: () => void;
   onRemoveEntry: (index: number) => void;
-  onModeChange: (mode: "shares" | "usd") => void;
+  onModeChange: (mode: string) => void;
 }
 
-export function FbtcInput({
+export function FundInput({
+  fund,
   entries,
   mode,
   onEntryChange,
   onAddEntry,
   onRemoveEntry,
   onModeChange,
-}: FbtcInputProps) {
+}: FundInputProps) {
+  const isNative = mode === fund.nativeMode;
   return (
-    <div className="btc-input-group btc-input-group--fbtc">
-      <label className="btc-label">FBTC Holdings</label>
+    <div className={`btc-input-group btc-input-group--${fund.cssModifier}`}>
+      <label className="btc-label">{fund.label}</label>
       {entries.map((entry, i) => (
         <div className="btc-input-row" key={i}>
           <span className="btc-input-prefix">
-            {mode === "shares" ? "Shares" : "$"}
+            {isNative ? fund.nativePrefix : "$"}
           </span>
           <input
             className="btc-input"
@@ -33,11 +37,11 @@ export function FbtcInput({
             onChange={(e) =>
               onEntryChange(i, sanitizeNumericInput(e.target.value))
             }
-            placeholder={mode === "shares" ? "0" : "0.00"}
+            placeholder={isNative ? fund.nativePlaceholder : "0.00"}
             aria-label={
-              mode === "shares"
-                ? `FBTC shares ${i + 1}`
-                : `USD amount for FBTC ${i + 1}`
+              isNative
+                ? `${fund.nativeAriaLabel} ${i + 1}`
+                : `USD amount for ${fund.ticker} ${i + 1}`
             }
           />
           <button
@@ -45,7 +49,7 @@ export function FbtcInput({
             onClick={() =>
               entries.length > 1 ? onRemoveEntry(i) : onEntryChange(i, "")
             }
-            aria-label={`Remove FBTC entry ${i + 1}`}
+            aria-label={`Remove ${fund.ticker} entry ${i + 1}`}
           >
             x
           </button>
@@ -56,13 +60,13 @@ export function FbtcInput({
       </button>
       <div className="btc-toggle-row">
         <button
-          className={`btc-toggle ${mode === "shares" ? "btc-toggle-active" : ""}`}
-          onClick={() => onModeChange("shares")}
+          className={`btc-toggle ${isNative ? "btc-toggle-active" : ""}`}
+          onClick={() => onModeChange(fund.nativeMode)}
         >
-          Shares
+          {fund.nativePrefix}
         </button>
         <button
-          className={`btc-toggle ${mode === "usd" ? "btc-toggle-active" : ""}`}
+          className={`btc-toggle ${!isNative ? "btc-toggle-active" : ""}`}
           onClick={() => onModeChange("usd")}
         >
           USD
