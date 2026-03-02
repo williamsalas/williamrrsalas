@@ -1,5 +1,397 @@
 [
   {
+    "id": "6988212970",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 60,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/60",
+        "id": 3342100592,
+        "number": 60,
+        "head": {
+          "ref": "claude/style-fbtc-bitcoin-comparison-7Vmhu",
+          "sha": "f23bdcd99058680b57dffb790e4cf714746eaaa6",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "c05259dee9d015942a477518566fff1a5d50b3e0",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "style: apply btc-orange to '1 BTC' and fbtc-green to FBTC shares in FbtcPerBtc",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/60",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-02T01:09:47Z"
+  },
+  {
+    "id": "6988209273",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 60,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/60",
+        "id": 3342100592,
+        "number": 60,
+        "head": {
+          "ref": "claude/style-fbtc-bitcoin-comparison-7Vmhu",
+          "sha": "f23bdcd99058680b57dffb790e4cf714746eaaa6",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "c05259dee9d015942a477518566fff1a5d50b3e0",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "style: apply btc-orange to '1 BTC' and fbtc-green to FBTC shares in FbtcPerBtc",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/60",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-02T01:09:33Z"
+  },
+  {
+    "id": "6987296020",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 59,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/59",
+        "id": 3341981096,
+        "number": 59,
+        "head": {
+          "ref": "wrrs/css-to-less",
+          "sha": "d0ca3de13eed92e95d9edcb0b3867edfd6093737",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "7fe32ee4a0cb78070bff687bce734c329a290b97",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "rewrite css to less",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/59",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-01T23:54:56Z"
+  },
+  {
+    "id": "6987294785",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 59,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/59",
+        "id": 3341981096,
+        "number": 59,
+        "head": {
+          "ref": "wrrs/css-to-less",
+          "sha": "d0ca3de13eed92e95d9edcb0b3867edfd6093737",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "7fe32ee4a0cb78070bff687bce734c329a290b97",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "rewrite css to less",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/59",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-01T23:54:50Z"
+  },
+  {
+    "id": "6986991613",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 58,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/58",
+        "id": 3341932890,
+        "number": 58,
+        "head": {
+          "ref": "wrrs/btc-visualizer",
+          "sha": "605c5fb03db53a42ef389024664de53fb7c3200d",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "b1646018d08c17d8c4d9e0a474c6390389449d16",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Add BTC visualizer",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/58",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-01T23:27:07Z"
+  },
+  {
+    "id": "6986968639",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 58,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/58",
+        "id": 3341932890,
+        "number": 58,
+        "head": {
+          "ref": "wrrs/btc-visualizer",
+          "sha": "605c5fb03db53a42ef389024664de53fb7c3200d",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "b1646018d08c17d8c4d9e0a474c6390389449d16",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Add BTC visualizer",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/58",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-01T23:24:46Z"
+  },
+  {
+    "id": "6984722173",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 57,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/57",
+        "id": 3341613176,
+        "number": 57,
+        "head": {
+          "ref": "wrrs/deploy-when-new-gh-events",
+          "sha": "cb0bcac5040c09abbc3f9c21b2aafbdad2e32c7d",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "44fb5f1ef98114a69907c24fe587fce01b93e7f4",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "redeploy site when new gh events",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/57",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-01T20:06:16Z"
+  },
+  {
+    "id": "6984713113",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 57,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/57",
+        "id": 3341613176,
+        "number": 57,
+        "head": {
+          "ref": "wrrs/deploy-when-new-gh-events",
+          "sha": "cb0bcac5040c09abbc3f9c21b2aafbdad2e32c7d",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "44fb5f1ef98114a69907c24fe587fce01b93e7f4",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "redeploy site when new gh events",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/57",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-01T20:05:21Z"
+  },
+  {
     "id": "6977496813",
     "type": "PullRequestEvent",
     "actor": {
@@ -284,10 +676,7 @@
             "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
             "name": "williamrrsalas"
           }
-        },
-        "title": "react rewrite",
-        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/54",
-        "merged": true
+        }
       }
     },
     "public": true,
@@ -333,10 +722,7 @@
             "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
             "name": "williamrrsalas"
           }
-        },
-        "title": "enrich pull request events with API data and add tests",
-        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/53",
-        "merged": true
+        }
       }
     },
     "public": true,
@@ -382,10 +768,7 @@
             "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
             "name": "williamrrsalas"
           }
-        },
-        "title": "enrich pull request events with API data and add tests",
-        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/53",
-        "merged": true
+        }
       }
     },
     "public": true,
@@ -431,10 +814,7 @@
             "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
             "name": "williamrrsalas"
           }
-        },
-        "title": "update recent activity section",
-        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/52",
-        "merged": true
+        }
       }
     },
     "public": true,
@@ -480,10 +860,7 @@
             "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
             "name": "williamrrsalas"
           }
-        },
-        "title": "update recent activity section",
-        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/52",
-        "merged": true
+        }
       }
     },
     "public": true,
