@@ -1,5 +1,201 @@
 [
   {
+    "id": "7023808391",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 64,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/64",
+        "id": 3346763818,
+        "number": 64,
+        "head": {
+          "ref": "claude/add-footer-social-icons-BUGbq",
+          "sha": "58c14935dd605c3a2222f639618115949044ea59",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "44c83cc76f532d0501d754579e631643895bfe71",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "fix: constrain footer width on BTC page to match homepage",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/64",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-03T01:39:18Z"
+  },
+  {
+    "id": "7023806122",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 64,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/64",
+        "id": 3346763818,
+        "number": 64,
+        "head": {
+          "ref": "claude/add-footer-social-icons-BUGbq",
+          "sha": "58c14935dd605c3a2222f639618115949044ea59",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "44c83cc76f532d0501d754579e631643895bfe71",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "fix: constrain footer width on BTC page to match homepage",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/64",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-03T01:39:11Z"
+  },
+  {
+    "id": "7023732086",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 63,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/63",
+        "id": 3346753314,
+        "number": 63,
+        "head": {
+          "ref": "claude/add-footer-social-icons-BUGbq",
+          "sha": "48186c962c7b0f01883b12012d9a875d484a104e",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "ac5a65813c3b748cb8acb90f12d3a7deb0fe979d",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "feat: add Footer with social icons to BtcPage",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/63",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-03T01:34:46Z"
+  },
+  {
+    "id": "7023724081",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 63,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/63",
+        "id": 3346753314,
+        "number": 63,
+        "head": {
+          "ref": "claude/add-footer-social-icons-BUGbq",
+          "sha": "48186c962c7b0f01883b12012d9a875d484a104e",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "ac5a65813c3b748cb8acb90f12d3a7deb0fe979d",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "feat: add Footer with social icons to BtcPage",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/63",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-03T01:34:21Z"
+  },
+  {
     "id": "6992815877",
     "type": "PullRequestEvent",
     "actor": {
