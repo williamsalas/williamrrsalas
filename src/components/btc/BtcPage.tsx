@@ -13,6 +13,7 @@ import {
   parseStoredEntries,
 } from "../../lib/btc.ts";
 import { useBtcPrices } from "../../hooks/useBtcPrices.ts";
+import { Footer } from "../Footer.tsx";
 
 const LS_BTC_KEY = "btc-holdings-btc";
 const LS_FBTC_KEY = "btc-holdings-fbtc-shares";
@@ -130,6 +131,7 @@ export function BtcPage() {
       />
       <FbtcPerBtc btcPrice={prices.btc} fbtcPrice={prices.fbtc} />
       <PriceSource prices={prices} />
+      <Footer />
     </div>
   );
 }
