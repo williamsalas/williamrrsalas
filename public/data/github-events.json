@@ -1,5 +1,201 @@
 [
   {
+    "id": "7026531705",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 66,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/66",
+        "id": 3347119625,
+        "number": 66,
+        "head": {
+          "ref": "wrrs/add-email-to-footer",
+          "sha": "a00c59892d17bd5b529cd18c766e85678ffc9309",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "a51bb4120b8f1df363f6bddd165b3646c96830c1",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "add email to footer",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/66",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-03T04:24:57Z"
+  },
+  {
+    "id": "7026525320",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 66,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/66",
+        "id": 3347119625,
+        "number": 66,
+        "head": {
+          "ref": "wrrs/add-email-to-footer",
+          "sha": "a00c59892d17bd5b529cd18c766e85678ffc9309",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "a51bb4120b8f1df363f6bddd165b3646c96830c1",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "add email to footer",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/66",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-03T04:24:36Z"
+  },
+  {
+    "id": "7026369074",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 65,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/65",
+        "id": 3347088567,
+        "number": 65,
+        "head": {
+          "ref": "claude/optimize-frontend-JfvWC",
+          "sha": "f19886977b67a39d39a1f45e96cf3197966de6d1",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "dcca29b63b6a312b838cfecf0d85cb16344b8d29",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Claude/optimize frontend jfv wc",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/65",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-03T04:14:56Z"
+  },
+  {
+    "id": "7026310266",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 65,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/65",
+        "id": 3347088567,
+        "number": 65,
+        "head": {
+          "ref": "claude/optimize-frontend-JfvWC",
+          "sha": "f19886977b67a39d39a1f45e96cf3197966de6d1",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "dcca29b63b6a312b838cfecf0d85cb16344b8d29",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Claude/optimize frontend jfv wc",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/65",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-03T04:11:32Z"
+  },
+  {
     "id": "7023808391",
     "type": "PullRequestEvent",
     "actor": {
