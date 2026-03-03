@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { memo, useState, useEffect } from "react";
 import type { BtcPrices } from "../../lib/types.ts";
 
 interface PriceSourceProps {
@@ -27,7 +27,9 @@ export function formatRelativeTime(isoString: string, now: number): string {
   return `${parts.join(", ")} and ${last} ago`;
 }
 
-export function PriceSource({ prices }: PriceSourceProps) {
+export const PriceSource = memo(function PriceSource({
+  prices,
+}: PriceSourceProps) {
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
@@ -51,4 +53,4 @@ export function PriceSource({ prices }: PriceSourceProps) {
       Not financial advice
     </p>
   );
-}
+});

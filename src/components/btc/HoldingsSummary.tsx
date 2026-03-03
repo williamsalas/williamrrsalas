@@ -1,8 +1,15 @@
+import { memo } from "react";
 import { formatBtc, formatUsd } from "../../lib/btc.ts";
 
+interface FundHolding {
+  label: string;
+  btc: number;
+  testIdBtc?: string;
+  testIdUsd?: string;
+}
+
 interface HoldingsSummaryProps {
-  btcBtc: number;
-  fbtcBtc: number;
+  holdings: FundHolding[];
   btcPrice: number;
 }
 
@@ -35,30 +42,25 @@ function SummaryRow({
   );
 }
 
-export function HoldingsSummary({
-  btcBtc,
-  fbtcBtc,
+export const HoldingsSummary = memo(function HoldingsSummary({
+  holdings,
   btcPrice,
 }: HoldingsSummaryProps) {
-  const totalBtc = btcBtc + fbtcBtc;
+  const totalBtc = holdings.reduce((sum, h) => sum + h.btc, 0);
 
   return (
     <div className="btc-summary">
       <h3 className="btc-summary-heading">Total Holdings</h3>
-      <SummaryRow
-        label="BTC"
-        btc={btcBtc}
-        btcPrice={btcPrice}
-        testIdBtc="btc-holdings-btc"
-        testIdUsd="btc-holdings-usd"
-      />
-      <SummaryRow
-        label="FBTC"
-        btc={fbtcBtc}
-        btcPrice={btcPrice}
-        testIdBtc="fbtc-holdings-btc"
-        testIdUsd="fbtc-holdings-usd"
-      />
+      {holdings.map((h) => (
+        <SummaryRow
+          key={h.label}
+          label={h.label}
+          btc={h.btc}
+          btcPrice={btcPrice}
+          testIdBtc={h.testIdBtc}
+          testIdUsd={h.testIdUsd}
+        />
+      ))}
       <div className="btc-summary-divider" />
       <SummaryRow
         label="Combined"
@@ -70,4 +72,4 @@ export function HoldingsSummary({
       <div className="btc-summary-note">@ {formatUsd(btcPrice)} per BTC</div>
     </div>
   );
-}
+});

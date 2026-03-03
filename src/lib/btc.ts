@@ -1,3 +1,5 @@
+import type { FundConfig } from "./types.ts";
+
 export const DEFAULT_BTC_PRICE = 65_296.67;
 export const DEFAULT_FBTC_PRICE = 57.15;
 
@@ -98,3 +100,39 @@ export function parseStoredEntries(raw: string | null): string[] {
     return [raw];
   }
 }
+
+export const ACTIVE_FUNDS: FundConfig[] = [
+  {
+    ticker: "BTC",
+    label: "BTC Holdings",
+    lsKey: "btc-holdings-btc",
+    cssModifier: "btc",
+    nativeMode: "btc",
+    nativePrefix: "BTC",
+    nativePlaceholder: "0.00000000",
+    nativeAriaLabel: "BTC amount",
+    parseHoldings: (amount, mode, prices) =>
+      parseBtcHoldings(amount, mode as "btc" | "usd", prices.btc),
+    toCanonical: (amount, mode, prices) =>
+      btcToCanonical(amount, mode as "btc" | "usd", prices.btc),
+  },
+  {
+    ticker: "FBTC",
+    label: "FBTC Holdings",
+    lsKey: "btc-holdings-fbtc-shares",
+    cssModifier: "fbtc",
+    nativeMode: "shares",
+    nativePrefix: "Shares",
+    nativePlaceholder: "0",
+    nativeAriaLabel: "FBTC shares",
+    parseHoldings: (amount, mode, prices) =>
+      parseFbtcHoldings(
+        amount,
+        mode as "shares" | "usd",
+        prices.btc,
+        prices.fbtc,
+      ),
+    toCanonical: (amount, mode, prices) =>
+      fbtcToCanonicalShares(amount, mode as "shares" | "usd", prices.fbtc),
+  },
+];

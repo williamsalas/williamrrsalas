@@ -1,9 +1,14 @@
+import { memo } from "react";
+
 interface FbtcPerBtcProps {
   btcPrice: number;
   fbtcPrice: number;
 }
 
-export function FbtcPerBtc({ btcPrice, fbtcPrice }: FbtcPerBtcProps) {
+export const FbtcPerBtc = memo(function FbtcPerBtc({
+  btcPrice,
+  fbtcPrice,
+}: FbtcPerBtcProps) {
   const sharesPerBtc = btcPrice / fbtcPrice;
 
   return (
@@ -28,4 +33,4 @@ export function FbtcPerBtc({ btcPrice, fbtcPrice }: FbtcPerBtcProps) {
       </p>
     </div>
   );
-}
+});

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
   WHAT_IF_PRICES,
   formatUsd,
@@ -11,7 +12,7 @@ interface WhatIfTableProps {
   onCustomPriceChange: (value: string) => void;
 }
 
-export function WhatIfTable({
+export const WhatIfTable = memo(function WhatIfTable({
   totalBtc,
   customPrice,
   onCustomPriceChange,
@@ -57,4 +58,4 @@ export function WhatIfTable({
       </table>
     </div>
   );
-}
+});
