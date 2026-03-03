@@ -7,6 +7,7 @@ import { PriceSource } from "./PriceSource.tsx";
 import { ACTIVE_FUNDS, parseStoredEntries } from "../../lib/btc.ts";
 import { useBtcPrices } from "../../hooks/useBtcPrices.ts";
 import type { FundInputProps } from "./FundInput.tsx";
+import { Footer } from "../Footer.tsx";
 
 type FundHandlers = Pick<
   FundInputProps,
@@ -145,6 +146,7 @@ export function BtcPage() {
       />
       <FbtcPerBtc btcPrice={prices.btc} fbtcPrice={prices.fbtc} />
       <PriceSource prices={prices} />
+      <Footer />
     </div>
   );
 }
