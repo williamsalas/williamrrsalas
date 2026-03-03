@@ -17,6 +17,14 @@ export function Footer() {
       >
         <i className="fab fa-linkedin"></i>
       </a>
+      <a
+        href="mailto:williamrrsalas@gmail.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contact"
+      >
+        <i className="fa-solid fa-envelope"></i>
+      </a>
     </footer>
   );
 }
