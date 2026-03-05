@@ -47,21 +47,30 @@ export default {
 
     // Fetch from Twelvedata
     try {
-      const apiUrl = `https://api.twelvedata.com/price?symbol=BTC/USD,FBTC&apikey=${env.TWELVEDATA_API_KEY}`;
+      const apiUrl = `https://api.twelvedata.com/price?symbol=BTC/USD,FBTC,IBIT,GBTC&apikey=${env.TWELVEDATA_API_KEY}`;
       const apiRes = await fetch(apiUrl);
       if (!apiRes.ok) throw new Error(`Twelvedata HTTP ${apiRes.status}`);
       const data = await apiRes.json();
 
       const btcPrice = parseFloat(data["BTC/USD"]?.price);
       const fbtcPrice = parseFloat(data["FBTC"]?.price);
+      const ibitPrice = parseFloat(data["IBIT"]?.price);
+      const gbtcPrice = parseFloat(data["GBTC"]?.price);
 
-      if (isNaN(btcPrice) || isNaN(fbtcPrice)) {
+      if (
+        isNaN(btcPrice) ||
+        isNaN(fbtcPrice) ||
+        isNaN(ibitPrice) ||
+        isNaN(gbtcPrice)
+      ) {
         throw new Error("Invalid price data from Twelvedata");
       }
 
       const body = JSON.stringify({
         btc: btcPrice,
         fbtc: fbtcPrice,
+        ibit: ibitPrice,
+        gbtc: gbtcPrice,
         ts: new Date().toISOString(),
       });
 

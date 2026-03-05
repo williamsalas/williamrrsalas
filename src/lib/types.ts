@@ -31,6 +31,8 @@ export interface TransformedEvent {
 export interface BtcPrices {
   btc: number;
   fbtc: number;
+  ibit: number;
+  gbtc: number;
   ts: string;
   source: "live" | "cached" | "default";
 }

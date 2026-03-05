@@ -5,8 +5,10 @@ import { BtcPage } from "../BtcPage.tsx";
 vi.mock("../../../hooks/useBtcPrices.ts", () => ({
   useBtcPrices: () => ({
     prices: {
-      btc: 65_296.67,
-      fbtc: 57.15,
+      btc: 72_508.44,
+      fbtc: 63.68,
+      ibit: 41.45,
+      gbtc: 56.975,
       ts: "2025-01-01T00:00:00Z",
       source: "default" as const,
     },
