@@ -1,0 +1,256 @@
+@import "./variables.less";
+
+footer {
+  background-color: @dark-gray;
+  color: @light-text;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 8px;
+
+  a {
+    color: @light-text;
+    margin: 0 10px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: @teal;
+    }
+  }
+}
+
+.repo-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+  cursor: pointer;
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: underline dotted;
+  }
+}
+
+.github-activity-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.pr-list {
+  margin: 0 0 0.5em 0;
+}
+
+.other-list {
+  margin: 0;
+}
+
+.bottom-flex-container {
+  max-width: 1000px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .github-date {
+    margin-left: auto;
+    margin-bottom: unset;
+    right: 0;
+  }
+  align-items: stretch;
+  padding: 2rem 0 0 0;
+  gap: 8px;
+}
+
+.bottom-left,
+.bottom-right {
+  .card-panel();
+  padding: 0 16px;
+  color: @light-text;
+  flex: 1 1 0;
+  min-width: 0;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin-bottom: 8px;
+  overflow-x: auto;
+  word-break: break-word;
+
+  code {
+    word-break: break-all;
+    white-space: pre-wrap;
+  }
+}
+
+.github-activity {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.repo-header {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.pr-event {
+  padding-bottom: 4px;
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.github-date {
+  margin-bottom: unset;
+  right: 0;
+}
+
+.repo-icon {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.status-icon {
+  vertical-align: middle;
+  margin-left: 2px;
+  margin-right: 6px;
+}
+
+.pr-title-link {
+  font-weight: bold;
+  max-width: 60vw;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: @teal;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:visited {
+    color: @teal;
+  }
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+.other-event {
+  margin-bottom: 8px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background: @black;
+  font-family:
+    sf mono,
+    menlo,
+    monospace;
+  color: @light-text;
+  margin: 16px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 40px;
+}
+
+h1 {
+  color: @light-text;
+}
+
+.github-events {
+  margin-top: unset;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+small {
+  margin-bottom: 8px;
+}
+
+img.pikachu {
+  margin-top: 16px;
+}
+
+.pikachu-counter {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  color: @teal;
+  font-weight: bold;
+}
+
+.menu-container {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  color: @light-text;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  margin: 0;
+  transition: color 0.2s;
+
+  &:hover {
+    color: @teal;
+  }
+}
+
+.menu-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: @dark-gray;
+  border-radius: 8px;
+  list-style: none;
+  margin: 4px 0 0 0;
+  padding: 8px 0;
+  min-width: 150px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+  li a {
+    display: block;
+    padding: 8px 16px;
+    color: @light-text;
+    text-decoration: none;
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(0, 173, 181, 0.15);
+      color: @teal;
+    }
+  }
+}
+
+.menu-disabled {
+  display: block;
+  padding: 8px 16px;
+  color: @muted;
+  cursor: default;
+}
