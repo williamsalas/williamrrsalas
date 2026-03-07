@@ -2,15 +2,17 @@ import { describe, it, expect } from "vitest";
 import {
   sanitizeNumericInput,
   parseBtcHoldings,
-  parseFbtcHoldings,
+  parseEtfHoldings,
   formatUsd,
   formatBtc,
   btcToCanonical,
-  fbtcToCanonicalShares,
+  etfToCanonicalShares,
   parseStoredEntries,
   formatWithCommas,
   DEFAULT_BTC_PRICE,
   DEFAULT_FBTC_PRICE,
+  DEFAULT_IBIT_PRICE,
+  DEFAULT_GBTC_PRICE,
 } from "../btc.ts";
 
 describe("sanitizeNumericInput", () => {
@@ -62,9 +64,9 @@ describe("parseBtcHoldings", () => {
   });
 });
 
-describe("parseFbtcHoldings", () => {
+describe("parseEtfHoldings", () => {
   it("converts shares to BTC using FBTC/BTC ratio", () => {
-    const result = parseFbtcHoldings(
+    const result = parseEtfHoldings(
       "100",
       "shares",
       DEFAULT_BTC_PRICE,
@@ -75,7 +77,7 @@ describe("parseFbtcHoldings", () => {
   });
 
   it("converts USD to BTC in usd mode", () => {
-    const result = parseFbtcHoldings(
+    const result = parseEtfHoldings(
       String(DEFAULT_BTC_PRICE),
       "usd",
       DEFAULT_BTC_PRICE,
@@ -86,13 +88,13 @@ describe("parseFbtcHoldings", () => {
 
   it("returns 0 for empty string", () => {
     expect(
-      parseFbtcHoldings("", "shares", DEFAULT_BTC_PRICE, DEFAULT_FBTC_PRICE),
+      parseEtfHoldings("", "shares", DEFAULT_BTC_PRICE, DEFAULT_FBTC_PRICE),
     ).toBe(0);
   });
 
   it("returns 0 for negative values", () => {
     expect(
-      parseFbtcHoldings("-5", "shares", DEFAULT_BTC_PRICE, DEFAULT_FBTC_PRICE),
+      parseEtfHoldings("-5", "shares", DEFAULT_BTC_PRICE, DEFAULT_FBTC_PRICE),
     ).toBe(0);
   });
 });
@@ -138,16 +140,16 @@ describe("btcToCanonical", () => {
   });
 });
 
-describe("fbtcToCanonicalShares", () => {
+describe("etfToCanonicalShares", () => {
   it("returns amount as-is in shares mode", () => {
-    expect(fbtcToCanonicalShares("100", "shares", DEFAULT_FBTC_PRICE)).toBe(
+    expect(etfToCanonicalShares("100", "shares", DEFAULT_FBTC_PRICE)).toBe(
       "100",
     );
   });
 
   it("converts USD to shares in usd mode", () => {
     const result = parseFloat(
-      fbtcToCanonicalShares(
+      etfToCanonicalShares(
         String(DEFAULT_FBTC_PRICE),
         "usd",
         DEFAULT_FBTC_PRICE,
@@ -157,7 +159,7 @@ describe("fbtcToCanonicalShares", () => {
   });
 
   it("returns empty string for invalid input", () => {
-    expect(fbtcToCanonicalShares("abc", "usd", DEFAULT_FBTC_PRICE)).toBe("");
+    expect(etfToCanonicalShares("abc", "usd", DEFAULT_FBTC_PRICE)).toBe("");
   });
 });
 
@@ -206,5 +208,12 @@ describe("formatWithCommas", () => {
 
   it("handles number with trailing dot", () => {
     expect(formatWithCommas("1000.")).toBe("1,000.");
+  });
+});
+
+describe("default prices", () => {
+  it("exports IBIT and GBTC default prices", () => {
+    expect(DEFAULT_IBIT_PRICE).toBeGreaterThan(0);
+    expect(DEFAULT_GBTC_PRICE).toBeGreaterThan(0);
   });
 });

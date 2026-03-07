@@ -28,7 +28,11 @@ function SummaryRow({
 }) {
   return (
     <div className="btc-summary-row">
-      <span className="btc-summary-label">{label}</span>
+      <span
+        className={`btc-summary-label${label === "Combined" ? "" : ` summary-label--${label.toLowerCase()}`}`}
+      >
+        {label}
+      </span>
       <span className="btc-summary-amounts">
         <span className="btc-summary-value" data-testid={testIdBtc}>
           {formatBtc(btc)} BTC

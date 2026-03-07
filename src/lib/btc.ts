@@ -1,7 +1,9 @@
 import type { FundConfig } from "./types.ts";
 
-export const DEFAULT_BTC_PRICE = 65_296.67;
-export const DEFAULT_FBTC_PRICE = 57.15;
+export const DEFAULT_BTC_PRICE = 72_508.44;
+export const DEFAULT_FBTC_PRICE = 63.68;
+export const DEFAULT_IBIT_PRICE = 41.45;
+export const DEFAULT_GBTC_PRICE = 56.975;
 
 export const WHAT_IF_PRICES = [100_000, 200_000, 500_000, 1_000_000];
 
@@ -39,7 +41,7 @@ export function parseBtcHoldings(
   return n / btcPrice;
 }
 
-export function parseFbtcHoldings(
+export function parseEtfHoldings(
   amount: string,
   mode: "shares" | "usd",
   btcPrice: number,
@@ -78,7 +80,7 @@ export function btcToCanonical(
   return (n / btcPrice).toString();
 }
 
-export function fbtcToCanonicalShares(
+export function etfToCanonicalShares(
   amount: string,
   mode: "shares" | "usd",
   fbtcPrice: number,
@@ -101,7 +103,7 @@ export function parseStoredEntries(raw: string | null): string[] {
   }
 }
 
-export const ACTIVE_FUNDS: FundConfig[] = [
+export const ALL_FUNDS: FundConfig[] = [
   {
     ticker: "BTC",
     label: "BTC Holdings",
@@ -126,13 +128,53 @@ export const ACTIVE_FUNDS: FundConfig[] = [
     nativePlaceholder: "0",
     nativeAriaLabel: "FBTC shares",
     parseHoldings: (amount, mode, prices) =>
-      parseFbtcHoldings(
+      parseEtfHoldings(
         amount,
         mode as "shares" | "usd",
         prices.btc,
         prices.fbtc,
       ),
     toCanonical: (amount, mode, prices) =>
-      fbtcToCanonicalShares(amount, mode as "shares" | "usd", prices.fbtc),
+      etfToCanonicalShares(amount, mode as "shares" | "usd", prices.fbtc),
+  },
+  {
+    ticker: "IBIT",
+    label: "IBIT Holdings",
+    lsKey: "btc-holdings-ibit-shares",
+    cssModifier: "ibit",
+    nativeMode: "shares",
+    nativePrefix: "Shares",
+    nativePlaceholder: "0",
+    nativeAriaLabel: "IBIT shares",
+    parseHoldings: (amount, mode, prices) =>
+      parseEtfHoldings(
+        amount,
+        mode as "shares" | "usd",
+        prices.btc,
+        prices.ibit,
+      ),
+    toCanonical: (amount, mode, prices) =>
+      etfToCanonicalShares(amount, mode as "shares" | "usd", prices.ibit),
+  },
+  {
+    ticker: "GBTC",
+    label: "GBTC Holdings",
+    lsKey: "btc-holdings-gbtc-shares",
+    cssModifier: "gbtc",
+    nativeMode: "shares",
+    nativePrefix: "Shares",
+    nativePlaceholder: "0",
+    nativeAriaLabel: "GBTC shares",
+    parseHoldings: (amount, mode, prices) =>
+      parseEtfHoldings(
+        amount,
+        mode as "shares" | "usd",
+        prices.btc,
+        prices.gbtc,
+      ),
+    toCanonical: (amount, mode, prices) =>
+      etfToCanonicalShares(amount, mode as "shares" | "usd", prices.gbtc),
   },
 ];
+
+export const ETF_FUNDS = ALL_FUNDS.filter((f) => f.ticker !== "BTC");

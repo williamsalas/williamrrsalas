@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "local": "npm run format && npm run build && npm run preview"
   },
   "dependencies": {
     "react": "^19.2.0",

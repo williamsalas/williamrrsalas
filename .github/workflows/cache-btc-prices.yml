@@ -32,6 +32,8 @@ jobs:
           d = json.load(open('/tmp/btc-prices.json'))
           assert isinstance(d.get('btc'), (int, float)) and d['btc'] > 0
           assert isinstance(d.get('fbtc'), (int, float)) and d['fbtc'] > 0
+          assert isinstance(d.get('ibit'), (int, float)) and d['ibit'] > 0
+          assert isinstance(d.get('gbtc'), (int, float)) and d['gbtc'] > 0
           assert isinstance(d.get('ts'), str)
           print('Valid:', d)
           "
@@ -43,7 +45,7 @@ jobs:
           with open('/tmp/btc-prices.json') as f:
               d = json.load(f)
           with open('public/data/btc-prices.json', 'w') as f:
-              json.dump({'btc': d['btc'], 'fbtc': d['fbtc'], 'ts': d['ts']}, f, indent=2)
+              json.dump({'btc': d['btc'], 'fbtc': d['fbtc'], 'ibit': d['ibit'], 'gbtc': d['gbtc'], 'ts': d['ts']}, f, indent=2)
               f.write('\n')
           "
 

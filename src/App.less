@@ -8,6 +8,8 @@
 @teal: #00adb5;
 @btc-orange: #f7931a;
 @fbtc-green: #76a923;
+@ibit-white: #ffffff;
+@gbtc-purple: #9481c4;
 
 // Mixins
 .card-panel() {
@@ -291,19 +293,72 @@ img.pikachu {
   margin: 0 0 8px 0;
 }
 
+.fund-selector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fund-selector-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border-radius: 999px;
+  background: @dark-gray;
+  border: 1px solid #555;
+  color: @muted;
+  cursor: pointer;
+  margin-top: 0;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+
+  &:hover {
+    border-color: @muted;
+    color: #ccc;
+  }
+
+  &--active {
+    background: rgba(247, 147, 26, 0.15);
+    border-color: @btc-orange;
+    color: @light-text;
+    font-weight: bold;
+  }
+}
+
+.fund-selector-logo {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
 .btc-inputs {
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
 .btc-input-group {
   --accent: @btc-orange;
-  flex: 1 1 0;
+  flex: 0 1 calc(50% - 8px);
   min-width: 0;
+  box-sizing: border-box;
   .card-panel();
 
   &--fbtc {
     --accent: @fbtc-green;
+  }
+
+  &--ibit {
+    --accent: @ibit-white;
+  }
+
+  &--gbtc {
+    --accent: @gbtc-purple;
   }
 }
 
@@ -394,6 +449,22 @@ img.pikachu {
   min-width: 70px;
 }
 
+.summary-label--fbtc {
+  color: @fbtc-green;
+}
+
+.summary-label--ibit {
+  color: @ibit-white;
+}
+
+.summary-label--gbtc {
+  color: @gbtc-purple;
+}
+
+.summary-label--btc {
+  color: @btc-orange;
+}
+
 .btc-summary-amounts {
   display: flex;
   align-items: baseline;
@@ -404,6 +475,10 @@ img.pikachu {
 .btc-summary-sep {
   color: @muted-dark;
   font-size: 0.85rem;
+
+  & ~ .btc-summary-value {
+    color: unset;
+  }
 }
 
 .btc-summary-value {
@@ -453,7 +528,7 @@ img.pikachu {
 
     &:last-child {
       text-align: right;
-      color: @btc-orange;
+      color: unset;
       font-weight: bold;
     }
   }
@@ -537,6 +612,64 @@ img.pikachu {
 }
 
 .btc-fbtc-per-btc-note {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: @muted-dark;
+}
+
+.btc-shares-per-btc {
+  .card-panel();
+}
+
+.btc-shares-per-btc-heading {
+  margin: 0 0 12px 0;
+  color: @light-text;
+}
+
+.btc-shares-per-btc-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+    color: @muted;
+    font-weight: normal;
+    padding: 6px 0;
+    border-bottom: 1px solid @dark-gray;
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+
+  td {
+    padding: 8px 0;
+    border-bottom: 1px solid @dark-gray;
+    font-weight: bold;
+
+    &:nth-child(2) {
+      color: unset;
+    }
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+}
+
+.shares-row--fbtc td {
+  color: @fbtc-green;
+}
+
+.shares-row--ibit td {
+  color: @ibit-white;
+}
+
+.shares-row--gbtc td {
+  color: @gbtc-purple;
+}
+
+.btc-shares-per-btc-note {
   margin-top: 8px;
   font-size: 0.8rem;
   color: @muted-dark;

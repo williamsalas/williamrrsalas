@@ -1,12 +1,20 @@
 import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
-import { render, screen, cleanup, fireEvent } from "@testing-library/react";
+import {
+  render,
+  screen,
+  cleanup,
+  fireEvent,
+  within,
+} from "@testing-library/react";
 import { BtcPage } from "../BtcPage.tsx";
 
 vi.mock("../../../hooks/useBtcPrices.ts", () => ({
   useBtcPrices: () => ({
     prices: {
-      btc: 65_296.67,
-      fbtc: 57.15,
+      btc: 72_508.44,
+      fbtc: 63.68,
+      ibit: 41.45,
+      gbtc: 56.975,
       ts: "2025-01-01T00:00:00Z",
       source: "default" as const,
     },
@@ -30,6 +38,47 @@ describe("BtcPage", () => {
     render(<BtcPage />);
     expect(screen.getByText("BTC Holdings")).toBeInTheDocument();
     expect(screen.getByText("FBTC Holdings")).toBeInTheDocument();
+  });
+
+  it("renders 4 fund selector buttons", () => {
+    const { container } = render(<BtcPage />);
+    const selector = within(
+      container.querySelector(".fund-selector")! as HTMLElement,
+    );
+    expect(selector.getByRole("button", { name: "BTC" })).toBeInTheDocument();
+    expect(selector.getByRole("button", { name: "FBTC" })).toBeInTheDocument();
+    expect(selector.getByRole("button", { name: "IBIT" })).toBeInTheDocument();
+    expect(selector.getByRole("button", { name: "GBTC" })).toBeInTheDocument();
+  });
+
+  it("toggling IBIT shows its input group", () => {
+    const { container } = render(<BtcPage />);
+    const selector = within(
+      container.querySelector(".fund-selector")! as HTMLElement,
+    );
+    expect(screen.queryByText("IBIT Holdings")).not.toBeInTheDocument();
+    fireEvent.click(selector.getByRole("button", { name: "IBIT" }));
+    expect(screen.getByText("IBIT Holdings")).toBeInTheDocument();
+  });
+
+  it("toggling off a fund hides its input group", () => {
+    const { container } = render(<BtcPage />);
+    const selector = within(
+      container.querySelector(".fund-selector")! as HTMLElement,
+    );
+    expect(screen.getByText("FBTC Holdings")).toBeInTheDocument();
+    fireEvent.click(selector.getByRole("button", { name: "FBTC" }));
+    expect(screen.queryByText("FBTC Holdings")).not.toBeInTheDocument();
+  });
+
+  it("cannot deselect all funds - defaults back to BTC", () => {
+    const { container } = render(<BtcPage />);
+    const selector = within(
+      container.querySelector(".fund-selector")! as HTMLElement,
+    );
+    fireEvent.click(selector.getByRole("button", { name: "FBTC" }));
+    fireEvent.click(selector.getByRole("button", { name: "BTC" }));
+    expect(screen.getByText("BTC Holdings")).toBeInTheDocument();
   });
 
   it("shows total holdings as zero initially", () => {

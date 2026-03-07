@@ -66,6 +66,8 @@ describe("PriceSource", () => {
     const prices: BtcPrices = {
       btc: 97432.15,
       fbtc: 84.23,
+      ibit: 55.12,
+      gbtc: 76.45,
       ts: "2026-03-01T14:30:00Z",
       source: "live",
     };
@@ -84,8 +86,10 @@ describe("PriceSource", () => {
   it("shows relative time for cached source", () => {
     vi.setSystemTime(new Date("2026-03-01T12:05:00Z"));
     const prices: BtcPrices = {
-      btc: 65296.67,
-      fbtc: 57.15,
+      btc: 72508.44,
+      fbtc: 63.68,
+      ibit: 41.45,
+      gbtc: 56.975,
       ts: "2026-03-01T12:00:00Z",
       source: "cached",
     };
@@ -96,8 +100,10 @@ describe("PriceSource", () => {
   it("shows relative time for default source", () => {
     vi.setSystemTime(new Date("2026-03-01T01:00:00Z"));
     const prices: BtcPrices = {
-      btc: 65296.67,
-      fbtc: 57.15,
+      btc: 72508.44,
+      fbtc: 63.68,
+      ibit: 41.45,
+      gbtc: 56.975,
       ts: "2026-03-01T00:00:00Z",
       source: "default",
     };
