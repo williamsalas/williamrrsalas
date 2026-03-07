@@ -24,8 +24,8 @@ describe("SharesPerBtc", () => {
 
   it("shows ratio for a single visible ETF fund", () => {
     render(<SharesPerBtc prices={prices} visibleTickers={new Set(["FBTC"])} />);
-    expect(screen.getByText(/FBTC shares/)).toBeInTheDocument();
-    expect(screen.queryByText(/IBIT shares/)).not.toBeInTheDocument();
+    expect(screen.getByText("FBTC")).toBeInTheDocument();
+    expect(screen.queryByText("IBIT")).not.toBeInTheDocument();
   });
 
   it("shows ratios for multiple visible ETF funds", () => {
@@ -35,8 +35,8 @@ describe("SharesPerBtc", () => {
         visibleTickers={new Set(["FBTC", "IBIT"])}
       />,
     );
-    expect(screen.getByText(/FBTC shares/)).toBeInTheDocument();
-    expect(screen.getByText(/IBIT shares/)).toBeInTheDocument();
+    expect(screen.getByText("FBTC")).toBeInTheDocument();
+    expect(screen.getByText("IBIT")).toBeInTheDocument();
   });
 
   it("computes the correct shares-per-BTC ratio", () => {

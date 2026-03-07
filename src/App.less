@@ -449,6 +449,22 @@ img.pikachu {
   min-width: 70px;
 }
 
+.summary-label--fbtc {
+  color: @fbtc-green;
+}
+
+.summary-label--ibit {
+  color: @ibit-white;
+}
+
+.summary-label--gbtc {
+  color: @gbtc-purple;
+}
+
+.summary-label--btc {
+  color: @btc-orange;
+}
+
 .btc-summary-amounts {
   display: flex;
   align-items: baseline;
@@ -459,6 +475,10 @@ img.pikachu {
 .btc-summary-sep {
   color: @muted-dark;
   font-size: 0.85rem;
+
+  & ~ .btc-summary-value {
+    color: unset;
+  }
 }
 
 .btc-summary-value {
@@ -508,7 +528,7 @@ img.pikachu {
 
     &:last-child {
       text-align: right;
-      color: @btc-orange;
+      color: unset;
       font-weight: bold;
     }
   }
@@ -606,20 +626,47 @@ img.pikachu {
   color: @light-text;
 }
 
-.btc-shares-per-btc-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 4px 0;
+.btc-shares-per-btc-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+    color: @muted;
+    font-weight: normal;
+    padding: 6px 0;
+    border-bottom: 1px solid @dark-gray;
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+
+  td {
+    padding: 8px 0;
+    border-bottom: 1px solid @dark-gray;
+    font-weight: bold;
+
+    &:nth-child(2) {
+      color: unset;
+    }
+
+    &:last-child {
+      text-align: right;
+    }
+  }
 }
 
-.btc-shares-per-btc-label {
-  color: @btc-orange;
-  font-weight: bold;
-}
-
-.btc-shares-per-btc-value {
+.shares-row--fbtc td {
   color: @fbtc-green;
-  font-weight: bold;
+}
+
+.shares-row--ibit td {
+  color: @ibit-white;
+}
+
+.shares-row--gbtc td {
+  color: @gbtc-purple;
 }
 
 .btc-shares-per-btc-note {

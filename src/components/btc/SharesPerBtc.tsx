@@ -27,31 +27,45 @@ export const SharesPerBtc = memo(function SharesPerBtc({
       <h3 className="btc-shares-per-btc-heading">
         How many ETF shares are in a Bitcoin?
       </h3>
-      {visibleEtfs.map((ticker) => {
-        const priceKey = TICKER_PRICE_KEY[ticker];
-        const etfPrice = prices[priceKey] as number;
-        const sharesPerBtc = prices.btc / etfPrice;
-        return (
-          <div className="btc-shares-per-btc-row" key={ticker}>
-            <span className="btc-shares-per-btc-label">1 BTC</span>
-            <span className="btc-shares-per-btc-value">
-              {sharesPerBtc.toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}{" "}
-              {ticker} shares
-            </span>
-          </div>
-        );
-      })}
+      <table className="btc-shares-per-btc-table">
+        <thead>
+          <tr>
+            <th>Fund</th>
+            <th>Share Price</th>
+            <th>Shares / BTC</th>
+          </tr>
+        </thead>
+        <tbody>
+          {visibleEtfs.map((ticker) => {
+            const priceKey = TICKER_PRICE_KEY[ticker];
+            const etfPrice = prices[priceKey] as number;
+            const sharesPerBtc = prices.btc / etfPrice;
+            return (
+              <tr
+                className={`shares-row--${ticker.toLowerCase()}`}
+                key={ticker}
+              >
+                <td>{ticker}</td>
+                <td>
+                  $
+                  {etfPrice.toLocaleString("en-US", {
+                    maximumFractionDigits: 2,
+                  })}
+                </td>
+                <td>
+                  {sharesPerBtc.toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
       <p className="btc-shares-per-btc-note">
         Based on BTC at $
         {prices.btc.toLocaleString("en-US", { maximumFractionDigits: 2 })}
-        {visibleEtfs.map((ticker) => {
-          const priceKey = TICKER_PRICE_KEY[ticker];
-          const etfPrice = prices[priceKey] as number;
-          return ` / ${ticker} at $${etfPrice.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
-        })}
       </p>
     </div>
   );

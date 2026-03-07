@@ -50,6 +50,9 @@ export const PriceSource = memo(function PriceSource({
         Twelve Data
       </a>
       <br />
+      Not affiliated with or endorsed by BlackRock, Fidelity, or Grayscale. Fund
+      names and logos are property of their respective owners.
+      <br />
       Not financial advice
     </p>
   );
