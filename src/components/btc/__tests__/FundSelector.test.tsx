@@ -6,8 +6,8 @@ import { ALL_FUNDS } from "../../../lib/btc.ts";
 afterEach(cleanup);
 
 describe("FundSelector", () => {
-  it("renders a button for each fund", () => {
-    render(
+  it("renders a button with logo for each fund", () => {
+    const { container } = render(
       <FundSelector
         funds={ALL_FUNDS}
         visibleTickers={new Set(["BTC", "FBTC"])}
@@ -18,6 +18,9 @@ describe("FundSelector", () => {
     expect(screen.getByRole("button", { name: "FBTC" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "IBIT" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "GBTC" })).toBeInTheDocument();
+
+    const logos = container.querySelectorAll(".fund-selector-logo");
+    expect(logos).toHaveLength(ALL_FUNDS.length);
   });
 
   it("marks visible fund buttons as active with aria-pressed", () => {

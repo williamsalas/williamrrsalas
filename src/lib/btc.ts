@@ -177,8 +177,4 @@ export const ALL_FUNDS: FundConfig[] = [
   },
 ];
 
-export const ACTIVE_FUNDS = ALL_FUNDS.filter(
-  (f) => f.ticker === "BTC" || f.ticker === "FBTC",
-);
-
 export const ETF_FUNDS = ALL_FUNDS.filter((f) => f.ticker !== "BTC");

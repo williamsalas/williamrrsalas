@@ -1,7 +1,16 @@
 import { memo } from "react";
 import type { FundConfig } from "../../lib/types.ts";
-// todo later: add logos to selector
-// import { FUND_LOGOS } from "../icons/FundLogos.tsx";
+import btcLogo from "../../assets/img/btclogo.png";
+import fidelityLogo from "../../assets/img/fidelitylogo.jpeg";
+import blackrockLogo from "../../assets/img/blackrocklogo.png";
+import grayscaleLogo from "../../assets/img/grayscalelogo.png";
+
+const FUND_LOGOS: Record<string, string> = {
+  BTC: btcLogo,
+  FBTC: fidelityLogo,
+  IBIT: blackrockLogo,
+  GBTC: grayscaleLogo,
+};
 
 interface FundSelectorProps {
   funds: FundConfig[];
@@ -23,7 +32,11 @@ export const FundSelector = memo(function FundSelector({
           onClick={() => onToggle(fund.ticker)}
           aria-pressed={visibleTickers.has(fund.ticker)}
         >
-          {/* {FUND_LOGOS[fund.ticker]}  */}
+          <img
+            src={FUND_LOGOS[fund.ticker] ?? btcLogo}
+            alt=""
+            className="fund-selector-logo"
+          />
           {fund.ticker}
         </button>
       ))}
