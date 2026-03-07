@@ -344,7 +344,7 @@ img.pikachu {
 
 .btc-input-group {
   --accent: @btc-orange;
-  flex: 0 1 calc(50% - 8px);
+  width: 100%;
   min-width: 0;
   box-sizing: border-box;
   .card-panel();
@@ -692,8 +692,8 @@ img.pikachu {
   }
 }
 
-@media (max-width: 500px) {
-  .btc-inputs {
-    flex-direction: column;
+@media (min-width: 600px) {
+  .btc-input-group {
+    flex: 0 1 calc(50% - 8px);
   }
 }
