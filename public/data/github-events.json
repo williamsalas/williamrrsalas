@@ -1,5 +1,103 @@
 [
   {
+    "id": "7182988109",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 70,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/70",
+        "id": 3368933034,
+        "number": 70,
+        "head": {
+          "ref": "wrrs/btc-page-title",
+          "sha": "16691ba88137f344d41bbc39904606b91cd6324a",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "c183dd3c11a700e81d57dff87837c5396092b087",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "update title for BTC Visualizer",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/70",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-08T01:58:40Z"
+  },
+  {
+    "id": "7182984715",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 70,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/70",
+        "id": 3368933034,
+        "number": 70,
+        "head": {
+          "ref": "wrrs/btc-page-title",
+          "sha": "16691ba88137f344d41bbc39904606b91cd6324a",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "c183dd3c11a700e81d57dff87837c5396092b087",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "update title for BTC Visualizer",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/70",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-08T01:58:11Z"
+  },
+  {
     "id": "7182861322",
     "type": "PullRequestEvent",
     "actor": {
