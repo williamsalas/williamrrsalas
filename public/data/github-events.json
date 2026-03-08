@@ -1,5 +1,103 @@
 [
   {
+    "id": "7191968220",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1176141713,
+      "name": "williamsalas/Guess-The-Globe",
+      "url": "https://api.github.com/repos/williamsalas/Guess-The-Globe"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 1,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/Guess-The-Globe/pulls/1",
+        "id": 3370319219,
+        "number": 1,
+        "head": {
+          "ref": "wrrs/init-react-native",
+          "sha": "ccc7afad565cd98080ab7ea73d672810fbab19a3",
+          "repo": {
+            "id": 1176141713,
+            "url": "https://api.github.com/repos/williamsalas/Guess-The-Globe",
+            "name": "Guess-The-Globe"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "5e712bd756ceb23844d9e1a5dd3f92318835acf7",
+          "repo": {
+            "id": 1176141713,
+            "url": "https://api.github.com/repos/williamsalas/Guess-The-Globe",
+            "name": "Guess-The-Globe"
+          }
+        },
+        "title": "setup React Native",
+        "html_url": "https://github.com/williamsalas/Guess-The-Globe/pull/1",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-08T18:29:55Z"
+  },
+  {
+    "id": "7191855698",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1176141713,
+      "name": "williamsalas/Guess-The-Globe",
+      "url": "https://api.github.com/repos/williamsalas/Guess-The-Globe"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 1,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/Guess-The-Globe/pulls/1",
+        "id": 3370319219,
+        "number": 1,
+        "head": {
+          "ref": "wrrs/init-react-native",
+          "sha": "ccc7afad565cd98080ab7ea73d672810fbab19a3",
+          "repo": {
+            "id": 1176141713,
+            "url": "https://api.github.com/repos/williamsalas/Guess-The-Globe",
+            "name": "Guess-The-Globe"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "5e712bd756ceb23844d9e1a5dd3f92318835acf7",
+          "repo": {
+            "id": 1176141713,
+            "url": "https://api.github.com/repos/williamsalas/Guess-The-Globe",
+            "name": "Guess-The-Globe"
+          }
+        },
+        "title": "setup React Native",
+        "html_url": "https://github.com/williamsalas/Guess-The-Globe/pull/1",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-08T18:29:34Z"
+  },
+  {
     "id": "7182988109",
     "type": "PullRequestEvent",
     "actor": {
