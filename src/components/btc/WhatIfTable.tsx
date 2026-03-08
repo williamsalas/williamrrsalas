@@ -44,6 +44,7 @@ export const WhatIfTable = memo(function WhatIfTable({
                 className="btc-input btc-custom-input"
                 type="text"
                 inputMode="decimal"
+                name="custom-btc-price"
                 value={formatWithCommas(customPrice)}
                 onChange={(e) =>
                   onCustomPriceChange(sanitizeNumericInput(e.target.value))
