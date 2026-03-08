@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./App.less";
 import { Header } from "./components/Header.tsx";
 import { GitHubActivity } from "./components/GitHubActivity.tsx";
@@ -23,6 +24,11 @@ function HomePage() {
 
 export default function App() {
   const { path, navigate } = useRoute();
+
+  useEffect(() => {
+    document.title =
+      path === "/btc" ? "BTC Visualizer" : "william salas | software dev";
+  }, [path]);
 
   return (
     <>
