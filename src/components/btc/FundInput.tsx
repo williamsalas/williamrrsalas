@@ -24,7 +24,7 @@ export const FundInput = memo(function FundInput({
   const isNative = mode === fund.nativeMode;
   return (
     <div className={`btc-input-group btc-input-group--${fund.cssModifier}`}>
-      <label className="btc-label">{fund.label}</label>
+      <div className="btc-label">{fund.label}</div>
       {entries.map((entry, i) => (
         <div className="btc-input-row" key={i}>
           <span className="btc-input-prefix">
@@ -34,6 +34,7 @@ export const FundInput = memo(function FundInput({
             className="btc-input"
             type="text"
             inputMode="decimal"
+            name={`${fund.cssModifier}-${i}`}
             value={entry}
             onChange={(e) =>
               onEntryChange(i, sanitizeNumericInput(e.target.value))
