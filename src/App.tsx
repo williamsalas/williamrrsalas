@@ -12,7 +12,7 @@ function HomePage() {
     <>
       <Header />
       <div className="bottom-flex-container">
-        <div className="bottom-left">
+        <div className="activity-panel">
           <h3 className="github-activity">recent activity</h3>
           <GitHubActivity />
         </div>
