@@ -43,7 +43,11 @@ footer {
 }
 
 .pr-list {
-  margin: 0 0 0.5em 0;
+  margin: 0 0 8px;
+}
+
+.github-events > .pr-list:last-child {
+  margin-bottom: 0;
 }
 
 .other-list {
@@ -55,20 +59,13 @@ footer {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  .github-date {
-    margin-left: auto;
-    margin-bottom: unset;
-    right: 0;
-  }
   align-items: stretch;
   padding: 2rem 0 0 0;
   gap: 8px;
 }
 
-.bottom-left,
-.bottom-right {
+.activity-panel {
   .card-panel();
-  padding: 0 16px;
   color: @light-text;
   flex: 1 1 0;
   min-width: 0;
@@ -87,12 +84,10 @@ footer {
 }
 
 .github-activity {
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin: 0 0 16px;
 }
 
 .repo-header {
-  margin-top: 0;
   margin-bottom: 6px;
   font-weight: bold;
 }
@@ -105,8 +100,7 @@ footer {
 }
 
 .github-date {
-  margin-bottom: unset;
-  right: 0;
+  margin-left: auto;
 }
 
 .repo-icon {
@@ -174,10 +168,6 @@ h1 {
   color: @light-text;
 }
 
-.github-events {
-  margin-top: unset;
-}
-
 button {
   padding: 10px 20px;
   font-size: 16px;
@@ -185,7 +175,7 @@ button {
   cursor: pointer;
 }
 
-small {
+#root > small {
   margin-bottom: 8px;
 }
 
