@@ -33,7 +33,12 @@ export const WhatIfTable = memo(function WhatIfTable({
         <tbody>
           {WHAT_IF_PRICES.map((price) => (
             <tr key={price}>
-              <td>{formatUsd(price)}</td>
+              <td>
+                {formatUsd(price)}
+                {price === 126_200 && (
+                  <span className="btc-ath-tag">ATH</span>
+                )}
+              </td>
               <td>{formatUsd(totalBtc * price)}</td>
             </tr>
           ))}
