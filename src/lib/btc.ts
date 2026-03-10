@@ -5,7 +5,7 @@ export const DEFAULT_FBTC_PRICE = 63.68;
 export const DEFAULT_IBIT_PRICE = 41.45;
 export const DEFAULT_GBTC_PRICE = 56.975;
 
-export const WHAT_IF_PRICES = [100_000, 200_000, 500_000, 1_000_000];
+export const WHAT_IF_PRICES = [100_000, 126_200, 200_000, 500_000, 1_000_000];
 
 export function sanitizeNumericInput(raw: string): string {
   // Allow only digits and a single decimal point
