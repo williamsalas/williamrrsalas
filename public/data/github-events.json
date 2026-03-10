@@ -1,5 +1,201 @@
 [
   {
+    "id": "7239666661",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 72,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/72",
+        "id": 3376878918,
+        "number": 72,
+        "head": {
+          "ref": "claude/add-btc-ath-scenario-ECGim",
+          "sha": "c87c2f785a9c14a42c64a5b64d82b6ba3a50ad08",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "05344ad82d7b13b0837008bc9dc670f04f984724",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "add ATH label tag to $126,200 what-if row",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/72",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-10T06:01:57Z"
+  },
+  {
+    "id": "7239653583",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 72,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/72",
+        "id": 3376878918,
+        "number": 72,
+        "head": {
+          "ref": "claude/add-btc-ath-scenario-ECGim",
+          "sha": "c87c2f785a9c14a42c64a5b64d82b6ba3a50ad08",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "05344ad82d7b13b0837008bc9dc670f04f984724",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "add ATH label tag to $126,200 what-if row",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/72",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-10T06:01:20Z"
+  },
+  {
+    "id": "7238957801",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 71,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/71",
+        "id": 3376766940,
+        "number": 71,
+        "head": {
+          "ref": "wrrs/fix-gh-activty-paddings",
+          "sha": "5f5834248ac37846d19b29ca5c9d2b832801d99c",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "e16c5bd612f3a5070d3247eeb9a4bcc091f446ec",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Update recent activity section styles",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/71",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-10T05:26:39Z"
+  },
+  {
+    "id": "7238933827",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 71,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/71",
+        "id": 3376766940,
+        "number": 71,
+        "head": {
+          "ref": "wrrs/fix-gh-activty-paddings",
+          "sha": "5f5834248ac37846d19b29ca5c9d2b832801d99c",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "e16c5bd612f3a5070d3247eeb9a4bcc091f446ec",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Update recent activity section styles",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/71",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-10T05:25:20Z"
+  },
+  {
     "id": "7191968220",
     "type": "PullRequestEvent",
     "actor": {
