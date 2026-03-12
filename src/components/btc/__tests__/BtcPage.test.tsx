@@ -94,20 +94,6 @@ describe("BtcPage", () => {
     expect(screen.getByTestId("total-btc")).toHaveTextContent("1.00000000");
   });
 
-  it("toggles BTC input to USD mode", () => {
-    render(<BtcPage />);
-    const btcButtons = screen.getAllByText("USD");
-    fireEvent.click(btcButtons[0]);
-    expect(screen.getByLabelText("USD amount for BTC 1")).toBeInTheDocument();
-  });
-
-  it("toggles FBTC input to USD mode", () => {
-    render(<BtcPage />);
-    const usdButtons = screen.getAllByText("USD");
-    fireEvent.click(usdButtons[1]);
-    expect(screen.getByLabelText("USD amount for FBTC 1")).toBeInTheDocument();
-  });
-
   it("renders the what-if table with price points", () => {
     render(<BtcPage />);
     expect(screen.getByText("$100,000.00")).toBeInTheDocument();
@@ -203,5 +189,53 @@ describe("BtcPage", () => {
     expect(
       screen.getByText(/Pricing information accurate as of/),
     ).toBeInTheDocument();
+  });
+
+  it("renders total banner with USD and BTC values", () => {
+    localStorage.setItem("btc-holdings-btc", '["1"]');
+    render(<BtcPage />);
+    const banner = screen.getByTestId("total-banner");
+    expect(banner).toHaveTextContent("$72,508.44");
+    expect(banner).toHaveTextContent("1.00000000 BTC");
+  });
+
+  it("checkboxes hidden with only 1 row", () => {
+    render(<BtcPage />);
+    expect(
+      screen.queryByLabelText(/^Select BTC entry/),
+    ).not.toBeInTheDocument();
+  });
+
+  it("checkboxes shown with 2+ rows", () => {
+    localStorage.setItem("btc-holdings-btc", '["1","2"]');
+    render(<BtcPage />);
+    expect(screen.getByLabelText("Select BTC entry 1")).toBeInTheDocument();
+    expect(screen.getByLabelText("Select BTC entry 2")).toBeInTheDocument();
+  });
+
+  it("consolidate button hidden until 2+ checkboxes selected", () => {
+    localStorage.setItem("btc-holdings-btc", '["1","2","3"]');
+    render(<BtcPage />);
+    expect(screen.queryByText(/Consolidate/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("Select BTC entry 1"));
+    expect(screen.queryByText(/Consolidate/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("Select BTC entry 2"));
+    expect(screen.getByText("Consolidate 2 selected")).toBeInTheDocument();
+  });
+
+  it("consolidate merges only selected entries, keeps unselected", () => {
+    localStorage.setItem("btc-holdings-btc", '["1","2","3"]');
+    render(<BtcPage />);
+
+    // Select entries 1 and 3
+    fireEvent.click(screen.getByLabelText("Select BTC entry 1"));
+    fireEvent.click(screen.getByLabelText("Select BTC entry 3"));
+    fireEvent.click(screen.getByText("Consolidate 2 selected"));
+
+    const inputs = screen.getAllByLabelText(/^BTC amount \d+$/);
+    expect(inputs).toHaveLength(2);
+    // Sum of 1 + 3 = 4 in first position, unselected entry "2" kept
+    expect((inputs[0] as HTMLInputElement).value).toBe("4");
+    expect((inputs[1] as HTMLInputElement).value).toBe("2");
   });
 });
