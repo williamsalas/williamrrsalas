@@ -5,14 +5,19 @@ import { HoldingsSummary } from "./HoldingsSummary.tsx";
 import { WhatIfTable } from "./WhatIfTable.tsx";
 import { SharesPerBtc } from "./SharesPerBtc.tsx";
 import { PriceSource } from "./PriceSource.tsx";
-import { ALL_FUNDS, parseStoredEntries } from "../../lib/btc.ts";
+import {
+  ALL_FUNDS,
+  parseStoredEntries,
+  formatUsd,
+  formatBtc,
+} from "../../lib/btc.ts";
 import { useBtcPrices } from "../../hooks/useBtcPrices.ts";
 import type { FundInputProps } from "./FundInput.tsx";
 import { Footer } from "../Footer.tsx";
 
 type FundHandlers = Pick<
   FundInputProps,
-  "onEntryChange" | "onAddEntry" | "onRemoveEntry" | "onModeChange"
+  "onEntryChange" | "onAddEntry" | "onRemoveEntry" | "onConsolidate"
 >;
 
 const LS_VISIBLE_KEY = "btc-visible-tickers";
@@ -46,10 +51,6 @@ export function BtcPage() {
     ),
   );
 
-  const [modes, setModes] = useState<Record<string, string>>(() =>
-    Object.fromEntries(ALL_FUNDS.map((fund) => [fund.ticker, fund.nativeMode])),
-  );
-
   const [customPrice, setCustomPrice] = useState("");
 
   const activeFunds = useMemo(
@@ -78,7 +79,7 @@ export function BtcPage() {
     ALL_FUNDS.forEach((fund) => {
       const fundEntries = entries[fund.ticker] ?? [""];
       const canonicals = fundEntries
-        .map((e) => fund.toCanonical(e, modes[fund.ticker], prices))
+        .map((e) => fund.toCanonical(e, fund.nativeMode, prices))
         .filter((c) => c !== "" && parseFloat(c) !== 0);
       if (canonicals.length > 0) {
         localStorage.setItem(fund.lsKey, JSON.stringify(canonicals));
@@ -86,7 +87,7 @@ export function BtcPage() {
         localStorage.removeItem(fund.lsKey);
       }
     });
-  }, [entries, modes, prices]);
+  }, [entries, prices]);
 
   const handleEntryChange = useCallback(
     (ticker: string, index: number, value: string) => {
@@ -112,8 +113,20 @@ export function BtcPage() {
     }));
   }, []);
 
-  const handleModeChange = useCallback((ticker: string, mode: string) => {
-    setModes((prev) => ({ ...prev, [ticker]: mode }));
+  const handleConsolidate = useCallback((ticker: string, indices: number[]) => {
+    setEntries((prev) => {
+      const current = prev[ticker];
+      const indexSet = new Set(indices);
+      const sum = indices.reduce((acc, i) => {
+        const val = parseFloat(current[i]);
+        return acc + (isNaN(val) ? 0 : val);
+      }, 0);
+      const kept = current.filter((_, i) => !indexSet.has(i));
+      return {
+        ...prev,
+        [ticker]: [parseFloat(sum.toFixed(8)).toString(), ...kept],
+      };
+    });
   }, []);
 
   // Stable per-fund handler objects so React.memo on FundInput can bail out
@@ -129,11 +142,12 @@ export function BtcPage() {
             onAddEntry: () => handleAddEntry(fund.ticker),
             onRemoveEntry: (index: number) =>
               handleRemoveEntry(fund.ticker, index),
-            onModeChange: (mode: string) => handleModeChange(fund.ticker, mode),
+            onConsolidate: (indices: number[]) =>
+              handleConsolidate(fund.ticker, indices),
           },
         ]),
       ),
-    [handleEntryChange, handleAddEntry, handleRemoveEntry, handleModeChange],
+    [handleEntryChange, handleAddEntry, handleRemoveEntry, handleConsolidate],
   );
 
   const fundHoldings = useMemo(
@@ -141,13 +155,13 @@ export function BtcPage() {
       activeFunds.map((fund) => ({
         label: fund.ticker,
         btc: (entries[fund.ticker] ?? []).reduce(
-          (sum, e) => sum + fund.parseHoldings(e, modes[fund.ticker], prices),
+          (sum, e) => sum + fund.parseHoldings(e, fund.nativeMode, prices),
           0,
         ),
         testIdBtc: `${fund.ticker.toLowerCase()}-holdings-btc`,
         testIdUsd: `${fund.ticker.toLowerCase()}-holdings-usd`,
       })),
-    [activeFunds, entries, modes, prices],
+    [activeFunds, entries, prices],
   );
 
   const totalBtc = useMemo(
@@ -167,6 +181,12 @@ export function BtcPage() {
   return (
     <div className="btc-page">
       <h2 className="btc-heading">BTC Holdings Visualizer</h2>
+      <div className="btc-total-banner" data-testid="total-banner">
+        <span className="btc-total-banner-value">
+          {formatUsd(totalBtc * prices.btc)}
+        </span>
+        <span className="btc-total-banner-btc">{formatBtc(totalBtc)} BTC</span>
+      </div>
       <FundSelector
         funds={ALL_FUNDS}
         visibleTickers={visibleTickers}
@@ -178,7 +198,6 @@ export function BtcPage() {
             key={fund.ticker}
             fund={fund}
             entries={entries[fund.ticker] ?? [""]}
-            mode={modes[fund.ticker]}
             {...fundHandlers[fund.ticker]}
           />
         ))}

@@ -19,6 +19,25 @@
   margin: 0 0 8px 0;
 }
 
+.btc-total-banner {
+  text-align: center;
+}
+
+.btc-total-banner-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: @light-text;
+  line-height: 1.2;
+}
+
+.btc-total-banner-btc {
+  display: block;
+  font-size: 0.9rem;
+  color: @btc-orange;
+  margin-top: 2px;
+}
+
 .fund-selector {
   display: flex;
   gap: 8px;
@@ -126,31 +145,27 @@
   }
 }
 
-.btc-toggle-row {
-  display: flex;
-  gap: 6px;
-  margin-top: 8px;
+.btc-entry-checkbox {
+  accent-color: var(--accent);
+  margin-right: 6px;
+  cursor: pointer;
 }
 
-.btc-toggle {
-  flex: 1;
-  padding: 4px 8px;
+.btc-entry-consolidate {
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px;
   font-size: 0.85rem;
-  margin-top: 0;
-  background: @dark-gray;
-  border: 1px solid #555;
-  border-radius: 4px;
-  color: #aaa;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  color: @black;
+  font-weight: bold;
   cursor: pointer;
-  transition:
-    background 0.2s,
-    color 0.2s;
+  transition: opacity 0.2s;
 
-  &-active {
-    background: var(--accent);
-    color: @black;
-    border-color: var(--accent);
-    font-weight: bold;
+  &:hover {
+    opacity: 0.85;
   }
 }
 
