@@ -55,52 +55,41 @@ export function useBtcPrices(): UseBtcPricesResult {
   useEffect(() => {
     let cancelled = false;
 
+    async function tryFetch(
+      url: string,
+      source: "live" | "cached",
+    ): Promise<boolean> {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data: unknown = await res.json();
+      if (!isValidResponse(data)) throw new Error("Invalid response shape");
+      if (!cancelled) {
+        setPrices({
+          btc: data.btc,
+          fbtc: data.fbtc,
+          ibit: data.ibit,
+          gbtc: data.gbtc,
+          ts: data.ts,
+          source,
+        });
+        setLoading(false);
+      }
+      return true;
+    }
+
     async function fetchPrices() {
-      // Try worker first
       try {
-        const res = await fetch(WORKER_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data: unknown = await res.json();
-        if (!isValidResponse(data)) throw new Error("Invalid response shape");
-        if (!cancelled) {
-          setPrices({
-            btc: data.btc,
-            fbtc: data.fbtc,
-            ibit: data.ibit,
-            gbtc: data.gbtc,
-            ts: data.ts,
-            source: "live",
-          });
-          setLoading(false);
-          return;
-        }
+        if (await tryFetch(WORKER_URL, "live")) return;
       } catch {
         // Fall through to static fallback
       }
 
-      // Try static fallback
       try {
-        const res = await fetch(FALLBACK_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data: unknown = await res.json();
-        if (!isValidResponse(data)) throw new Error("Invalid response shape");
-        if (!cancelled) {
-          setPrices({
-            btc: data.btc,
-            fbtc: data.fbtc,
-            ibit: data.ibit,
-            gbtc: data.gbtc,
-            ts: data.ts,
-            source: "cached",
-          });
-          setLoading(false);
-          return;
-        }
+        if (await tryFetch(FALLBACK_URL, "cached")) return;
       } catch {
         // Fall through to defaults
       }
 
-      // Use hardcoded defaults
       if (!cancelled) {
         setPrices(DEFAULT_PRICES);
         setLoading(false);

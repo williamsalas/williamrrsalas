@@ -1,10 +1,5 @@
 import type { GitHubEvent, TransformedEvent } from "./types.ts";
 
-export const isChoreDataPR = (e: TransformedEvent): boolean =>
-  e.type === "PullRequestEvent" &&
-  !!e.title &&
-  e.title.startsWith("chore(data");
-
 export const safeRepoName = (
   e: Pick<TransformedEvent, "repo"> | GitHubEvent,
 ): string => {
