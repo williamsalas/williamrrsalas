@@ -202,7 +202,11 @@ export function BtcPage() {
           />
         ))}
       </div>
-      <HoldingsSummary holdings={fundHoldings} btcPrice={prices.btc} />
+      <HoldingsSummary
+        holdings={fundHoldings}
+        totalBtc={totalBtc}
+        btcPrice={prices.btc}
+      />
       <WhatIfTable
         totalBtc={totalBtc}
         customPrice={customPrice}

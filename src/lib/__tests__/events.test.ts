@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 import {
-  isChoreDataPR,
   safeRepoName,
   uniquePRs,
   groupPRsByRepo,
@@ -24,23 +23,6 @@ function makeTransformed(
     ...overrides,
   };
 }
-
-describe("isChoreDataPR", () => {
-  it("returns true for chore(data) PRs", () => {
-    const e = makeTransformed({ title: "chore(data): refresh events" });
-    expect(isChoreDataPR(e)).toBe(true);
-  });
-
-  it("returns false for regular PRs", () => {
-    const e = makeTransformed({ title: "add new feature" });
-    expect(isChoreDataPR(e)).toBe(false);
-  });
-
-  it("returns false for non-PR events", () => {
-    const e = makeTransformed({ type: "PushEvent" });
-    expect(isChoreDataPR(e)).toBe(false);
-  });
-});
 
 describe("safeRepoName", () => {
   it("returns repo string from TransformedEvent", () => {

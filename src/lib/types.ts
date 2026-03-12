@@ -37,15 +37,17 @@ export interface BtcPrices {
   source: "live" | "cached" | "default";
 }
 
+export type FundMode = "btc" | "shares" | "usd";
+
 export interface FundConfig {
   ticker: string;
   label: string;
   lsKey: string;
   cssModifier: string;
-  nativeMode: string;
+  nativeMode: FundMode;
   nativePrefix: string;
   nativePlaceholder: string;
   nativeAriaLabel: string;
-  parseHoldings: (amount: string, mode: string, prices: BtcPrices) => number;
-  toCanonical: (amount: string, mode: string, prices: BtcPrices) => string;
+  parseHoldings: (amount: string, mode: FundMode, prices: BtcPrices) => number;
+  toCanonical: (amount: string, mode: FundMode, prices: BtcPrices) => string;
 }

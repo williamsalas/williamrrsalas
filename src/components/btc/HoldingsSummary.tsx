@@ -10,6 +10,7 @@ interface FundHolding {
 
 interface HoldingsSummaryProps {
   holdings: FundHolding[];
+  totalBtc: number;
   btcPrice: number;
 }
 
@@ -48,10 +49,9 @@ function SummaryRow({
 
 export const HoldingsSummary = memo(function HoldingsSummary({
   holdings,
+  totalBtc,
   btcPrice,
 }: HoldingsSummaryProps) {
-  const totalBtc = holdings.reduce((sum, h) => sum + h.btc, 0);
-
   return (
     <div className="btc-summary">
       <h3 className="btc-summary-heading">Total Holdings</h3>
