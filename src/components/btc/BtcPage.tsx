@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { FundInput } from "./FundInput.tsx";
 import { FundSelector } from "./FundSelector.tsx";
+import { AddEntryDialog } from "./AddEntryDialog.tsx";
 import { HoldingsSummary } from "./HoldingsSummary.tsx";
 import { WhatIfTable } from "./WhatIfTable.tsx";
 import { SharesPerBtc } from "./SharesPerBtc.tsx";
@@ -8,16 +9,18 @@ import { PriceSource } from "./PriceSource.tsx";
 import {
   ALL_FUNDS,
   parseStoredEntries,
+  fundCurrentPrice,
   formatUsd,
   formatBtc,
 } from "../../lib/btc.ts";
 import { useBtcPrices } from "../../hooks/useBtcPrices.ts";
 import type { FundInputProps } from "./FundInput.tsx";
+import type { FundEntry } from "../../lib/types.ts";
 import { Footer } from "../Footer.tsx";
 
 type FundHandlers = Pick<
   FundInputProps,
-  "onEntryChange" | "onAddEntry" | "onRemoveEntry" | "onConsolidate"
+  "onEntryChange" | "onOpenAddDialog" | "onRemoveEntry" | "onConsolidate"
 >;
 
 const LS_VISIBLE_KEY = "btc-visible-tickers";
@@ -42,7 +45,7 @@ export function BtcPage() {
   const [visibleTickers, setVisibleTickers] =
     useState<Set<string>>(loadVisibleTickers);
 
-  const [entries, setEntries] = useState<Record<string, string[]>>(() =>
+  const [entries, setEntries] = useState<Record<string, FundEntry[]>>(() =>
     Object.fromEntries(
       ALL_FUNDS.map((fund) => [
         fund.ticker,
@@ -51,6 +54,7 @@ export function BtcPage() {
     ),
   );
 
+  const [dialogTicker, setDialogTicker] = useState<string | null>(null);
   const [customPrice, setCustomPrice] = useState("");
 
   const activeFunds = useMemo(
@@ -77,12 +81,19 @@ export function BtcPage() {
 
   useEffect(() => {
     ALL_FUNDS.forEach((fund) => {
-      const fundEntries = entries[fund.ticker] ?? [""];
-      const canonicals = fundEntries
-        .map((e) => fund.toCanonical(e, fund.nativeMode, prices))
-        .filter((c) => c !== "" && parseFloat(c) !== 0);
-      if (canonicals.length > 0) {
-        localStorage.setItem(fund.lsKey, JSON.stringify(canonicals));
+      const fundEntries = entries[fund.ticker] ?? [{ amount: "" }];
+      const toSave: { amount: string; buyPrice?: number }[] = [];
+      for (const e of fundEntries) {
+        const canonical = fund.toCanonical(e.amount, fund.nativeMode, prices);
+        if (canonical === "" || parseFloat(canonical) === 0) continue;
+        toSave.push(
+          e.buyPrice != null
+            ? { amount: canonical, buyPrice: e.buyPrice }
+            : { amount: canonical },
+        );
+      }
+      if (toSave.length > 0) {
+        localStorage.setItem(fund.lsKey, JSON.stringify(toSave));
       } else {
         localStorage.removeItem(fund.lsKey);
       }
@@ -93,17 +104,24 @@ export function BtcPage() {
     (ticker: string, index: number, value: string) => {
       setEntries((prev) => ({
         ...prev,
-        [ticker]: prev[ticker].map((e, i) => (i === index ? value : e)),
+        [ticker]: prev[ticker].map((e, i) =>
+          i === index ? { ...e, amount: value } : e,
+        ),
       }));
     },
     [],
   );
 
-  const handleAddEntry = useCallback((ticker: string) => {
+  const handleOpenAddDialog = useCallback((ticker: string) => {
+    setDialogTicker(ticker);
+  }, []);
+
+  const handleAddEntry = useCallback((ticker: string, entry: FundEntry) => {
     setEntries((prev) => ({
       ...prev,
-      [ticker]: [...prev[ticker], ""],
+      [ticker]: [...prev[ticker], entry],
     }));
+    setDialogTicker(null);
   }, []);
 
   const handleRemoveEntry = useCallback((ticker: string, index: number) => {
@@ -118,13 +136,13 @@ export function BtcPage() {
       const current = prev[ticker];
       const indexSet = new Set(indices);
       const sum = indices.reduce((acc, i) => {
-        const val = parseFloat(current[i]);
+        const val = parseFloat(current[i].amount);
         return acc + (isNaN(val) ? 0 : val);
       }, 0);
       const kept = current.filter((_, i) => !indexSet.has(i));
       return {
         ...prev,
-        [ticker]: [parseFloat(sum.toFixed(8)).toString(), ...kept],
+        [ticker]: [{ amount: parseFloat(sum.toFixed(8)).toString() }, ...kept],
       };
     });
   }, []);
@@ -139,7 +157,7 @@ export function BtcPage() {
           {
             onEntryChange: (index: number, value: string) =>
               handleEntryChange(fund.ticker, index, value),
-            onAddEntry: () => handleAddEntry(fund.ticker),
+            onOpenAddDialog: () => handleOpenAddDialog(fund.ticker),
             onRemoveEntry: (index: number) =>
               handleRemoveEntry(fund.ticker, index),
             onConsolidate: (indices: number[]) =>
@@ -147,7 +165,12 @@ export function BtcPage() {
           },
         ]),
       ),
-    [handleEntryChange, handleAddEntry, handleRemoveEntry, handleConsolidate],
+    [
+      handleEntryChange,
+      handleOpenAddDialog,
+      handleRemoveEntry,
+      handleConsolidate,
+    ],
   );
 
   const fundHoldings = useMemo(
@@ -155,7 +178,8 @@ export function BtcPage() {
       activeFunds.map((fund) => ({
         label: fund.ticker,
         btc: (entries[fund.ticker] ?? []).reduce(
-          (sum, e) => sum + fund.parseHoldings(e, fund.nativeMode, prices),
+          (sum, e) =>
+            sum + fund.parseHoldings(e.amount, fund.nativeMode, prices),
           0,
         ),
         testIdBtc: `${fund.ticker.toLowerCase()}-holdings-btc`,
@@ -168,6 +192,10 @@ export function BtcPage() {
     () => fundHoldings.reduce((sum, f) => sum + f.btc, 0),
     [fundHoldings],
   );
+
+  const dialogFund = dialogTicker
+    ? ALL_FUNDS.find((f) => f.ticker === dialogTicker)
+    : null;
 
   if (loading) {
     return (
@@ -197,11 +225,19 @@ export function BtcPage() {
           <FundInput
             key={fund.ticker}
             fund={fund}
-            entries={entries[fund.ticker] ?? [""]}
+            entries={entries[fund.ticker] ?? [{ amount: "" }]}
             {...fundHandlers[fund.ticker]}
           />
         ))}
       </div>
+      {dialogFund && (
+        <AddEntryDialog
+          fund={dialogFund}
+          currentPrice={fundCurrentPrice(dialogFund.ticker, prices)}
+          onAdd={(entry) => handleAddEntry(dialogFund.ticker, entry)}
+          onCancel={() => setDialogTicker(null)}
+        />
+      )}
       <HoldingsSummary
         holdings={fundHoldings}
         totalBtc={totalBtc}

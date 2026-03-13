@@ -24,6 +24,19 @@ vi.mock("../../../hooks/useBtcPrices.ts", () => ({
 
 beforeEach(() => {
   localStorage.clear();
+  HTMLDialogElement.prototype.showModal =
+    HTMLDialogElement.prototype.showModal ||
+    vi.fn(function (this: HTMLDialogElement) {
+      this.setAttribute("open", "");
+    });
+  HTMLDialogElement.prototype.close =
+    HTMLDialogElement.prototype.close ||
+    vi.fn(function (this: HTMLDialogElement) {
+      this.removeAttribute("open");
+      this.dispatchEvent(new Event("close"));
+    });
+  window.matchMedia =
+    window.matchMedia || vi.fn(() => ({ matches: false }) as MediaQueryList);
 });
 
 afterEach(cleanup);
@@ -102,11 +115,11 @@ describe("BtcPage", () => {
     expect(screen.getByText("$1,000,000.00")).toBeInTheDocument();
   });
 
-  it("persists BTC entries to localStorage as JSON array", () => {
+  it("persists BTC entries to localStorage as FundEntry array", () => {
     render(<BtcPage />);
     const btcInput = screen.getByLabelText("BTC amount 1");
     fireEvent.change(btcInput, { target: { value: "2.5" } });
-    expect(localStorage.getItem("btc-holdings-btc")).toBe('["2.5"]');
+    expect(localStorage.getItem("btc-holdings-btc")).toBe('[{"amount":"2.5"}]');
   });
 
   it("loads BTC entries from localStorage (JSON array)", () => {
@@ -134,12 +147,43 @@ describe("BtcPage", () => {
     expect(screen.getByText("$150,000.00")).toBeInTheDocument();
   });
 
-  it("adds a new BTC entry when + is clicked", () => {
+  it("opens add dialog when + is clicked", () => {
     render(<BtcPage />);
     const addButtons = screen.getAllByText("+");
     fireEvent.click(addButtons[0]);
+    expect(screen.getByText("Add BTC Entry")).toBeInTheDocument();
+  });
+
+  it("adds entry via dialog in native mode", () => {
+    render(<BtcPage />);
+    fireEvent.click(screen.getAllByText("+")[0]);
+    const amountInput = screen.getByLabelText("BTC amount");
+    fireEvent.change(amountInput, { target: { value: "1.5" } });
+    fireEvent.click(screen.getByText("Add"));
     const inputs = screen.getAllByLabelText(/^BTC amount \d+$/);
     expect(inputs).toHaveLength(2);
+    expect((inputs[1] as HTMLInputElement).value).toBe("1.5");
+  });
+
+  it("adds entry via dialog in USD mode with buy price annotation", () => {
+    render(<BtcPage />);
+    fireEvent.click(screen.getAllByText("+")[0]);
+    fireEvent.click(screen.getByText("USD"));
+    const amountInput = screen.getByLabelText("USD amount for BTC");
+    fireEvent.change(amountInput, { target: { value: "72508.44" } });
+    fireEvent.click(screen.getByText("Add"));
+    const annotation = document.querySelector(".btc-entry-buy-price");
+    expect(annotation).toBeInTheDocument();
+    expect(annotation).toHaveTextContent("@ $72,508.44");
+  });
+
+  it("cancel dismisses dialog without adding", () => {
+    render(<BtcPage />);
+    fireEvent.click(screen.getAllByText("+")[0]);
+    expect(screen.getByText("Add BTC Entry")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Cancel"));
+    expect(screen.queryByText("Add BTC Entry")).not.toBeInTheDocument();
+    expect(screen.getAllByLabelText(/^BTC amount \d+$/)).toHaveLength(1);
   });
 
   it("removes a BTC entry when x is clicked", () => {
@@ -181,7 +225,7 @@ describe("BtcPage", () => {
     render(<BtcPage />);
     const inputs = screen.getAllByLabelText(/^BTC amount \d+$/);
     fireEvent.change(inputs[0], { target: { value: "0" } });
-    expect(localStorage.getItem("btc-holdings-btc")).toBe('["2"]');
+    expect(localStorage.getItem("btc-holdings-btc")).toBe('[{"amount":"2"}]');
   });
 
   it("shows price source attribution", () => {
