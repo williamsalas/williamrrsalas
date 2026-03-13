@@ -1,9 +1,8 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import { sanitizeNumericInput, formatWithCommas } from "../../lib/btc.ts";
 import type { FundConfig, FundEntry } from "../../lib/types.ts";
 
 const DISMISS_THRESHOLD = 100;
-const MOBILE_BREAKPOINT = 768;
 
 const ACCENT_COLORS: Record<string, string> = {
   btc: "#f7931a",
@@ -28,10 +27,6 @@ export function AddEntryDialog({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dragY = useRef<number | null>(null);
   const offsetYRef = useRef(0);
-  const isMobile = useRef(
-    typeof window !== "undefined" &&
-      window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`).matches,
-  );
   const [offsetY, setOffsetY] = useState(0);
   const [mode, setMode] = useState<"native" | "usd">("native");
   const [amount, setAmount] = useState("");
@@ -41,27 +36,40 @@ export function AddEntryDialog({
     dialogRef.current?.showModal();
   }, []);
 
-  const onTouchStart = useCallback((e: React.TouchEvent) => {
-    if (!isMobile.current) return;
-    dragY.current = e.touches[0].clientY;
-  }, []);
+  useEffect(() => {
+    const el = dialogRef.current;
+    if (!el) return;
 
-  const onTouchMove = useCallback((e: React.TouchEvent) => {
-    if (!isMobile.current || dragY.current === null) return;
-    const dy = Math.max(0, e.touches[0].clientY - dragY.current);
-    offsetYRef.current = dy;
-    setOffsetY(dy);
-  }, []);
+    const handleTouchStart = (e: TouchEvent) => {
+      dragY.current = e.touches[0].clientY;
+    };
 
-  const onTouchEnd = useCallback(() => {
-    if (!isMobile.current) return;
-    if (offsetYRef.current > DISMISS_THRESHOLD) {
-      dialogRef.current?.close();
-    } else {
-      setOffsetY(0);
-    }
-    offsetYRef.current = 0;
-    dragY.current = null;
+    const handleTouchMove = (e: TouchEvent) => {
+      if (dragY.current === null) return;
+      const dy = Math.max(0, e.touches[0].clientY - dragY.current);
+      if (dy > 0) e.preventDefault();
+      offsetYRef.current = dy;
+      setOffsetY(dy);
+    };
+
+    const handleTouchEnd = () => {
+      if (offsetYRef.current > DISMISS_THRESHOLD) {
+        el.close();
+      } else {
+        setOffsetY(0);
+      }
+      offsetYRef.current = 0;
+      dragY.current = null;
+    };
+
+    el.addEventListener("touchstart", handleTouchStart);
+    el.addEventListener("touchmove", handleTouchMove, { passive: false });
+    el.addEventListener("touchend", handleTouchEnd);
+    return () => {
+      el.removeEventListener("touchstart", handleTouchStart);
+      el.removeEventListener("touchmove", handleTouchMove);
+      el.removeEventListener("touchend", handleTouchEnd);
+    };
   }, []);
 
   const parsedAmount = parseFloat(amount);
@@ -87,7 +95,7 @@ export function AddEntryDialog({
   const style: React.CSSProperties & Record<string, string> = {
     "--accent": ACCENT_COLORS[fund.cssModifier] ?? ACCENT_COLORS.btc,
   };
-  if (isMobile.current && offsetY > 0) {
+  if (offsetY > 0) {
     style.transform = `translateY(${offsetY}px)`;
     style.transition = "none";
   }
@@ -101,9 +109,6 @@ export function AddEntryDialog({
       onClick={(e) => {
         if (e.target === dialogRef.current) dialogRef.current?.close();
       }}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
     >
       <div className="add-entry-dialog-handle" />
       <div className="add-entry-dialog-content">
