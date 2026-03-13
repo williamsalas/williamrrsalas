@@ -1,4 +1,4 @@
-import type { FundConfig, FundMode } from "./types.ts";
+import type { BtcPrices, FundConfig, FundEntry, FundMode } from "./types.ts";
 
 export const DEFAULT_BTC_PRICE = 72_508.44;
 export const DEFAULT_FBTC_PRICE = 63.68;
@@ -91,16 +91,26 @@ export function etfToCanonicalShares(
   return (n / fbtcPrice).toString();
 }
 
-export function parseStoredEntries(raw: string | null): string[] {
-  if (!raw) return [""];
+export function parseStoredEntries(raw: string | null): FundEntry[] {
+  if (!raw) return [{ amount: "" }];
   try {
     const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-    if (Array.isArray(parsed)) return [""];
-    return [raw];
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      // New FundEntry[] format: [{amount, buyPrice?}, ...]
+      if (typeof parsed[0] === "object" && parsed[0] !== null) return parsed;
+      // Legacy string[] format: ["1.5", "2"] -> [{amount: "1.5"}, {amount: "2"}]
+      return parsed.map((s: string) => ({ amount: s }));
+    }
+    if (Array.isArray(parsed)) return [{ amount: "" }];
+    return [{ amount: raw }];
   } catch {
-    return [raw];
+    return [{ amount: raw }];
   }
+}
+
+export function fundCurrentPrice(ticker: string, prices: BtcPrices): number {
+  const key = ticker.toLowerCase() as keyof BtcPrices;
+  return (prices[key] as number) ?? prices.btc;
 }
 
 export const ALL_FUNDS: FundConfig[] = [

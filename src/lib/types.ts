@@ -37,6 +37,11 @@ export interface BtcPrices {
   source: "live" | "cached" | "default";
 }
 
+export interface FundEntry {
+  amount: string;
+  buyPrice?: number;
+}
+
 export type FundMode = "btc" | "shares" | "usd";
 
 export interface FundConfig {

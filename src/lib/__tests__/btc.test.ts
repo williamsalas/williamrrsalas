@@ -164,28 +164,37 @@ describe("etfToCanonicalShares", () => {
 });
 
 describe("parseStoredEntries", () => {
-  it("returns [''] for null", () => {
-    expect(parseStoredEntries(null)).toEqual([""]);
+  it("returns [{amount: ''}] for null", () => {
+    expect(parseStoredEntries(null)).toEqual([{ amount: "" }]);
   });
 
-  it("returns [''] for empty string", () => {
-    expect(parseStoredEntries("")).toEqual([""]);
+  it("returns [{amount: ''}] for empty string", () => {
+    expect(parseStoredEntries("")).toEqual([{ amount: "" }]);
   });
 
-  it("wraps a legacy single value in an array", () => {
-    expect(parseStoredEntries("2.5")).toEqual(["2.5"]);
+  it("wraps a legacy single value in a FundEntry", () => {
+    expect(parseStoredEntries("2.5")).toEqual([{ amount: "2.5" }]);
   });
 
-  it("parses a JSON array", () => {
-    expect(parseStoredEntries('["1","2.5"]')).toEqual(["1", "2.5"]);
+  it("migrates legacy string array to FundEntry array", () => {
+    expect(parseStoredEntries('["1","2.5"]')).toEqual([
+      { amount: "1" },
+      { amount: "2.5" },
+    ]);
   });
 
-  it("returns [''] for an empty JSON array", () => {
-    expect(parseStoredEntries("[]")).toEqual([""]);
+  it("parses new FundEntry array format", () => {
+    expect(
+      parseStoredEntries('[{"amount":"1","buyPrice":100000},{"amount":"2.5"}]'),
+    ).toEqual([{ amount: "1", buyPrice: 100000 }, { amount: "2.5" }]);
   });
 
-  it("returns legacy value for invalid JSON", () => {
-    expect(parseStoredEntries("{bad")).toEqual(["{bad"]);
+  it("returns [{amount: ''}] for an empty JSON array", () => {
+    expect(parseStoredEntries("[]")).toEqual([{ amount: "" }]);
+  });
+
+  it("returns legacy value as FundEntry for invalid JSON", () => {
+    expect(parseStoredEntries("{bad")).toEqual([{ amount: "{bad" }]);
   });
 });
 

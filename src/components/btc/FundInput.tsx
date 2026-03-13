@@ -1,12 +1,12 @@
 import { memo, useState, useEffect } from "react";
-import { sanitizeNumericInput } from "../../lib/btc.ts";
-import type { FundConfig } from "../../lib/types.ts";
+import { sanitizeNumericInput, formatUsd } from "../../lib/btc.ts";
+import type { FundConfig, FundEntry } from "../../lib/types.ts";
 
 export interface FundInputProps {
   fund: FundConfig;
-  entries: string[];
+  entries: FundEntry[];
   onEntryChange: (index: number, value: string) => void;
-  onAddEntry: () => void;
+  onOpenAddDialog: () => void;
   onRemoveEntry: (index: number) => void;
   onConsolidate: (indices: number[]) => void;
 }
@@ -15,7 +15,7 @@ export const FundInput = memo(function FundInput({
   fund,
   entries,
   onEntryChange,
-  onAddEntry,
+  onOpenAddDialog,
   onRemoveEntry,
   onConsolidate,
 }: FundInputProps) {
@@ -66,13 +66,18 @@ export const FundInput = memo(function FundInput({
             type="text"
             inputMode="decimal"
             name={`${fund.cssModifier}-${i}`}
-            value={entry}
+            value={entry.amount}
             onChange={(e) =>
               onEntryChange(i, sanitizeNumericInput(e.target.value))
             }
             placeholder={fund.nativePlaceholder}
             aria-label={`${fund.nativeAriaLabel} ${i + 1}`}
           />
+          {entry.buyPrice != null && (
+            <span className="btc-entry-buy-price">
+              @ {formatUsd(entry.buyPrice)}
+            </span>
+          )}
           <button
             className="btc-entry-remove"
             onClick={() =>
@@ -93,7 +98,7 @@ export const FundInput = memo(function FundInput({
           Consolidate {selected.size} selected
         </button>
       )}
-      <button className="btc-entry-add" onClick={onAddEntry}>
+      <button className="btc-entry-add" onClick={onOpenAddDialog}>
         +
       </button>
     </div>
