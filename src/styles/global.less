@@ -252,13 +252,16 @@ img.pikachu {
 
 .projects-carousel {
   display: flex;
-  justify-content: center;
   gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   max-width: 1000px;
   width: 100%;
   padding: 4px 0;
+
+  @media (min-width: @breakpoint-desktop) {
+    justify-content: center;
+  }
 
   // Thin scrollbar
   scrollbar-width: thin;
