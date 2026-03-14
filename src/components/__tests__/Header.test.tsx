@@ -4,21 +4,22 @@ import { Header } from "../Header.tsx";
 
 afterEach(cleanup);
 
+const noop = () => {};
+
 describe("Header", () => {
   it("renders greeting", () => {
-    render(<Header />);
+    render(<Header navigate={noop} />);
     expect(screen.getByText(/hi, i'm william salas/)).toBeInTheDocument();
   });
 
-  it("renders the pikachu image", () => {
-    render(<Header />);
-    const img = screen.getByAltText("Under Construction");
-    expect(img).toBeInTheDocument();
-    expect(img).toHaveClass("pikachu");
+  it("renders project carousel", () => {
+    render(<Header navigate={noop} />);
+    expect(screen.getByText("BTC Visualizer")).toBeInTheDocument();
+    expect(screen.getByText("Guess the Globe")).toBeInTheDocument();
   });
 
   it("renders bio text", () => {
-    render(<Header />);
+    render(<Header navigate={noop} />);
     expect(
       screen.getByText(/software developer from southern california/),
     ).toBeInTheDocument();

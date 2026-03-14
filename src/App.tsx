@@ -7,10 +7,10 @@ import { MenuButton } from "./components/MenuButton.tsx";
 import { BtcPage } from "./components/btc/BtcPage.tsx";
 import { useRoute } from "./hooks/useRoute.ts";
 
-function HomePage() {
+function HomePage({ navigate }: { navigate: (to: string) => void }) {
   return (
     <>
-      <Header />
+      <Header navigate={navigate} />
       <div className="bottom-flex-container">
         <div className="activity-panel">
           <h3 className="github-activity">recent activity</h3>
@@ -33,7 +33,7 @@ export default function App() {
   return (
     <>
       <MenuButton navigate={navigate} />
-      {path === "/btc" ? <BtcPage /> : <HomePage />}
+      {path === "/btc" ? <BtcPage /> : <HomePage navigate={navigate} />}
     </>
   );
 }

@@ -146,7 +146,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100vh;
   background: @black;
   font-family:
     sf mono,
@@ -243,4 +242,102 @@ img.pikachu {
   padding: 8px 16px;
   color: @muted;
   cursor: default;
+}
+
+// Project carousel
+.projects-heading {
+  color: @light-text;
+  margin: 16px 0 12px;
+}
+
+.projects-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  max-width: 1000px;
+  width: 100%;
+  padding: 4px 0;
+
+  @media (min-width: @breakpoint-desktop) {
+    justify-content: center;
+  }
+
+  // Thin scrollbar
+  scrollbar-width: thin;
+  scrollbar-color: @dark-gray transparent;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: @dark-gray;
+    border-radius: 3px;
+  }
+}
+
+.project-tile {
+  .card-panel();
+  position: relative;
+  flex: 0 0 280px;
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  border: 1px solid transparent;
+  scroll-snap-align: start;
+  cursor: pointer;
+  text-decoration: none;
+  color: @light-text;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  background-color: @panel-bg;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.35);
+    border-color: @teal;
+  }
+
+  &:visited {
+    color: @light-text;
+  }
+}
+
+.project-tile--disabled {
+  opacity: 0.7;
+  filter: grayscale(40%);
+  cursor: default;
+
+  &:hover {
+    transform: none;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
+    border-color: transparent;
+  }
+}
+
+.project-tile-label {
+  font-weight: bold;
+  z-index: 1;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.project-tile-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.7rem;
+  color: @light-text;
+  border: 1px solid @light-text;
+  border-radius: 10px;
+  padding: 2px 8px;
+  text-transform: lowercase;
 }
