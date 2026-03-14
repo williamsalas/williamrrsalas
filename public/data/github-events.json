@@ -1,5 +1,54 @@
 [
   {
+    "id": "7394585683",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 548287641,
+      "name": "jpetazzo/usb-webcam-analyzer",
+      "url": "https://api.github.com/repos/jpetazzo/usb-webcam-analyzer"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 1,
+      "pull_request": {
+        "url": "https://api.github.com/repos/jpetazzo/usb-webcam-analyzer/pulls/1",
+        "id": 3398180095,
+        "number": 1,
+        "head": {
+          "ref": "wrrs/add-windows-support",
+          "sha": "3d0f6be4d5dd90e7ec1b88946ddfe75b4647ebc7",
+          "repo": {
+            "id": 1181391302,
+            "url": "https://api.github.com/repos/williamsalas/usb-webcam-analyzer",
+            "name": "usb-webcam-analyzer"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "a9fcb4f26b04da827b22c262fa178c8dd7bebebe",
+          "repo": {
+            "id": 548287641,
+            "url": "https://api.github.com/repos/jpetazzo/usb-webcam-analyzer",
+            "name": "usb-webcam-analyzer"
+          }
+        },
+        "title": "adding windows support",
+        "html_url": "https://github.com/jpetazzo/usb-webcam-analyzer/pull/1",
+        "merged": false
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-14T04:53:24Z"
+  },
+  {
     "id": "7359704220",
     "type": "PullRequestEvent",
     "actor": {
