@@ -55,6 +55,15 @@ describe("uniquePRs", () => {
     expect(result[1].id).toBe("3");
   });
 
+  it("keeps PRs with the same number from different repos", () => {
+    const events = [
+      makeTransformed({ id: "1", pr_number: 1, repo: "user/repo-a" }),
+      makeTransformed({ id: "2", pr_number: 1, repo: "user/repo-b" }),
+    ];
+    const result = uniquePRs(events);
+    expect(result).toHaveLength(2);
+  });
+
   it("keeps non-PR events", () => {
     const events = [
       makeTransformed({ type: "PushEvent", pr_number: 0 }),
