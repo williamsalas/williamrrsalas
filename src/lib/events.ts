@@ -11,11 +11,12 @@ export const safeRepoName = (
 };
 
 export function uniquePRs(events: TransformedEvent[]): TransformedEvent[] {
-  const seen = new Set<number>();
+  const seen = new Set<string>();
   return events.filter((e) => {
     if (e.type !== "PullRequestEvent" || !e.pr_number) return true;
-    if (seen.has(e.pr_number)) return false;
-    seen.add(e.pr_number);
+    const key = `${safeRepoName(e)}#${e.pr_number}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
     return true;
   });
 }
