@@ -1,6 +1,10 @@
-import pikachuGif from "../assets/img/pikaconstruction.gif";
+import { ProjectCarousel } from "./ProjectCarousel.tsx";
 
-export function Header() {
+interface HeaderProps {
+  navigate: (to: string) => void;
+}
+
+export function Header({ navigate }: HeaderProps) {
   return (
     <>
       <h2>hi, i'm william salas 👋</h2>
@@ -9,7 +13,7 @@ export function Header() {
         part of Redfin's search team building the site's most visited pages,
         search and home details
       </small>
-      <img src={pikachuGif} className="pikachu" alt="Under Construction" />
+      <ProjectCarousel navigate={navigate} />
     </>
   );
 }
