@@ -1,5 +1,103 @@
 [
   {
+    "id": "7394804369",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 78,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/78",
+        "id": 3398211865,
+        "number": 78,
+        "head": {
+          "ref": "wrrs/fix-recent-activity-duplicate-pr-number",
+          "sha": "a3b431591ae7b088fdf8057acb3609cf8faeaf14",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "42ddb7b38947c2c895d64cdcdb66163729fa5aa8",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "fix recent activity duplicate pr numbers",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/78",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-14T05:18:04Z"
+  },
+  {
+    "id": "7394803184",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 78,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/78",
+        "id": 3398211865,
+        "number": 78,
+        "head": {
+          "ref": "wrrs/fix-recent-activity-duplicate-pr-number",
+          "sha": "a3b431591ae7b088fdf8057acb3609cf8faeaf14",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "42ddb7b38947c2c895d64cdcdb66163729fa5aa8",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "fix recent activity duplicate pr numbers",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/78",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-14T05:17:57Z"
+  },
+  {
     "id": "7394585683",
     "type": "PullRequestEvent",
     "actor": {
