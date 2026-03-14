@@ -1,7 +1,11 @@
 // Cloudflare Worker - paste into dashboard at https://dash.cloudflare.com
-// Requires TWELVEDATA_API_KEY secret configured in worker settings
+// Requires:
+//   - TWELVEDATA_API_KEY secret configured in worker settings
+//   - PRICES KV namespace bound to the worker (variable name: PRICES)
 
-const CACHE_TTL = 600; // 10 minutes
+const KV_KEY = "btc-prices";
+const KV_TTL = 600; // 10 minutes - how long KV data is considered fresh
+const EDGE_CACHE_TTL = 60; // 1 minute - short-lived per-PoP layer in front of KV
 
 function corsHeaders(origin) {
   const allowed =
@@ -16,37 +20,67 @@ function corsHeaders(origin) {
   };
 }
 
+function jsonResponse(body, status, origin) {
+  return new Response(body, {
+    status,
+    headers: {
+      "Content-Type": "application/json",
+      "Cache-Control": `public, max-age=${EDGE_CACHE_TTL}`,
+      ...corsHeaders(origin),
+    },
+  });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const origin = request.headers.get("Origin") || "";
 
-    // Handle CORS preflight
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: corsHeaders(origin) });
     }
 
     if (url.pathname !== "/prices") {
-      return new Response(JSON.stringify({ error: "Not found" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json", ...corsHeaders(origin) },
-      });
+      return jsonResponse(JSON.stringify({ error: "Not found" }), 404, origin);
     }
 
-    // Check edge cache
+    // Layer 1: Per-PoP edge cache (fast, but independent per location)
     const cache = caches.default;
     const cacheKey = new Request(url.toString(), { method: "GET" });
-    let response = await cache.match(cacheKey);
-    if (response) {
-      const headers = new Headers(response.headers);
+    const edgeHit = await cache.match(cacheKey);
+    if (edgeHit) {
+      const headers = new Headers(edgeHit.headers);
       Object.entries(corsHeaders(origin)).forEach(([k, v]) =>
         headers.set(k, v),
       );
-      return new Response(response.body, { status: 200, headers });
+      return new Response(edgeHit.body, { status: 200, headers });
     }
 
-    // Fetch from Twelvedata
+    // Layer 2: KV global cache (shared across all PoPs)
     try {
+      const { value: kvData, metadata } =
+        await env.PRICES.getWithMetadata(KV_KEY);
+
+      if (kvData && metadata?.ts) {
+        const ageSeconds = (Date.now() - metadata.ts) / 1000;
+
+        if (ageSeconds < KV_TTL) {
+          // KV is fresh - serve it and populate edge cache
+          await cache.put(
+            cacheKey,
+            new Response(kvData, {
+              status: 200,
+              headers: {
+                "Content-Type": "application/json",
+                "Cache-Control": `public, max-age=${EDGE_CACHE_TTL}`,
+              },
+            }),
+          );
+          return jsonResponse(kvData, 200, origin);
+        }
+      }
+
+      // Layer 3: KV stale or missing - fetch from Twelvedata
       const apiUrl = `https://api.twelvedata.com/price?symbol=BTC/USD,FBTC,IBIT,GBTC&apikey=${env.TWELVEDATA_API_KEY}`;
       const apiRes = await fetch(apiUrl);
       if (!apiRes.ok) throw new Error(`Twelvedata HTTP ${apiRes.status}`);
@@ -63,6 +97,8 @@ export default {
         isNaN(ibitPrice) ||
         isNaN(gbtcPrice)
       ) {
+        // Twelvedata returned bad data - serve stale KV if available
+        if (kvData) return jsonResponse(kvData, 200, origin);
         throw new Error("Invalid price data from Twelvedata");
       }
 
@@ -74,36 +110,27 @@ export default {
         ts: new Date().toISOString(),
       });
 
-      response = new Response(body, {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": `public, max-age=${CACHE_TTL}`,
-          ...corsHeaders(origin),
-        },
-      });
+      // Write to KV (global) + edge cache (local PoP) in parallel
+      await Promise.all([
+        env.PRICES.put(KV_KEY, body, { metadata: { ts: Date.now() } }),
+        cache.put(
+          cacheKey,
+          new Response(body, {
+            status: 200,
+            headers: {
+              "Content-Type": "application/json",
+              "Cache-Control": `public, max-age=${EDGE_CACHE_TTL}`,
+            },
+          }),
+        ),
+      ]);
 
-      // Store in edge cache (non-blocking)
-      const cacheResponse = new Response(body, {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": `public, max-age=${CACHE_TTL}`,
-        },
-      });
-      await cache.put(cacheKey, cacheResponse);
-
-      return response;
+      return jsonResponse(body, 200, origin);
     } catch (err) {
-      return new Response(
+      return jsonResponse(
         JSON.stringify({ error: err.message || "Failed to fetch prices" }),
-        {
-          status: 502,
-          headers: {
-            "Content-Type": "application/json",
-            ...corsHeaders(origin),
-          },
-        },
+        502,
+        origin,
       );
     }
   },
