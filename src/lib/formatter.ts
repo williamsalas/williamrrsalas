@@ -61,18 +61,18 @@ export function restoreHeaders(text: string): string {
 
     if (isFence) inCodeBlock = !inCodeBlock;
 
+    const trimmed = line.trim();
+
     if (
       !inCodeBlock &&
       !isFence &&
-      !line.startsWith("#") &&
-      !line.startsWith("-") &&
-      !line.startsWith("*") &&
-      line.trim().length > 0 &&
-      line.trim().length <= 40 &&
+      !STRUCTURAL_MARKER.test(trimmed) &&
+      trimmed.length > 0 &&
+      !/[.?!]$/.test(trimmed) &&
       i + 1 < lines.length &&
       lines[i + 1].trim() === ""
     ) {
-      result.push(`## ${line}`);
+      result.push(`## ${trimmed}`);
     } else {
       result.push(line);
     }

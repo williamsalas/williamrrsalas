@@ -91,10 +91,21 @@ describe("restoreHeaders", () => {
     expect(restoreHeaders(input)).toBe("```\nSummary\n\n```");
   });
 
-  it("skips lines longer than 40 chars", () => {
-    const long = "A".repeat(41);
-    const input = `${long}\n\nnext`;
-    expect(restoreHeaders(input)).toBe(`${long}\n\nnext`);
+  it("skips lines ending with sentence punctuation", () => {
+    expect(restoreHeaders("This is a sentence.\n\nnext")).toBe(
+      "This is a sentence.\n\nnext",
+    );
+    expect(restoreHeaders("Is this a question?\n\nnext")).toBe(
+      "Is this a question?\n\nnext",
+    );
+    expect(restoreHeaders("Wow!\n\nnext")).toBe("Wow!\n\nnext");
+  });
+
+  it("handles long header lines without length limit", () => {
+    const input = "Commit 2: show amount of new/deleted lines\n\n- bullet";
+    expect(restoreHeaders(input)).toBe(
+      "## Commit 2: show amount of new/deleted lines\n\n- bullet",
+    );
   });
 });
 
