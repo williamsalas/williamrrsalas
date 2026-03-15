@@ -1,5 +1,250 @@
 [
   {
+    "id": "7404999238",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 80,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/80",
+        "id": 3399882586,
+        "number": 80,
+        "head": {
+          "ref": "wrrs/update-prices-worker-global-KV-cache",
+          "sha": "a0316a8db26a79021c5df85d3ea21c252f164f32",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "e359c2d0b2f959336ff2173ae6cb1759c45c9fd9",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "update prices worker global KV cache",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/80",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-14T21:41:40Z"
+  },
+  {
+    "id": "7404997700",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 80,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/80",
+        "id": 3399882586,
+        "number": 80,
+        "head": {
+          "ref": "wrrs/update-prices-worker-global-KV-cache",
+          "sha": "a0316a8db26a79021c5df85d3ea21c252f164f32",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "e359c2d0b2f959336ff2173ae6cb1759c45c9fd9",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "update prices worker global KV cache",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/80",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-14T21:41:34Z"
+  },
+  {
+    "id": "7403144541",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 79,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/79",
+        "id": 3399613225,
+        "number": 79,
+        "head": {
+          "ref": "wrrs/add-project-carousel",
+          "sha": "81d7168268acbb55beb17b93504fd5d8ea467c4b",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "7311e5d33b0ae71bd7aa4fc4aec229373e2c04a8",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "add project carousel",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/79",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-14T18:53:09Z"
+  },
+  {
+    "id": "7403055789",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 79,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/79",
+        "id": 3399613225,
+        "number": 79,
+        "head": {
+          "ref": "wrrs/add-project-carousel",
+          "sha": "81d7168268acbb55beb17b93504fd5d8ea467c4b",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "7311e5d33b0ae71bd7aa4fc4aec229373e2c04a8",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "add project carousel",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/79",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-14T18:44:56Z"
+  },
+  {
+    "id": "7401025976",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 548287641,
+      "name": "jpetazzo/usb-webcam-analyzer",
+      "url": "https://api.github.com/repos/jpetazzo/usb-webcam-analyzer"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 1,
+      "pull_request": {
+        "url": "https://api.github.com/repos/jpetazzo/usb-webcam-analyzer/pulls/1",
+        "id": 3398180095,
+        "number": 1,
+        "head": {
+          "ref": "wrrs/add-windows-support",
+          "sha": "3d0f6be4d5dd90e7ec1b88946ddfe75b4647ebc7",
+          "repo": {
+            "id": 1181391302,
+            "url": "https://api.github.com/repos/williamsalas/usb-webcam-analyzer",
+            "name": "usb-webcam-analyzer"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "a9fcb4f26b04da827b22c262fa178c8dd7bebebe",
+          "repo": {
+            "id": 548287641,
+            "url": "https://api.github.com/repos/jpetazzo/usb-webcam-analyzer",
+            "name": "usb-webcam-analyzer"
+          }
+        },
+        "title": "adding windows support",
+        "html_url": "https://github.com/jpetazzo/usb-webcam-analyzer/pull/1",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-14T15:45:49Z"
+  },
+  {
     "id": "7394804369",
     "type": "PullRequestEvent",
     "actor": {
@@ -140,7 +385,7 @@
         },
         "title": "adding windows support",
         "html_url": "https://github.com/jpetazzo/usb-webcam-analyzer/pull/1",
-        "merged": false
+        "merged": true
       }
     },
     "public": true,
