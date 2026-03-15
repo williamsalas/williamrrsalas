@@ -96,9 +96,21 @@ function LineNumberedEditor({
   );
 }
 
+function DiffStat({ delta }: { delta: number }) {
+  const cls =
+    delta > 0
+      ? "formatter-diff-added"
+      : delta < 0
+        ? "formatter-diff-removed"
+        : "formatter-diff-neutral";
+  const label = delta > 0 ? `+${delta}` : `${delta}`;
+  return <span className={`formatter-diff-stat ${cls}`}>{label}</span>;
+}
+
 export function ClaudeFormatterPage() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
+  const [lineDelta, setLineDelta] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
   const [headers, setHeaders] = useState(false);
   const copiedTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
@@ -106,7 +118,9 @@ export function ClaudeFormatterPage() {
   );
 
   const handleFormat = useCallback(() => {
-    setOutput(formatClaudeOutput(input, { restoreHeaders: headers }));
+    const formatted = formatClaudeOutput(input, { restoreHeaders: headers });
+    setOutput(formatted);
+    setLineDelta(formatted.split("\n").length - input.split("\n").length);
   }, [input, headers]);
 
   const handleCopy = useCallback(async () => {
@@ -120,6 +134,7 @@ export function ClaudeFormatterPage() {
   const handleClear = useCallback(() => {
     setInput("");
     setOutput("");
+    setLineDelta(null);
   }, []);
 
   useEffect(() => {
@@ -165,7 +180,10 @@ export function ClaudeFormatterPage() {
           </div>
         </div>
         <div className="formatter-panel">
-          <span className="formatter-panel-label">Output</span>
+          <div className="formatter-panel-header">
+            <span className="formatter-panel-label">Output</span>
+            {lineDelta !== null && <DiffStat delta={lineDelta} />}
+          </div>
           <LineNumberedEditor
             value={output}
             readOnly

@@ -71,11 +71,37 @@
   min-width: 0;
 }
 
+.formatter-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .formatter-panel-label {
   color: @muted;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.formatter-diff-stat {
+  font-family:
+    sf mono,
+    menlo,
+    monospace;
+  font-size: 0.75rem;
+
+  &.formatter-diff-added {
+    color: #4ec56a;
+  }
+
+  &.formatter-diff-removed {
+    color: #f85149;
+  }
+
+  &.formatter-diff-neutral {
+    color: @muted;
+  }
 }
 
 .formatter-editor {
