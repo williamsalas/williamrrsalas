@@ -13,7 +13,7 @@ const LS_KEY = "claude-formatter-input";
 beforeEach(() => {
   localStorage.clear();
   vi.useFakeTimers();
-  global.ResizeObserver = class {
+  globalThis.ResizeObserver = class ResizeObserver {
     observe() {}
     unobserve() {}
     disconnect() {}
