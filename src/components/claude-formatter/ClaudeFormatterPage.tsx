@@ -10,6 +10,17 @@ import { formatClaudeOutput } from "../../lib/formatter.ts";
 import { useCopyToClipboard } from "../../hooks/useCopyToClipboard.ts";
 import { Footer } from "../Footer.tsx";
 
+const LS_KEY = "claude-formatter-input";
+const LS_MAX_BYTES = 100_000;
+
+function loadSavedInput(): string {
+  try {
+    return localStorage.getItem(LS_KEY) ?? "";
+  } catch {
+    return "";
+  }
+}
+
 function LineNumberedEditor({
   value,
   onChange,
@@ -136,9 +147,24 @@ function PromptBlock() {
 }
 
 export function ClaudeFormatterPage() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(loadSavedInput);
   const [output, setOutput] = useState("");
   const [lineDelta, setLineDelta] = useState<number | null>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      try {
+        if (input === "") {
+          localStorage.removeItem(LS_KEY);
+        } else if (input.length <= LS_MAX_BYTES) {
+          localStorage.setItem(LS_KEY, input);
+        }
+      } catch {
+        // ignore
+      }
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [input]);
   const { copied, copy } = useCopyToClipboard(output);
 
   const handleFormat = useCallback(() => {
@@ -151,6 +177,11 @@ export function ClaudeFormatterPage() {
     setInput("");
     setOutput("");
     setLineDelta(null);
+    try {
+      localStorage.removeItem(LS_KEY);
+    } catch {
+      // ignore
+    }
   }, []);
 
   return (
