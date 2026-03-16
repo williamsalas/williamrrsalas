@@ -49,57 +49,15 @@ export function dedent(text: string): string {
   return lines.map((l) => (l.trim().length > 0 ? l.slice(min) : l)).join("\n");
 }
 
-/** Detect bare section headers and prepend `## `. */
-export function restoreHeaders(text: string): string {
-  const lines = text.split("\n");
-  const result: string[] = [];
-  let inCodeBlock = false;
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    const isFence = line.trimStart().startsWith("```");
-
-    if (isFence) inCodeBlock = !inCodeBlock;
-
-    const trimmed = line.trim();
-
-    if (
-      !inCodeBlock &&
-      !isFence &&
-      !STRUCTURAL_MARKER.test(trimmed) &&
-      trimmed.length > 0 &&
-      !/[.?!]$/.test(trimmed) &&
-      i + 1 < lines.length &&
-      lines[i + 1].trim() === ""
-    ) {
-      result.push(`## ${trimmed}`);
-    } else {
-      result.push(line);
-    }
-  }
-
-  return result.join("\n");
-}
-
 /** Replace 3+ consecutive blank lines with a single blank line. */
 export function collapseBlankLines(text: string): string {
   return text.replace(/\n{3,}/g, "\n\n");
 }
 
-interface FormatOptions {
-  restoreHeaders?: boolean;
-}
-
-/** Pipeline: dedent -> joinWrappedLines -> (optionally) restoreHeaders -> trim trailing whitespace per line -> collapseBlankLines -> trim. */
-export function formatClaudeOutput(
-  input: string,
-  options: FormatOptions = {},
-): string {
+/** Pipeline: dedent -> joinWrappedLines -> trim trailing whitespace per line -> collapseBlankLines -> trim. */
+export function formatClaudeOutput(input: string): string {
   let result = dedent(input);
   result = joinWrappedLines(result);
-  if (options.restoreHeaders) {
-    result = restoreHeaders(result);
-  }
   result = result
     .split("\n")
     .map((l) => l.trimEnd())

@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import {
   dedent,
   joinWrappedLines,
-  restoreHeaders,
   collapseBlankLines,
   formatClaudeOutput,
 } from "../formatter.ts";
@@ -70,45 +69,6 @@ describe("joinWrappedLines", () => {
   });
 });
 
-describe("restoreHeaders", () => {
-  it("prepends ## to short standalone lines followed by blank", () => {
-    const input = "Summary\n\n- bullet point";
-    expect(restoreHeaders(input)).toBe("## Summary\n\n- bullet point");
-  });
-
-  it("skips lines that already have #", () => {
-    const input = "## Summary\n\n- bullet";
-    expect(restoreHeaders(input)).toBe("## Summary\n\n- bullet");
-  });
-
-  it("skips bullet lines", () => {
-    const input = "- short line\n\nnext";
-    expect(restoreHeaders(input)).toBe("- short line\n\nnext");
-  });
-
-  it("skips lines inside code blocks", () => {
-    const input = "```\nSummary\n\n```";
-    expect(restoreHeaders(input)).toBe("```\nSummary\n\n```");
-  });
-
-  it("skips lines ending with sentence punctuation", () => {
-    expect(restoreHeaders("This is a sentence.\n\nnext")).toBe(
-      "This is a sentence.\n\nnext",
-    );
-    expect(restoreHeaders("Is this a question?\n\nnext")).toBe(
-      "Is this a question?\n\nnext",
-    );
-    expect(restoreHeaders("Wow!\n\nnext")).toBe("Wow!\n\nnext");
-  });
-
-  it("handles long header lines without length limit", () => {
-    const input = "Commit 2: show amount of new/deleted lines\n\n- bullet";
-    expect(restoreHeaders(input)).toBe(
-      "## Commit 2: show amount of new/deleted lines\n\n- bullet",
-    );
-  });
-});
-
 describe("collapseBlankLines", () => {
   it("replaces 3+ newlines with 2", () => {
     expect(collapseBlankLines("a\n\n\nb")).toBe("a\n\nb");
@@ -169,18 +129,6 @@ describe("formatClaudeOutput", () => {
         "- Verify subsequent requests from different locations serve from KV (no additional TwelveData calls)",
       ].join("\n"),
     );
-  });
-
-  it("restores headers when option enabled", () => {
-    const input = "  Summary\n\n  - bullet";
-    const output = formatClaudeOutput(input, { restoreHeaders: true });
-    expect(output).toBe("## Summary\n\n- bullet");
-  });
-
-  it("does not restore headers by default", () => {
-    const input = "  Summary\n\n  - bullet";
-    const output = formatClaudeOutput(input);
-    expect(output).toBe("Summary\n\n- bullet");
   });
 
   it("returns empty string for empty input", () => {

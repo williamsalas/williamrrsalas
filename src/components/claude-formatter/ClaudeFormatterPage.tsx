@@ -7,6 +7,7 @@ import {
   useEffect,
 } from "react";
 import { formatClaudeOutput } from "../../lib/formatter.ts";
+import { useCopyToClipboard } from "../../hooks/useCopyToClipboard.ts";
 import { Footer } from "../Footer.tsx";
 
 function LineNumberedEditor({
@@ -107,29 +108,44 @@ function DiffStat({ delta }: { delta: number }) {
   return <span className={`formatter-diff-stat ${cls}`}>{label}</span>;
 }
 
+const SUGGESTED_PROMPT =
+  "generate a PR description covering all commits on this branch (git log main..HEAD) plus any staged changes (git diff --cached). read the full diff (git diff main..HEAD) to understand the actual changes, not just commit messages. wrap the entire output in a ```markdown code fence so ## headings and formatting survive as literal characters when copied from the terminal. use unindented - bullets, no terminal padding or line wrapping artifacts. sections: ## Summary (2-3 bullets, what and why), ## What changed (specific changes grouped logically), ## Test plan (verification steps). be concise and precise - no filler.";
+
+function PromptBlock() {
+  const { copied, copy } = useCopyToClipboard(SUGGESTED_PROMPT);
+
+  return (
+    <div className="formatter-prompt-block">
+      <span className="formatter-prompt-label">Suggested prompt</span>
+      <div className="formatter-prompt-row">
+        <code className="formatter-prompt-text">{SUGGESTED_PROMPT}</code>
+        <button
+          className="formatter-btn formatter-btn--prompt-copy"
+          onClick={copy}
+        >
+          <span style={{ visibility: copied ? "hidden" : "visible" }}>
+            Copy
+          </span>
+          <span style={{ visibility: copied ? "visible" : "hidden" }}>
+            Copied!
+          </span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function ClaudeFormatterPage() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [lineDelta, setLineDelta] = useState<number | null>(null);
-  const [copied, setCopied] = useState(false);
-  const [headers, setHeaders] = useState(false);
-  const copiedTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
-    undefined,
-  );
+  const { copied, copy } = useCopyToClipboard(output);
 
   const handleFormat = useCallback(() => {
-    const formatted = formatClaudeOutput(input, { restoreHeaders: headers });
+    const formatted = formatClaudeOutput(input);
     setOutput(formatted);
     setLineDelta(formatted.split("\n").length - input.split("\n").length);
-  }, [input, headers]);
-
-  const handleCopy = useCallback(async () => {
-    if (!output) return;
-    await navigator.clipboard.writeText(output);
-    setCopied(true);
-    clearTimeout(copiedTimer.current);
-    copiedTimer.current = setTimeout(() => setCopied(false), 2000);
-  }, [output]);
+  }, [input]);
 
   const handleClear = useCallback(() => {
     setInput("");
@@ -137,17 +153,15 @@ export function ClaudeFormatterPage() {
     setLineDelta(null);
   }, []);
 
-  useEffect(() => {
-    return () => clearTimeout(copiedTimer.current);
-  }, []);
-
   return (
     <div className="formatter-page">
       <h2 className="formatter-heading">Claude Code Formatter</h2>
       <p className="formatter-description">
-        Paste Claude Code PR description output to strip terminal indentation
-        and rejoin wrapped lines for GitHub.
+        Clean up Claude Code terminal output into markdown ready to paste into
+        GitHub PR descriptions. Strips leading indentation, rejoins wrapped
+        lines, and collapses extra blank lines.
       </p>
+      <PromptBlock />
       <div className="formatter-panels">
         <div className="formatter-panel">
           <span className="formatter-panel-label">Input</span>
@@ -157,14 +171,6 @@ export function ClaudeFormatterPage() {
             placeholder="Paste Claude Code output here..."
           />
           <div className="formatter-input-actions">
-            <label className="formatter-toggle">
-              <input
-                type="checkbox"
-                checked={headers}
-                onChange={(e) => setHeaders(e.target.checked)}
-              />
-              Restore ## headers
-            </label>
             <button
               className="formatter-btn formatter-btn--format"
               onClick={handleFormat}
@@ -192,9 +198,14 @@ export function ClaudeFormatterPage() {
           <div className="formatter-output-actions">
             <button
               className="formatter-btn formatter-btn--copy"
-              onClick={handleCopy}
+              onClick={copy}
             >
-              {copied ? "Copied!" : "Copy"}
+              <span style={{ visibility: copied ? "hidden" : "visible" }}>
+                Copy
+              </span>
+              <span style={{ visibility: copied ? "visible" : "hidden" }}>
+                Copied!
+              </span>
             </button>
           </div>
         </div>
