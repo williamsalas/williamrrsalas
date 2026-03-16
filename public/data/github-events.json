@@ -1,5 +1,201 @@
 [
   {
+    "id": "7420792410",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 82,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/82",
+        "id": 3402017620,
+        "number": 82,
+        "head": {
+          "ref": "wrrs/add-local-storage-claude-formatter",
+          "sha": "fa5ea35196e878724f553d31724770a2bb5bdbd8",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "6360436917dbb8d67623057c895e247ada85afed",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "add local storage claude formatter",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/82",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-16T00:28:33Z"
+  },
+  {
+    "id": "7420784232",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 82,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/82",
+        "id": 3402017620,
+        "number": 82,
+        "head": {
+          "ref": "wrrs/add-local-storage-claude-formatter",
+          "sha": "fa5ea35196e878724f553d31724770a2bb5bdbd8",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "6360436917dbb8d67623057c895e247ada85afed",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "add local storage claude formatter",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/82",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-16T00:27:57Z"
+  },
+  {
+    "id": "7420508733",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 81,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/81",
+        "id": 3401974951,
+        "number": 81,
+        "head": {
+          "ref": "wrrs/claude-code-formatter",
+          "sha": "099ba7ba76a3b3836854b5d433024f5cb3874710",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "03e91647c7ec0388088518de6d1bec8469b12261",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Claude Code Formatter",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/81",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-16T00:10:36Z"
+  },
+  {
+    "id": "7420486308",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 81,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/81",
+        "id": 3401974951,
+        "number": 81,
+        "head": {
+          "ref": "wrrs/claude-code-formatter",
+          "sha": "099ba7ba76a3b3836854b5d433024f5cb3874710",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "03e91647c7ec0388088518de6d1bec8469b12261",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Claude Code Formatter",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/81",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-16T00:09:13Z"
+  },
+  {
     "id": "7404999238",
     "type": "PullRequestEvent",
     "actor": {
