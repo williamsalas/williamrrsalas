@@ -1,0 +1,286 @@
+@import "./variables.less";
+
+.formatter-mono() {
+  font-family:
+    sf mono,
+    menlo,
+    monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  padding: 16px;
+}
+
+.formatter-page {
+  max-width: 98%;
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  footer {
+    align-self: center;
+  }
+}
+
+.formatter-heading {
+  color: @light-text;
+  margin: 0 0 4px 0;
+}
+
+.formatter-description {
+  color: @muted;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.formatter-prompt-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: calc(50% - 8px);
+
+  @media (max-width: (@breakpoint-desktop - 1)) {
+    width: 100%;
+  }
+}
+
+.formatter-prompt-label {
+  color: @muted;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.formatter-prompt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: @panel-bg;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid @dark-gray;
+}
+
+.formatter-prompt-text {
+  font-family:
+    sf mono,
+    menlo,
+    monospace;
+  font-size: 0.82rem;
+  color: @muted;
+  line-height: 1.4;
+}
+
+.formatter-btn--prompt-copy {
+  background: transparent;
+  border: 1px solid @muted-dark;
+  color: @muted-dark;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  display: inline-grid;
+  place-items: center;
+
+  & > span {
+    grid-area: 1 / 1;
+  }
+
+  &:hover {
+    border-color: @teal;
+    color: @teal;
+  }
+}
+
+.formatter-panels {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+
+  @media (max-width: (@breakpoint-desktop - 1)) {
+    flex-direction: column;
+  }
+  max-height: 70vh;
+}
+
+.formatter-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.formatter-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.formatter-panel-label {
+  color: @muted;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.formatter-diff-stat {
+  font-family:
+    sf mono,
+    menlo,
+    monospace;
+  font-size: 0.75rem;
+
+  &.formatter-diff-added {
+    color: #4ec56a;
+  }
+
+  &.formatter-diff-removed {
+    color: #f85149;
+  }
+
+  &.formatter-diff-neutral {
+    color: @muted;
+  }
+}
+
+.formatter-editor {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+
+  &:focus-within:not(:has([readonly]:focus)) .formatter-gutter {
+    border-color: @teal;
+  }
+}
+
+.formatter-gutter {
+  min-width: 40px;
+  background: @panel-bg;
+  color: @muted-dark;
+  font-family:
+    sf mono,
+    menlo,
+    monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-align: right;
+  padding: 16px 8px 16px 8px;
+  border-radius: 10px 0 0 10px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  user-select: none;
+  border: 1px solid transparent;
+  border-right: none;
+}
+
+.formatter-gutter-line {
+  box-sizing: border-box;
+}
+
+.formatter-textarea {
+  .card-panel();
+  .formatter-mono();
+  flex: 1;
+  background: @dark-gray;
+  color: @light-text;
+  border: 1px solid transparent;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  resize: none;
+  outline: none;
+  overflow-x: hidden;
+
+  &:focus {
+    border-color: @teal;
+  }
+
+  &[readonly] {
+    cursor: default;
+
+    &:focus {
+      border-color: transparent;
+    }
+  }
+}
+
+.formatter-mirror {
+  .formatter-mono();
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  // Width is set dynamically via JS to match textarea.clientWidth
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.formatter-input-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.formatter-output-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.formatter-btn {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.formatter-btn--format {
+  background: @teal;
+  border: none;
+  color: @black;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.formatter-btn--copy {
+  background: transparent;
+  border: 1px solid @teal;
+  color: @teal;
+  padding: 8px 32px;
+  display: inline-grid;
+  place-items: center;
+
+  & > span {
+    grid-area: 1 / 1;
+  }
+
+  &:hover {
+    background: @teal;
+    color: @black;
+  }
+}
+
+.formatter-btn--clear {
+  background: transparent;
+  border: 1px solid @muted-dark;
+  color: @muted-dark;
+
+  &:hover {
+    border-color: @muted;
+    color: @muted;
+  }
+}

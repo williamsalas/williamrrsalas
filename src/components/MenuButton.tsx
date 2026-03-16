@@ -48,6 +48,14 @@ export function MenuButton({ navigate }: MenuButtonProps) {
               BTC Visualizer
             </a>
           </li>
+          <li>
+            <a
+              href="/claude-formatter"
+              onClick={(e) => handleNav(e, "/claude-formatter")}
+            >
+              Claude Formatter
+            </a>
+          </li>
         </ul>
       )}
     </div>
