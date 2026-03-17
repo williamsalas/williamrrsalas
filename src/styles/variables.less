@@ -14,10 +14,35 @@
 // Breakpoints
 @breakpoint-desktop: 768px;
 
+// Spacing
+@spacing-xxs: 2px;
+@spacing-xs: 4px;
+@spacing-sm: 6px;
+@spacing-md: 8px;
+@spacing-lg: 10px;
+@spacing-xl: 12px;
+@spacing-2xl: 14px;
+@spacing-3xl: 16px;
+@spacing-4xl: 20px;
+@spacing-5xl: 24px;
+@spacing-6xl: 32px;
+@spacing-7xl: 40px;
+
+// Border radius
+@radius-xxs: 2px;
+@radius-xs: 3px;
+@radius-sm: 4px;
+@radius-md: 6px;
+@radius-lg: 8px;
+@radius-xl: 10px;
+@radius-2xl: 14px;
+@radius-pill: 999px;
+@radius-circle: 50%;
+
 // Mixins
 .card-panel() {
   background: @panel-bg;
-  border-radius: 10px;
-  padding: 16px;
+  border-radius: @radius-xl;
+  padding: @spacing-3xl;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
 }

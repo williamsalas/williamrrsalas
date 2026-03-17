@@ -10,7 +10,7 @@
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
-  padding: 16px;
+  padding: @spacing-3xl;
 }
 
 .formatter-page {
@@ -19,7 +19,7 @@
   min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: @spacing-3xl;
 
   footer {
     align-self: center;
@@ -28,7 +28,7 @@
 
 .formatter-heading {
   color: @light-text;
-  margin: 0 0 4px 0;
+  margin: 0 0 @spacing-xs 0;
 }
 
 .formatter-description {
@@ -40,8 +40,8 @@
 .formatter-prompt-block {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  width: calc(50% - 8px);
+  gap: @spacing-xs;
+  width: calc(50% - @spacing-md);
 
   @media (max-width: (@breakpoint-desktop - 1)) {
     width: 100%;
@@ -58,10 +58,10 @@
 .formatter-prompt-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: @spacing-lg;
   background: @panel-bg;
-  border-radius: 8px;
-  padding: 10px 14px;
+  border-radius: @radius-lg;
+  padding: @spacing-lg @spacing-2xl;
   border: 1px solid @dark-gray;
 }
 
@@ -79,7 +79,7 @@
   background: transparent;
   border: 1px solid @muted-dark;
   color: @muted-dark;
-  padding: 4px 14px;
+  padding: @spacing-xs @spacing-2xl;
   font-size: 0.8rem;
   flex-shrink: 0;
   display: inline-grid;
@@ -97,7 +97,7 @@
 
 .formatter-panels {
   display: flex;
-  gap: 16px;
+  gap: @spacing-3xl;
   flex: 1;
   min-height: 0;
 
@@ -111,14 +111,14 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: @spacing-sm;
   min-width: 0;
 }
 
 .formatter-panel-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: @spacing-md;
 }
 
 .formatter-panel-label {
@@ -171,8 +171,8 @@
   font-size: 0.85rem;
   line-height: 1.5;
   text-align: right;
-  padding: 16px 8px 16px 8px;
-  border-radius: 10px 0 0 10px;
+  padding: @spacing-3xl @spacing-md @spacing-3xl @spacing-md;
+  border-radius: @radius-xl 0 0 @radius-xl;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
   overflow: hidden;
   user-select: none;
@@ -192,7 +192,7 @@
   color: @light-text;
   border: 1px solid transparent;
   border-left: none;
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 @radius-xl @radius-xl 0;
   resize: none;
   outline: none;
   overflow-x: hidden;
@@ -224,7 +224,7 @@
 .formatter-input-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: @spacing-md;
 }
 
 .formatter-output-actions {
@@ -233,11 +233,11 @@
 }
 
 .formatter-btn {
-  padding: 8px 20px;
+  padding: @spacing-md @spacing-4xl;
   font-size: 0.9rem;
   font-family: inherit;
   font-weight: bold;
-  border-radius: 6px;
+  border-radius: @radius-md;
   cursor: pointer;
   margin-top: 0;
   transition:
@@ -260,7 +260,7 @@
   background: transparent;
   border: 1px solid @teal;
   color: @teal;
-  padding: 8px 32px;
+  padding: @spacing-md @spacing-6xl;
   display: inline-grid;
   place-items: center;
 

@@ -5,12 +5,12 @@ footer {
   color: @light-text;
   text-align: center;
   padding: 1rem;
-  border-radius: 10px;
-  margin-top: 8px;
+  border-radius: @radius-xl;
+  margin-top: @spacing-md;
 
   a {
     color: @light-text;
-    margin: 0 10px;
+    margin: 0 @spacing-lg;
     font-size: 1.5rem;
     text-decoration: none;
     transition: color 0.2s;
@@ -43,7 +43,7 @@ footer {
 }
 
 .pr-list {
-  margin: 0 0 8px;
+  margin: 0 0 @spacing-md;
 }
 
 .github-events > .pr-list:last-child {
@@ -61,7 +61,7 @@ footer {
   justify-content: space-between;
   align-items: stretch;
   padding: 2rem 0 0 0;
-  gap: 8px;
+  gap: @spacing-md;
 }
 
 .activity-panel {
@@ -73,7 +73,7 @@ footer {
   display: flex;
   flex-direction: column;
   height: fit-content;
-  margin-bottom: 8px;
+  margin-bottom: @spacing-md;
   overflow-x: auto;
   word-break: break-word;
 
@@ -84,17 +84,17 @@ footer {
 }
 
 .github-activity {
-  margin: 0 0 16px;
+  margin: 0 0 @spacing-3xl;
 }
 
 .repo-header {
-  margin-bottom: 6px;
+  margin-bottom: @spacing-sm;
   font-weight: bold;
 }
 
 .pr-event {
-  padding-bottom: 4px;
-  padding-left: 8px;
+  padding-bottom: @spacing-xs;
+  padding-left: @spacing-md;
   display: flex;
   align-items: center;
 }
@@ -105,13 +105,13 @@ footer {
 
 .repo-icon {
   vertical-align: middle;
-  margin-right: 6px;
+  margin-right: @spacing-sm;
 }
 
 .status-icon {
   vertical-align: middle;
-  margin-left: 2px;
-  margin-right: 6px;
+  margin-left: @spacing-xxs;
+  margin-right: @spacing-sm;
 }
 
 .pr-title-link {
@@ -138,7 +138,7 @@ footer {
 }
 
 .other-event {
-  margin-bottom: 8px;
+  margin-bottom: @spacing-md;
 }
 
 body {
@@ -152,7 +152,7 @@ body {
     menlo,
     monospace;
   color: @light-text;
-  margin: 16px;
+  margin: @spacing-3xl;
 }
 
 #root {
@@ -160,7 +160,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: 40px;
+  padding-top: @spacing-7xl;
 }
 
 h1 {
@@ -168,22 +168,22 @@ h1 {
 }
 
 button {
-  padding: 10px 20px;
+  padding: @spacing-lg @spacing-4xl;
   font-size: 16px;
-  margin-top: 20px;
+  margin-top: @spacing-4xl;
   cursor: pointer;
 }
 
 #root > small {
-  margin-bottom: 8px;
+  margin-bottom: @spacing-md;
 }
 
 img.pikachu {
-  margin-top: 16px;
+  margin-top: @spacing-3xl;
 }
 
 .pikachu-counter {
-  margin-top: 12px;
+  margin-top: @spacing-xl;
   font-size: 1.1rem;
   color: @teal;
   font-weight: bold;
@@ -191,8 +191,8 @@ img.pikachu {
 
 .menu-container {
   position: fixed;
-  top: 16px;
-  right: 16px;
+  top: @spacing-3xl;
+  right: @spacing-3xl;
   z-index: 100;
 }
 
@@ -202,7 +202,7 @@ img.pikachu {
   color: @light-text;
   font-size: 1.5rem;
   cursor: pointer;
-  padding: 8px;
+  padding: @spacing-md;
   margin: 0;
   transition: color 0.2s;
 
@@ -216,16 +216,16 @@ img.pikachu {
   top: 100%;
   right: 0;
   background: @dark-gray;
-  border-radius: 8px;
+  border-radius: @radius-lg;
   list-style: none;
-  margin: 4px 0 0 0;
-  padding: 8px 0;
+  margin: @spacing-xs 0 0 0;
+  padding: @spacing-md 0;
   min-width: 150px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 
   li a {
     display: block;
-    padding: 8px 16px;
+    padding: @spacing-md @spacing-3xl;
     color: @light-text;
     text-decoration: none;
     transition: background 0.2s;
@@ -239,7 +239,7 @@ img.pikachu {
 
 .menu-disabled {
   display: block;
-  padding: 8px 16px;
+  padding: @spacing-md @spacing-3xl;
   color: @muted;
   cursor: default;
 }
@@ -247,17 +247,17 @@ img.pikachu {
 // Project carousel
 .projects-heading {
   color: @light-text;
-  margin: 16px 0 12px;
+  margin: @spacing-3xl 0 @spacing-xl;
 }
 
 .projects-carousel {
   display: flex;
-  gap: 16px;
+  gap: @spacing-3xl;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   max-width: 1000px;
   width: 100%;
-  padding: 4px 0;
+  padding: @spacing-xs 0;
 
   @media (min-width: @breakpoint-desktop) {
     justify-content: center;
@@ -277,7 +277,7 @@ img.pikachu {
 
   &::-webkit-scrollbar-thumb {
     background: @dark-gray;
-    border-radius: 3px;
+    border-radius: @radius-xs;
   }
 }
 
@@ -332,12 +332,12 @@ img.pikachu {
 
 .project-tile-badge {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: @spacing-lg;
+  right: @spacing-lg;
   font-size: 0.7rem;
   color: @light-text;
   border: 1px solid @light-text;
-  border-radius: 10px;
-  padding: 2px 8px;
+  border-radius: @radius-xl;
+  padding: @spacing-xxs @spacing-md;
   text-transform: lowercase;
 }
