@@ -10,8 +10,6 @@ import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { formatClaudeOutput } from "../../lib/formatter.ts";
 import { useCopyToClipboard } from "../../hooks/useCopyToClipboard.ts";
-import Toggle from "react-toggle";
-import "react-toggle/style.css";
 import { Footer } from "../Footer.tsx";
 
 const LS_KEY = "claude-formatter-input";
@@ -239,13 +237,19 @@ export function ClaudeFormatterPage() {
             {lineDelta !== null && <DiffStat delta={lineDelta} />}
             <div className="formatter-view-toggle">
               <span className="formatter-toggle-label">Raw</span>
-              <Toggle
-                checked={viewMode === "preview"}
-                icons={false}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setViewMode(e.target.checked ? "preview" : "raw")
-                }
-              />
+              <label className="formatter-toggle">
+                <div className="formatter-toggle-track" />
+                <div className="formatter-toggle-thumb" />
+                <input
+                  type="checkbox"
+                  className="formatter-toggle-input"
+                  aria-label="Toggle preview mode"
+                  checked={viewMode === "preview"}
+                  onChange={(e) =>
+                    setViewMode(e.target.checked ? "preview" : "raw")
+                  }
+                />
+              </label>
               <span className="formatter-toggle-label">Preview</span>
             </div>
           </div>

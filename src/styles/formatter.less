@@ -286,12 +286,12 @@
   }
 }
 
-// View toggle (react-toggle + labels)
+// View toggle
 .formatter-view-toggle {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: @spacing-sm;
 }
 
 .formatter-toggle-label {
@@ -302,47 +302,77 @@
   letter-spacing: 0.05em;
 }
 
-// react-toggle theme overrides
-.formatter-view-toggle .react-toggle-track {
-  width: 36px;
-  height: 18px;
-  background-color: @dark-gray;
+// Toggle switch
+.formatter-view-toggle .formatter-toggle {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.formatter-view-toggle
-  .react-toggle:hover:not(.react-toggle--disabled)
-  .react-toggle-track {
+.formatter-view-toggle .formatter-toggle-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.formatter-view-toggle .formatter-toggle-track {
+  width: 36px;
+  height: 18px;
+  border-radius: @radius-pill;
+  background-color: @dark-gray;
+  transition: background-color 0.2s ease;
+}
+
+.formatter-view-toggle .formatter-toggle:hover .formatter-toggle-track {
   background-color: lighten(@dark-gray, 5%);
 }
 
-.formatter-view-toggle .react-toggle--checked .react-toggle-track {
+.formatter-view-toggle
+  .formatter-toggle:has(input:checked)
+  .formatter-toggle-track {
   background-color: @teal;
 }
 
 .formatter-view-toggle
-  .react-toggle--checked:hover:not(.react-toggle--disabled)
-  .react-toggle-track {
+  .formatter-toggle:has(input:checked):hover
+  .formatter-toggle-track {
   background-color: darken(@teal, 8%);
 }
 
-.formatter-view-toggle .react-toggle-thumb {
+.formatter-view-toggle .formatter-toggle-thumb {
+  position: absolute;
+  top: 1px;
+  left: 1px;
   width: 16px;
   height: 16px;
-  border-color: @muted-dark;
+  border: 1px solid @muted-dark;
+  border-radius: @radius-circle;
+  background-color: @light-text;
+  box-sizing: border-box;
+  transition:
+    left 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.formatter-view-toggle .react-toggle--checked .react-toggle-thumb {
+.formatter-view-toggle
+  .formatter-toggle:has(input:checked)
+  .formatter-toggle-thumb {
   left: 19px;
   border-color: @teal;
 }
 
-.formatter-view-toggle .react-toggle--focus .react-toggle-thumb {
+.formatter-view-toggle .formatter-toggle:focus-within .formatter-toggle-thumb {
   box-shadow: 0 0 2px 2px fade(@teal, 40%);
 }
 
-.formatter-view-toggle
-  .react-toggle:active:not(.react-toggle--disabled)
-  .react-toggle-thumb {
+.formatter-view-toggle .formatter-toggle:active .formatter-toggle-thumb {
   box-shadow: 0 0 3px 3px fade(@teal, 30%);
 }
 
