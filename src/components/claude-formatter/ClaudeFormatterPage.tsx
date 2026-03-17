@@ -124,7 +124,7 @@ function DiffStat({ delta }: { delta: number }) {
 }
 
 const SUGGESTED_PROMPT =
-  "generate a PR description covering all commits on this branch (git log main..HEAD) plus any staged changes (git diff --cached). read the full diff (git diff main..HEAD) to understand the actual changes, not just commit messages. wrap the entire output in a ```markdown code fence so ## headings and formatting survive as literal characters when copied from the terminal. use unindented - bullets, no terminal padding or line wrapping artifacts. sections: ## Summary (2-3 bullets, what and why), ## What changed (specific changes grouped logically), ## Test plan (verification steps). be concise and precise - no filler.";
+  "generate a PR description covering all commits on this branch (git log main..HEAD) plus any staged changes (git diff --cached). read the full diff (git diff main..HEAD) to understand the actual changes, not just commit messages. wrap the entire output in a ```markdown code fence so ## headings and formatting survive as literal characters when copied from the terminal. use unindented - bullets, no terminal padding or line wrapping artifacts. sections: ## Summary (2-3 bullets, what and why), ## What changed (specific changes grouped logically), ## Test plan (verification steps). only describe the net effect vs main - do not mention issues introduced and fixed within the same branch. be concise and precise - no filler.";
 
 function PromptBlock() {
   const { copied, copy } = useCopyToClipboard(SUGGESTED_PROMPT);
