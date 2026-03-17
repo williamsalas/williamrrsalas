@@ -6,8 +6,12 @@ import {
   useLayoutEffect,
   useEffect,
 } from "react";
+import { marked } from "marked";
+import DOMPurify from "dompurify";
 import { formatClaudeOutput } from "../../lib/formatter.ts";
 import { useCopyToClipboard } from "../../hooks/useCopyToClipboard.ts";
+import Toggle from "react-toggle";
+import "react-toggle/style.css";
 import { Footer } from "../Footer.tsx";
 
 const LS_KEY = "claude-formatter-input";
@@ -150,6 +154,17 @@ export function ClaudeFormatterPage() {
   const [input, setInput] = useState(loadSavedInput);
   const [output, setOutput] = useState("");
   const [lineDelta, setLineDelta] = useState<number | null>(null);
+  const [viewMode, setViewMode] = useState<"raw" | "preview">("preview");
+
+  const previewHtml = useMemo(() => {
+    if (viewMode !== "preview" || !output) return "";
+    const raw = marked.parse(output, {
+      async: false,
+      gfm: true,
+      breaks: false,
+    }) as string;
+    return DOMPurify.sanitize(raw);
+  }, [output, viewMode]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -195,7 +210,9 @@ export function ClaudeFormatterPage() {
       <PromptBlock />
       <div className="formatter-panels">
         <div className="formatter-panel">
-          <span className="formatter-panel-label">Input</span>
+          <div className="formatter-panel-header">
+            <span className="formatter-panel-label">Input</span>
+          </div>
           <LineNumberedEditor
             value={input}
             onChange={setInput}
@@ -220,12 +237,36 @@ export function ClaudeFormatterPage() {
           <div className="formatter-panel-header">
             <span className="formatter-panel-label">Output</span>
             {lineDelta !== null && <DiffStat delta={lineDelta} />}
+            <div className="formatter-view-toggle">
+              <span className="formatter-toggle-label">Raw</span>
+              <Toggle
+                checked={viewMode === "preview"}
+                icons={false}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setViewMode(e.target.checked ? "preview" : "raw")
+                }
+              />
+              <span className="formatter-toggle-label">Preview</span>
+            </div>
           </div>
-          <LineNumberedEditor
-            value={output}
-            readOnly
-            placeholder="Formatted output will appear here..."
-          />
+          {viewMode === "raw" ? (
+            <LineNumberedEditor
+              value={output}
+              readOnly
+              placeholder="Formatted output will appear here..."
+            />
+          ) : previewHtml ? (
+            <div
+              className="formatter-preview"
+              dangerouslySetInnerHTML={{ __html: previewHtml }}
+            />
+          ) : (
+            <div className="formatter-preview">
+              <span className="formatter-preview-placeholder">
+                Formatted output will appear here...
+              </span>
+            </div>
+          )}
           <div className="formatter-output-actions">
             <button
               className="formatter-btn formatter-btn--copy"
