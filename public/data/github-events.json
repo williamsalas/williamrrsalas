@@ -1,5 +1,299 @@
 [
   {
+    "id": "7462632130",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 85,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/85",
+        "id": 3407410376,
+        "number": 85,
+        "head": {
+          "ref": "wrrs/remove-react-toggle-dep",
+          "sha": "5c18a8804c543d0e95a04d6970ba9bdc21873d7c",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "c93054469f2968519c90fc7da6f566b74f5f6021",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "fix build: replace react-toggle with custom css",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/85",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-17T03:26:42Z"
+  },
+  {
+    "id": "7462630010",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 85,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/85",
+        "id": 3407410376,
+        "number": 85,
+        "head": {
+          "ref": "wrrs/remove-react-toggle-dep",
+          "sha": "5c18a8804c543d0e95a04d6970ba9bdc21873d7c",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "c93054469f2968519c90fc7da6f566b74f5f6021",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "fix build: replace react-toggle with custom css",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/85",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-17T03:26:36Z"
+  },
+  {
+    "id": "7462434665",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 84,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/84",
+        "id": 3407358741,
+        "number": 84,
+        "head": {
+          "ref": "wrrs/add-style-tokens",
+          "sha": "45d20315474888ea20dd1188262bba8551b6c5b7",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "30f7fd81d5bb001e3ec8f989b65aaf0334d2f9d1",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "add style tokens",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/84",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-17T03:14:18Z"
+  },
+  {
+    "id": "7462205616",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 84,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/84",
+        "id": 3407358741,
+        "number": 84,
+        "head": {
+          "ref": "wrrs/add-style-tokens",
+          "sha": "45d20315474888ea20dd1188262bba8551b6c5b7",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "30f7fd81d5bb001e3ec8f989b65aaf0334d2f9d1",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "add style tokens",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/84",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-17T03:01:16Z"
+  },
+  {
+    "id": "7461989508",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 83,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/83",
+        "id": 3407321812,
+        "number": 83,
+        "head": {
+          "ref": "wrrs/add-viewer-claude-formatter",
+          "sha": "aaf21cbdee52b90f8fc7b13abb8a804518c19a6a",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "fac115bd238ebc778b6a6695c71aaaeb2d657b18",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Add markdown viewer claude formatter",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/83",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-17T02:48:01Z"
+  },
+  {
+    "id": "7461898435",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 83,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/83",
+        "id": 3407321812,
+        "number": 83,
+        "head": {
+          "ref": "wrrs/add-viewer-claude-formatter",
+          "sha": "aaf21cbdee52b90f8fc7b13abb8a804518c19a6a",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "fac115bd238ebc778b6a6695c71aaaeb2d657b18",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Add markdown viewer claude formatter",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/83",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-03-17T02:42:33Z"
+  },
+  {
     "id": "7420792410",
     "type": "PullRequestEvent",
     "actor": {
