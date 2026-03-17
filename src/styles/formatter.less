@@ -119,6 +119,7 @@
   display: flex;
   align-items: center;
   gap: @spacing-md;
+  height: 20px;
 }
 
 .formatter-panel-label {
@@ -281,6 +282,234 @@
 
   &:hover {
     border-color: @muted;
+    color: @muted;
+  }
+}
+
+// View toggle (react-toggle + labels)
+.formatter-view-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.formatter-toggle-label {
+  color: @muted;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// react-toggle theme overrides
+.formatter-view-toggle .react-toggle-track {
+  width: 36px;
+  height: 18px;
+  background-color: @dark-gray;
+}
+
+.formatter-view-toggle
+  .react-toggle:hover:not(.react-toggle--disabled)
+  .react-toggle-track {
+  background-color: lighten(@dark-gray, 5%);
+}
+
+.formatter-view-toggle .react-toggle--checked .react-toggle-track {
+  background-color: @teal;
+}
+
+.formatter-view-toggle
+  .react-toggle--checked:hover:not(.react-toggle--disabled)
+  .react-toggle-track {
+  background-color: darken(@teal, 8%);
+}
+
+.formatter-view-toggle .react-toggle-thumb {
+  width: 16px;
+  height: 16px;
+  border-color: @muted-dark;
+}
+
+.formatter-view-toggle .react-toggle--checked .react-toggle-thumb {
+  left: 19px;
+  border-color: @teal;
+}
+
+.formatter-view-toggle .react-toggle--focus .react-toggle-thumb {
+  box-shadow: 0 0 2px 2px fade(@teal, 40%);
+}
+
+.formatter-view-toggle
+  .react-toggle:active:not(.react-toggle--disabled)
+  .react-toggle-thumb {
+  box-shadow: 0 0 3px 3px fade(@teal, 30%);
+}
+
+// Markdown preview container
+.formatter-preview {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  background: @dark-gray;
+  border-radius: 10px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
+  color: @light-text;
+  font-size: 0.92rem;
+  line-height: 1.6;
+
+  // Placeholder text
+  .formatter-preview-placeholder {
+    color: @muted-dark;
+    font-family:
+      sf mono,
+      menlo,
+      monospace;
+    font-size: 0.85rem;
+  }
+
+  // Headings
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: @light-text;
+    margin: 1.2em 0 0.5em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h1 {
+    font-size: 1.6em;
+    border-bottom: 1px solid @muted-dark;
+    padding-bottom: 0.3em;
+  }
+
+  h2 {
+    font-size: 1.3em;
+    border-bottom: 1px solid @muted-dark;
+    padding-bottom: 0.25em;
+  }
+
+  h3 {
+    font-size: 1.1em;
+  }
+
+  // Paragraphs
+  p {
+    margin: 0.6em 0;
+  }
+
+  // Links
+  a {
+    color: @teal;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Inline code
+  code {
+    font-family:
+      sf mono,
+      menlo,
+      monospace;
+    font-size: 0.88em;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+  }
+
+  // Code blocks
+  pre {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 6px;
+    padding: 12px 16px;
+    overflow-x: auto;
+    margin: 0.8em 0;
+
+    > code {
+      background: none;
+      padding: 0;
+      font-size: 0.85em;
+      line-height: 1.5;
+    }
+  }
+
+  // Blockquotes
+  blockquote {
+    border-left: 3px solid @teal;
+    margin: 0.8em 0;
+    padding: 0.4em 1em;
+    background: rgba(0, 173, 181, 0.06);
+    color: @muted;
+
+    p {
+      margin: 0.3em 0;
+    }
+  }
+
+  // Lists
+  ul,
+  ol {
+    padding-left: 1.8em;
+    margin: 0.6em 0;
+  }
+
+  li {
+    margin: 0.25em 0;
+  }
+
+  // Task list checkboxes
+  li > input[type="checkbox"] {
+    margin-right: 0.4em;
+  }
+
+  // Tables
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.8em 0;
+  }
+
+  th,
+  td {
+    border: 1px solid @muted-dark;
+    padding: 6px 12px;
+    text-align: left;
+  }
+
+  th {
+    background: rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+  }
+
+  tr:hover td {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  // Horizontal rules
+  hr {
+    border: none;
+    border-top: 1px solid @muted-dark;
+    margin: 1.2em 0;
+  }
+
+  // Images
+  img {
+    max-width: 100%;
+    border-radius: 6px;
+  }
+
+  // Strikethrough
+  del {
     color: @muted;
   }
 }

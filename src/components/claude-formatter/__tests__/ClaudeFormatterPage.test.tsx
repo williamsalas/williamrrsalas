@@ -97,3 +97,75 @@ describe("ClaudeFormatterPage localStorage", () => {
     expect(localStorage.getItem(LS_KEY)).toBeNull();
   });
 });
+
+describe("ClaudeFormatterPage view toggle", () => {
+  function getToggleCheckbox(): HTMLInputElement {
+    return document.querySelector(
+      ".formatter-view-toggle input[type='checkbox']",
+    )! as HTMLInputElement;
+  }
+
+  function toggleToRaw() {
+    fireEvent.click(getToggleCheckbox());
+  }
+
+  it("renders toggle in preview mode by default", () => {
+    render(<ClaudeFormatterPage />);
+    expect(getToggleCheckbox().checked).toBe(true);
+    expect(screen.getByText("Raw")).toBeTruthy();
+    expect(screen.getByText("Preview")).toBeTruthy();
+  });
+
+  it("switches to raw mode when toggle is clicked", () => {
+    render(<ClaudeFormatterPage />);
+    toggleToRaw();
+    expect(getToggleCheckbox().checked).toBe(false);
+  });
+
+  it("switches back to preview mode when toggle is clicked again", () => {
+    render(<ClaudeFormatterPage />);
+    toggleToRaw();
+    fireEvent.click(getToggleCheckbox());
+    expect(getToggleCheckbox().checked).toBe(true);
+  });
+
+  it("renders markdown as HTML in preview mode", () => {
+    render(<ClaudeFormatterPage />);
+    const textarea = screen.getByPlaceholderText(
+      "Paste Claude Code output here...",
+    );
+    fireEvent.change(textarea, {
+      target: { value: "## Hello\n\nWorld" },
+    });
+    fireEvent.click(screen.getByText("Format"));
+    const preview = document.querySelector(".formatter-preview")!;
+    expect(preview.querySelector("h2")!.textContent).toBe("Hello");
+    expect(preview.querySelector("p")!.textContent).toBe("World");
+  });
+
+  it("shows placeholder in preview mode when output is empty", () => {
+    render(<ClaudeFormatterPage />);
+    expect(
+      screen.getByText("Formatted output will appear here..."),
+    ).toBeTruthy();
+  });
+
+  it("copy button still works in preview mode", () => {
+    const writeTextMock = vi.fn().mockResolvedValue(undefined);
+    Object.assign(navigator, {
+      clipboard: { writeText: writeTextMock },
+    });
+
+    render(<ClaudeFormatterPage />);
+    const textarea = screen.getByPlaceholderText(
+      "Paste Claude Code output here...",
+    );
+    fireEvent.change(textarea, { target: { value: "## Test" } });
+    fireEvent.click(screen.getByText("Format"));
+    const outputCopyBtn = document.querySelector(
+      ".formatter-output-actions .formatter-btn--copy",
+    )!;
+    fireEvent.click(outputCopyBtn);
+    expect(writeTextMock).toHaveBeenCalled();
+  });
+});
