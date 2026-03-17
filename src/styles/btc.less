@@ -7,7 +7,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: @spacing-3xl;
 
   footer {
     align-self: center;
@@ -16,7 +16,7 @@
 
 .btc-heading {
   color: @light-text;
-  margin: 0 0 8px 0;
+  margin: 0 0 @spacing-md 0;
 }
 
 .btc-total-banner {
@@ -35,23 +35,23 @@
   display: block;
   font-size: 0.9rem;
   color: @btc-orange;
-  margin-top: 2px;
+  margin-top: @spacing-xxs;
 }
 
 .fund-selector {
   display: flex;
-  gap: 8px;
+  gap: @spacing-md;
   flex-wrap: wrap;
 }
 
 .fund-selector-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
+  gap: @spacing-sm;
+  padding: @spacing-sm @spacing-2xl;
   font-size: 0.9rem;
   font-family: inherit;
-  border-radius: 999px;
+  border-radius: @radius-pill;
   background: @dark-gray;
   border: 1px solid #555;
   color: @muted;
@@ -78,13 +78,13 @@
 .fund-selector-logo {
   width: 18px;
   height: 18px;
-  border-radius: 50%;
+  border-radius: @radius-circle;
 }
 
 .btc-inputs {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: @spacing-3xl;
 }
 
 .btc-input-group {
@@ -110,7 +110,7 @@
 .btc-label {
   display: block;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: @spacing-md;
   color: var(--accent);
 }
 
@@ -118,13 +118,13 @@
   display: flex;
   align-items: center;
   background: @dark-gray;
-  border-radius: 6px;
-  padding: 4px 8px;
+  border-radius: @radius-md;
+  padding: @spacing-xs @spacing-md;
 }
 
 .btc-input-prefix {
   color: @muted;
-  margin-right: 6px;
+  margin-right: @spacing-sm;
   white-space: nowrap;
   font-size: 0.9rem;
 }
@@ -137,7 +137,7 @@
   font-family: inherit;
   font-size: 1rem;
   outline: none;
-  padding: 6px 0;
+  padding: @spacing-sm 0;
   min-width: 0;
 
   &::placeholder {
@@ -147,18 +147,18 @@
 
 .btc-entry-checkbox {
   accent-color: var(--accent);
-  margin-right: 6px;
+  margin-right: @spacing-sm;
   cursor: pointer;
 }
 
 .btc-entry-consolidate {
   width: 100%;
-  margin-top: 6px;
-  padding: 6px;
+  margin-top: @spacing-sm;
+  padding: @spacing-sm;
   font-size: 0.85rem;
   background: var(--accent);
   border: none;
-  border-radius: 6px;
+  border-radius: @radius-md;
   color: @black;
   font-weight: bold;
   cursor: pointer;
@@ -174,7 +174,7 @@
 }
 
 .btc-summary-heading {
-  margin: 0 0 12px 0;
+  margin: 0 0 @spacing-xl 0;
   color: @light-text;
 }
 
@@ -182,7 +182,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 4px 0;
+  padding: @spacing-xs 0;
 }
 
 .btc-summary-label {
@@ -209,7 +209,7 @@
 .btc-summary-amounts {
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: @spacing-sm;
   text-align: right;
 }
 
@@ -229,11 +229,11 @@
 
 .btc-summary-divider {
   border-top: 1px solid @muted-dark;
-  margin: 6px 0;
+  margin: @spacing-sm 0;
 }
 
 .btc-summary-note {
-  margin-top: 8px;
+  margin-top: @spacing-md;
   font-size: 0.8rem;
   color: @muted-dark;
 }
@@ -243,7 +243,7 @@
 }
 
 .btc-whatif-heading {
-  margin: 0 0 12px 0;
+  margin: 0 0 @spacing-xl 0;
   color: @light-text;
 }
 
@@ -255,7 +255,7 @@
     text-align: left;
     color: @muted;
     font-weight: normal;
-    padding: 6px 0;
+    padding: @spacing-sm 0;
     border-bottom: 1px solid @dark-gray;
 
     &:last-child {
@@ -264,7 +264,7 @@
   }
 
   td {
-    padding: 8px 0;
+    padding: @spacing-md 0;
     border-bottom: 1px solid @dark-gray;
 
     &:first-child {
@@ -282,13 +282,13 @@
 
 .btc-ath-tag {
   display: inline-block;
-  margin-left: 6px;
+  margin-left: @spacing-sm;
   padding: 1px 5px;
   font-size: 0.7rem;
   font-weight: bold;
   color: @btc-orange;
   border: 1px solid @btc-orange;
-  border-radius: 3px;
+  border-radius: @radius-xs;
   vertical-align: middle;
   line-height: 1.4;
   opacity: 0.85;
@@ -296,24 +296,24 @@
 
 .btc-custom-prefix {
   display: inline;
-  margin-right: 2px;
+  margin-right: @spacing-xxs;
 }
 
 .btc-custom-input {
-  padding: 4px 6px;
+  padding: @spacing-xs @spacing-sm;
   background: @dark-gray;
-  border-radius: 4px;
+  border-radius: @radius-sm;
 }
 
 .btc-input-row + .btc-input-row {
-  margin-top: 6px;
+  margin-top: @spacing-sm;
 }
 
 .btc-entry-buy-price {
   color: @muted;
   font-size: 0.8rem;
   white-space: nowrap;
-  margin: 0 4px;
+  margin: 0 @spacing-xs;
 }
 
 .btc-entry-remove {
@@ -322,7 +322,7 @@
   color: @muted-dark;
   font-size: 1rem;
   cursor: pointer;
-  padding: 2px 6px;
+  padding: @spacing-xxs @spacing-sm;
   margin: 0;
   margin-top: 0;
   line-height: 1;
@@ -335,12 +335,12 @@
 
 .btc-entry-add {
   width: 100%;
-  margin-top: 6px;
-  padding: 6px;
+  margin-top: @spacing-sm;
+  padding: @spacing-sm;
   font-size: 0.85rem;
   background: transparent;
   border: 1px dashed #555;
-  border-radius: 6px;
+  border-radius: @radius-md;
   color: @muted;
   cursor: pointer;
   transition:
@@ -358,14 +358,14 @@
 }
 
 .btc-fbtc-per-btc-heading {
-  margin: 0 0 12px 0;
+  margin: 0 0 @spacing-xl 0;
   color: @light-text;
 }
 
 .btc-fbtc-per-btc-row {
   display: flex;
   justify-content: space-between;
-  padding: 4px 0;
+  padding: @spacing-xs 0;
 }
 
 .btc-fbtc-per-btc-label {
@@ -379,7 +379,7 @@
 }
 
 .btc-fbtc-per-btc-note {
-  margin-top: 8px;
+  margin-top: @spacing-md;
   font-size: 0.8rem;
   color: @muted-dark;
 }
@@ -389,7 +389,7 @@
 }
 
 .btc-shares-per-btc-heading {
-  margin: 0 0 12px 0;
+  margin: 0 0 @spacing-xl 0;
   color: @light-text;
 }
 
@@ -401,7 +401,7 @@
     text-align: left;
     color: @muted;
     font-weight: normal;
-    padding: 6px 0;
+    padding: @spacing-sm 0;
     border-bottom: 1px solid @dark-gray;
 
     &:last-child {
@@ -410,7 +410,7 @@
   }
 
   td {
-    padding: 8px 0;
+    padding: @spacing-md 0;
     border-bottom: 1px solid @dark-gray;
     font-weight: bold;
 
@@ -437,7 +437,7 @@
 }
 
 .btc-shares-per-btc-note {
-  margin-top: 8px;
+  margin-top: @spacing-md;
   font-size: 0.8rem;
   color: @muted-dark;
 }
@@ -451,7 +451,7 @@
   color: @muted;
   font-size: 0.8rem;
   text-align: center;
-  margin: 24px 0 0;
+  margin: @spacing-5xl 0 0;
 
   a {
     color: #aaa;
@@ -463,10 +463,10 @@
   background: @panel-bg;
   color: @light-text;
   border: 1px solid @dark-gray;
-  border-radius: 10px;
+  border-radius: @radius-xl;
   padding: 0;
   max-width: 360px;
-  width: calc(100% - 32px);
+  width: calc(100% - @spacing-6xl);
 
   &::backdrop {
     background: rgba(0, 0, 0, 0.6);
@@ -478,16 +478,16 @@
 }
 
 .add-entry-dialog-content {
-  padding: 20px;
+  padding: @spacing-4xl;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: @spacing-2xl;
 }
 
 @media (max-width: (@breakpoint-desktop - 1)) {
   .add-entry-dialog {
     border-bottom: none;
-    border-radius: 14px 14px 0 0;
+    border-radius: @radius-2xl @radius-2xl 0 0;
     width: 100%;
     max-width: 100%;
     max-height: 90dvh;
@@ -512,13 +512,13 @@
     width: 36px;
     height: 4px;
     background: @muted-dark;
-    border-radius: 2px;
-    margin: 10px auto 0;
+    border-radius: @radius-xxs;
+    margin: @spacing-lg auto 0;
   }
 
   .add-entry-dialog-content {
-    padding: 12px 20px 24px;
-    padding-bottom: max(24px, env(safe-area-inset-bottom));
+    padding: @spacing-xl @spacing-4xl @spacing-5xl;
+    padding-bottom: max(@spacing-5xl, env(safe-area-inset-bottom));
   }
 }
 
@@ -530,15 +530,15 @@
 
 .add-entry-dialog-toggle {
   display: flex;
-  gap: 6px;
+  gap: @spacing-sm;
 }
 
 .add-entry-dialog-toggle-btn {
   flex: 1;
-  padding: 8px;
+  padding: @spacing-md;
   font-size: 0.9rem;
   font-family: inherit;
-  border-radius: 6px;
+  border-radius: @radius-md;
   background: @dark-gray;
   border: 1px solid #555;
   color: @muted;
@@ -560,7 +560,7 @@
 .add-entry-dialog-label {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: @spacing-xs;
   color: @muted;
   font-size: 0.85rem;
 }
@@ -568,8 +568,8 @@
 .add-entry-dialog-input {
   background: @dark-gray;
   border: 1px solid #555;
-  border-radius: 6px;
-  padding: 10px 12px;
+  border-radius: @radius-md;
+  padding: @spacing-lg @spacing-xl;
   color: @light-text;
   font-family: inherit;
   font-size: 1rem;
@@ -594,7 +594,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: @spacing-2xl;
 }
 
 .add-entry-dialog-preview {
@@ -606,16 +606,16 @@
 
 .add-entry-dialog-actions {
   display: flex;
-  gap: 8px;
-  margin-top: 4px;
+  gap: @spacing-md;
+  margin-top: @spacing-xs;
 }
 
 .add-entry-dialog-cancel {
   flex: 1;
-  padding: 10px;
+  padding: @spacing-lg;
   font-size: 0.9rem;
   font-family: inherit;
-  border-radius: 6px;
+  border-radius: @radius-md;
   background: @dark-gray;
   border: 1px solid #555;
   color: @muted;
@@ -633,11 +633,11 @@
 
 .add-entry-dialog-add {
   flex: 1;
-  padding: 10px;
+  padding: @spacing-lg;
   font-size: 0.9rem;
   font-family: inherit;
   font-weight: bold;
-  border-radius: 6px;
+  border-radius: @radius-md;
   background: var(--accent);
   border: none;
   color: @black;
@@ -657,6 +657,6 @@
 
 @media (min-width: @breakpoint-desktop) {
   .btc-input-group {
-    flex: 0 1 calc(50% - 8px);
+    flex: 0 1 calc(50% - @spacing-md);
   }
 }
