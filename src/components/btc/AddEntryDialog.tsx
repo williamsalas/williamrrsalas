@@ -31,6 +31,7 @@ export function AddEntryDialog({
   const [mode, setMode] = useState<"native" | "usd">("native");
   const [amount, setAmount] = useState("");
   const [buyPrice, setBuyPrice] = useState(currentPrice.toString());
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     dialogRef.current?.showModal();
@@ -84,11 +85,16 @@ export function AddEntryDialog({
 
   const handleAdd = () => {
     if (!isValid) return;
+    const desc = description.trim() || undefined;
     if (mode === "native") {
-      onAdd({ amount });
+      onAdd({ amount, ...(desc ? { description: desc } : {}) });
     } else {
       const converted = (parsedAmount / parsedBuyPrice).toString();
-      onAdd({ amount: converted, buyPrice: parsedBuyPrice });
+      onAdd({
+        amount: converted,
+        buyPrice: parsedBuyPrice,
+        ...(desc ? { description: desc } : {}),
+      });
     }
   };
 
@@ -144,6 +150,18 @@ export function AddEntryDialog({
                 ? `${fund.ticker} amount`
                 : `USD amount for ${fund.ticker}`
             }
+          />
+        </label>
+        <label className="add-entry-dialog-label">
+          Note (optional)
+          <input
+            className="add-entry-dialog-input"
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="e.g. Coinbase purchase"
+            maxLength={200}
+            aria-label="Note for this entry"
           />
         </label>
         <div
