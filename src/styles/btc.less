@@ -305,8 +305,75 @@
   border-radius: @radius-sm;
 }
 
-.btc-input-row + .btc-input-row {
+.btc-entry-wrap + .btc-entry-wrap {
   margin-top: @spacing-sm;
+}
+
+.btc-note-toggle {
+  background: none;
+  border: none;
+  color: @muted-dark;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: @spacing-xxs @spacing-xs;
+  margin: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+
+  i {
+    line-height: 0;
+    display: block;
+  }
+
+  &:hover {
+    color: @muted;
+  }
+
+  &--active {
+    color: var(--accent);
+
+    &:hover {
+      color: var(--accent);
+      opacity: 0.8;
+    }
+  }
+}
+
+.btc-entry-description {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  color: @muted;
+  font-family: inherit;
+  font-size: 0.78rem;
+  padding: @spacing-xs @spacing-md;
+  outline: none;
+  box-sizing: border-box;
+  animation: note-fade-in 0.15s ease-out;
+
+  &::placeholder {
+    color: @muted-dark;
+  }
+
+  &:focus {
+    color: @light-text;
+  }
+}
+
+@keyframes note-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .btc-entry-buy-price {
@@ -324,8 +391,10 @@
   cursor: pointer;
   padding: @spacing-xxs @spacing-sm;
   margin: 0;
-  margin-top: 0;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: color 0.2s;
 
   &:hover {

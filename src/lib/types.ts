@@ -40,6 +40,7 @@ export interface BtcPrices {
 export interface FundEntry {
   amount: string;
   buyPrice?: number;
+  description?: string;
 }
 
 export type FundMode = "btc" | "shares" | "usd";

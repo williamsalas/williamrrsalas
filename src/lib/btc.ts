@@ -96,8 +96,22 @@ export function parseStoredEntries(raw: string | null): FundEntry[] {
   try {
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
-      // New FundEntry[] format: [{amount, buyPrice?}, ...]
-      if (typeof parsed[0] === "object" && parsed[0] !== null) return parsed;
+      // New FundEntry[] format: [{amount, buyPrice?, description?}, ...]
+      if (typeof parsed[0] === "object" && parsed[0] !== null) {
+        return parsed.map((e: unknown): FundEntry => {
+          if (typeof e !== "object" || e === null) return { amount: "" };
+          const entry = e as Record<string, unknown>;
+          return {
+            amount: typeof entry.amount === "string" ? entry.amount : "",
+            ...(typeof entry.buyPrice === "number"
+              ? { buyPrice: entry.buyPrice }
+              : {}),
+            ...(typeof entry.description === "string" && entry.description
+              ? { description: entry.description.slice(0, 200) }
+              : {}),
+          };
+        });
+      }
       // Legacy string[] format: ["1.5", "2"] -> [{amount: "1.5"}, {amount: "2"}]
       return parsed.map((s: string) => ({ amount: s }));
     }

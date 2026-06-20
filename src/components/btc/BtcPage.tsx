@@ -20,7 +20,11 @@ import { Footer } from "../Footer.tsx";
 
 type FundHandlers = Pick<
   FundInputProps,
-  "onEntryChange" | "onOpenAddDialog" | "onRemoveEntry" | "onConsolidate"
+  | "onEntryChange"
+  | "onDescriptionChange"
+  | "onOpenAddDialog"
+  | "onRemoveEntry"
+  | "onConsolidate"
 >;
 
 const LS_VISIBLE_KEY = "btc-visible-tickers";
@@ -82,15 +86,16 @@ export function BtcPage() {
   useEffect(() => {
     ALL_FUNDS.forEach((fund) => {
       const fundEntries = entries[fund.ticker] ?? [{ amount: "" }];
-      const toSave: { amount: string; buyPrice?: number }[] = [];
+      const toSave: { amount: string; buyPrice?: number; description?: string }[] =
+        [];
       for (const e of fundEntries) {
         const canonical = fund.toCanonical(e.amount, fund.nativeMode, prices);
         if (canonical === "" || parseFloat(canonical) === 0) continue;
-        toSave.push(
-          e.buyPrice != null
-            ? { amount: canonical, buyPrice: e.buyPrice }
-            : { amount: canonical },
-        );
+        const saved: { amount: string; buyPrice?: number; description?: string } =
+          { amount: canonical };
+        if (e.buyPrice != null) saved.buyPrice = e.buyPrice;
+        if (e.description) saved.description = e.description;
+        toSave.push(saved);
       }
       if (toSave.length > 0) {
         localStorage.setItem(fund.lsKey, JSON.stringify(toSave));
@@ -106,6 +111,20 @@ export function BtcPage() {
         ...prev,
         [ticker]: prev[ticker].map((e, i) =>
           i === index ? { ...e, amount: value } : e,
+        ),
+      }));
+    },
+    [],
+  );
+
+  const handleDescriptionChange = useCallback(
+    (ticker: string, index: number, value: string) => {
+      setEntries((prev) => ({
+        ...prev,
+        [ticker]: prev[ticker].map((e, i) =>
+          i === index
+            ? { ...e, description: value || undefined }
+            : e,
         ),
       }));
     },
@@ -139,10 +158,23 @@ export function BtcPage() {
         const val = parseFloat(current[i].amount);
         return acc + (isNaN(val) ? 0 : val);
       }, 0);
+      const descriptions = indices
+        .map((i) => current[i].description)
+        .filter((d): d is string => Boolean(d));
+      const consolidatedDescription =
+        descriptions.length > 0 ? descriptions.join(" · ") : undefined;
       const kept = current.filter((_, i) => !indexSet.has(i));
       return {
         ...prev,
-        [ticker]: [{ amount: parseFloat(sum.toFixed(8)).toString() }, ...kept],
+        [ticker]: [
+          {
+            amount: parseFloat(sum.toFixed(8)).toString(),
+            ...(consolidatedDescription
+              ? { description: consolidatedDescription }
+              : {}),
+          },
+          ...kept,
+        ],
       };
     });
   }, []);
@@ -157,6 +189,8 @@ export function BtcPage() {
           {
             onEntryChange: (index: number, value: string) =>
               handleEntryChange(fund.ticker, index, value),
+            onDescriptionChange: (index: number, value: string) =>
+              handleDescriptionChange(fund.ticker, index, value),
             onOpenAddDialog: () => handleOpenAddDialog(fund.ticker),
             onRemoveEntry: (index: number) =>
               handleRemoveEntry(fund.ticker, index),
@@ -167,6 +201,7 @@ export function BtcPage() {
       ),
     [
       handleEntryChange,
+      handleDescriptionChange,
       handleOpenAddDialog,
       handleRemoveEntry,
       handleConsolidate,
