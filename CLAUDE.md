@@ -41,8 +41,7 @@
 │   ├── styles/
 │   │   ├── variables.less          # LESS variables (colors, breakpoints, mixins)
 │   │   ├── global.less             # Shared styles (menu, project tiles, dialog)
-│   │   ├── btc.less                # BTC page styles
-│   │   └── formatter.less          # Claude Formatter page styles
+│   │   └── btc.less                # BTC page styles
 │   ├── components/
 │   │   ├── Header.tsx              # Greeting, bio, project carousel
 │   │   ├── Footer.tsx              # GitHub + LinkedIn links
@@ -63,9 +62,6 @@
 │   │   │   ├── SharesPerBtc.tsx    # ETF shares-per-BTC ratio table
 │   │   │   ├── PriceSource.tsx     # Live-ticking relative timestamp + attribution
 │   │   │   └── __tests__/          # BTC component tests
-│   │   ├── claude-formatter/
-│   │   │   ├── ClaudeFormatterPage.tsx  # Paste + format Claude Code terminal output
-│   │   │   └── __tests__/              # Formatter component tests
 │   │   ├── icons/
 │   │   │   ├── PRStatusIcon.tsx    # Inline SVG for open/merged/closed
 │   │   │   └── RepoIcon.tsx        # Inline SVG for repo header
@@ -74,12 +70,10 @@
 │   │   ├── useRoute.ts             # Client-side routing (pushState + popstate)
 │   │   ├── useGitHubEvents.ts      # Fetch + transform + group pipeline
 │   │   ├── useBtcPrices.ts         # Worker -> cached JSON -> default fallback chain
-│   │   ├── useCopyToClipboard.ts   # Copy text + 2s "Copied!" feedback
 │   │   └── __tests__/              # Hook tests
 │   ├── lib/
 │   │   ├── events.ts               # Data transformation, filtering, grouping
 │   │   ├── btc.ts                  # BTC/FBTC parsing, formatting, conversions
-│   │   ├── formatter.ts            # Claude output cleanup (dedent, join wraps, collapse blanks)
 │   │   ├── date.ts                 # Date formatting ("MMM DD")
 │   │   ├── types.ts                # Shared TypeScript interfaces
 │   │   └── __tests__/              # Unit tests for pure logic
@@ -89,8 +83,7 @@
 │           ├── btclogo.png
 │           ├── fidelitylogo.jpeg
 │           ├── blackrocklogo.png
-│           ├── grayscalelogo.png
-│           └── formatterlogo.png
+│           └── grayscalelogo.png
 ├── tools/
 │   ├── merge_events.py             # GitHub events merge/dedup script
 │   ├── test_merge_events.py        # Python tests for merge script
@@ -134,7 +127,7 @@ The Codespaces devcontainer auto-installs deps and starts the dev server on port
 ## Gotchas & Non-obvious Decisions
 
 - **`chore(data)` filtering** - Automated data-refresh PRs (titled `chore(data): ...`) are filtered out of the activity feed in `events.ts` so they don't clutter the display.
-- **SPA routing on GitHub Pages** - `public/404.html` redirects unknown paths to `index.html` with a query-string encoding (via [spa-github-pages](https://github.com/rafgraph/spa-github-pages)). `index.html` has a matching restore script. The `useRoute` hook handles client-side navigation with `pushState`/`popstate`. Routes: `/` (home), `/btc`, `/claude-formatter`.
+- **SPA routing on GitHub Pages** - `public/404.html` redirects unknown paths to `index.html` with a query-string encoding (via [spa-github-pages](https://github.com/rafgraph/spa-github-pages)). `index.html` has a matching restore script. The `useRoute` hook handles client-side navigation with `pushState`/`popstate`. Routes: `/` (home), `/btc`.
 - **Inline SVG icons** - PR status and repo icons are inline React SVG components (not external files) to eliminate HTTP requests. Don't use Font Awesome for PR state indicators.
 - **Static data files** - `public/data/github-events.json` and `public/data/btc-prices.json` are served as static files and fetched at runtime. Both are refreshed by their respective GitHub Actions.
 - **BTC price fallback chain** - `useBtcPrices` tries the Cloudflare Worker first, falls back to the cached JSON, then hardcoded defaults. The worker proxies Twelvedata with a 10-min edge cache to limit API credit usage.
@@ -142,7 +135,7 @@ The Codespaces devcontainer auto-installs deps and starts the dev server on port
 - **Cloudflare Worker is manual-deploy** - `workers/btc-prices-worker.js` must be pasted into the Cloudflare dashboard manually. It is not deployed by CI.
 - **PriceSource ticking timestamp** - `PriceSource.tsx` uses a 1-second `setInterval` to show a live-updating relative time ("2 min and 30 seconds ago"). Tests use `vi.useFakeTimers()` + `vi.setSystemTime()` for deterministic assertions.
 - **PWA manifest** - `site.webmanifest` is configured for standalone display mode with the site's dark theme colors (`#222831` / `#000000`).
-- **LESS stylesheets** - Styles are split by feature: `App.less` (homepage/global), `styles/variables.less` (colors, breakpoints, mixins), `styles/global.less` (shared components), `styles/btc.less`, `styles/formatter.less`.
+- **LESS stylesheets** - Styles are split by feature: `App.less` (homepage/global), `styles/variables.less` (colors, breakpoints, mixins), `styles/global.less` (shared components), `styles/btc.less`.
 
 ## Preferred Patterns
 
