@@ -1,7 +1,6 @@
 import { ProjectTile } from "./ProjectTile.tsx";
 import type { ProjectTileData } from "./ProjectTile.tsx";
 import btcLogo from "../assets/img/btclogo.png";
-import formatterLogo from "../assets/img/formatterlogo.png";
 import pikachuGif from "../assets/img/pikaconstruction.gif";
 
 const PROJECTS: ProjectTileData[] = [
@@ -11,13 +10,6 @@ const PROJECTS: ProjectTileData[] = [
     route: "/btc",
     image: btcLogo,
     imageSize: "contain",
-  },
-  {
-    id: "formatter",
-    name: "Claude Formatter",
-    route: "/claude-formatter",
-    image: formatterLogo,
-    imageSize: "cover",
   },
   {
     id: "globe",

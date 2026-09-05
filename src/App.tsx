@@ -5,7 +5,6 @@ import { GitHubActivity } from "./components/GitHubActivity.tsx";
 import { Footer } from "./components/Footer.tsx";
 import { MenuButton } from "./components/MenuButton.tsx";
 import { BtcPage } from "./components/btc/BtcPage.tsx";
-import { ClaudeFormatterPage } from "./components/claude-formatter/ClaudeFormatterPage.tsx";
 import { useRoute } from "./hooks/useRoute.ts";
 
 function HomePage({ navigate }: { navigate: (to: string) => void }) {
@@ -29,7 +28,6 @@ export default function App() {
   useEffect(() => {
     const titles: Record<string, string> = {
       "/btc": "BTC Visualizer",
-      "/claude-formatter": "Claude Code Formatter",
     };
     document.title = titles[path] ?? "william salas | software dev";
   }, [path]);
@@ -37,13 +35,7 @@ export default function App() {
   return (
     <>
       <MenuButton navigate={navigate} />
-      {path === "/btc" ? (
-        <BtcPage />
-      ) : path === "/claude-formatter" ? (
-        <ClaudeFormatterPage />
-      ) : (
-        <HomePage navigate={navigate} />
-      )}
+      {path === "/btc" ? <BtcPage /> : <HomePage navigate={navigate} />}
     </>
   );
 }
