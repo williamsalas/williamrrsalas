@@ -1,5 +1,103 @@
 [
   {
+    "id": "14499640421",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 88,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/88",
+        "id": 4453425585,
+        "number": 88,
+        "head": {
+          "ref": "remove-claude-formatter",
+          "sha": "fb926f0d19afa782790bd72fc42bca48531ca7ce",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "6c455d33e829da55e09b443657cd422eaf40e0e0",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Remove Claude Formatter page",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/88",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-09-05T23:02:22Z"
+  },
+  {
+    "id": "14499578559",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 67336084,
+      "login": "williamsalas",
+      "display_login": "williamsalas",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/williamsalas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67336084?"
+    },
+    "repo": {
+      "id": 1041146450,
+      "name": "williamsalas/williamrrsalas",
+      "url": "https://api.github.com/repos/williamsalas/williamrrsalas"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 88,
+      "pull_request": {
+        "url": "https://api.github.com/repos/williamsalas/williamrrsalas/pulls/88",
+        "id": 4453425585,
+        "number": 88,
+        "head": {
+          "ref": "remove-claude-formatter",
+          "sha": "fb926f0d19afa782790bd72fc42bca48531ca7ce",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "6c455d33e829da55e09b443657cd422eaf40e0e0",
+          "repo": {
+            "id": 1041146450,
+            "url": "https://api.github.com/repos/williamsalas/williamrrsalas",
+            "name": "williamrrsalas"
+          }
+        },
+        "title": "Remove Claude Formatter page",
+        "html_url": "https://github.com/williamsalas/williamrrsalas/pull/88",
+        "merged": true
+      }
+    },
+    "public": true,
+    "created_at": "2026-09-05T22:59:34Z"
+  },
+  {
     "id": "10874643913",
     "type": "PullRequestEvent",
     "actor": {
